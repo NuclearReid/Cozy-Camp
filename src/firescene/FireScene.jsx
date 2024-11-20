@@ -35,14 +35,7 @@ export default function FireScene()
 
     return (
         <>
-            <PresentationControls
-                global={false}
-                snap={true}
-                cursor={false}
-                polar={[0, 0]} // Can't rotate up and down
-                azimuth={[-0.75, 0.75]} // Horizontal limits
-                config={{ mass: 1, tension: 170, friction: 26 }} // Spring config
-            >
+            
                 {/* Fire pit */}
                 <mesh 
                     position={[positionFire.x, positionFire.y, positionFire.z]}
@@ -52,7 +45,6 @@ export default function FireScene()
                     <torusGeometry/>
                     <meshToonMaterial color="brown" />
                 </mesh>
-
                 {/* Tent */}
                 <mesh
                     position={[positionTent.x, positionTent.y, positionTent.z]}
@@ -63,13 +55,11 @@ export default function FireScene()
                     <boxGeometry />
                     <meshToonMaterial color='tan'/>
                 </mesh>
-                
                 {/* The floor */}
                 <mesh position-y={ - 1 } rotation-x={ - Math.PI * 0.5 } scale={ 10 }>
                     <circleGeometry />
                     <meshStandardMaterial color="greenyellow" />
                 </mesh>
-            </PresentationControls>
         </>
     )
 }
