@@ -56,7 +56,11 @@ export default function FireScene()
                     <meshToonMaterial color='tan'/>
                 </mesh>
                 {/* The floor */}
-                <mesh position-y={ - 1 } rotation-x={ - Math.PI * 0.5 } scale={ 10 }>
+                <mesh 
+                    position-y={ - 1 } 
+                    rotation-x={ - Math.PI * 0.5 } 
+                    scale={ 10 }
+                >
                     <circleGeometry />
                     <meshStandardMaterial color="greenyellow" />
                 </mesh>

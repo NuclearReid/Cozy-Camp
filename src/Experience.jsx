@@ -9,8 +9,7 @@ import * as THREE from 'three'
 import CameraControlsReact from 'camera-controls'
 CameraControlsReact.install({THREE:THREE})
 
-
-
+// My fragments
 import useWorld from './stores/useWorld'
 import FireScene from './firescene/FireScene'
 import Lighting from './environement/Lighting'
@@ -79,7 +78,23 @@ export default function Experience()
 
     }
 
+    // How to rotate the camera to have it start by looking at the panel
+    useEffect(() =>
+    {
+        if(cameraControlsRef.current)
+        {   
+            console.log(cameraControlsRef.current)
+            // Sets the camera positiong and target at the same time ( position, target)
+            cameraControlsRef.current.setLookAt(-3.9, 10.2, 11.9, 2, 10, 0)
+            // console.log(cameraControlsRef.current)
+            cameraControlsRef.current.maxAzimuthAngle = Math.PI * 0.05
+            cameraControlsRef.current.minAzimuthAngle = -Math.PI * 0.25
 
+            // these should both be at Math.PI * 0.5 to lock verticle rotation
+            // cameraControlsRef.current.maxPolarAngle = Math.PI * 0.5
+            // cameraControlsRef.current.minPolarAngle = Math.PI * 0.5
+        }
+    }, [])
 
     return <>
         <Perf position='top-left' />
@@ -92,11 +107,11 @@ export default function Experience()
                     rotation-y={ - Math.PI * 0.25}
                     // position-y={1.4}
                     position={[-2.19, 10.6, 2.2]}
-
                 >
                     Cozy 
                     <meshToonMaterial color={'#E13C42'}/>
                 </Text3D>
+
                 <Text3D 
                     font='./text/FingerPaint-Regular.ttf'
                     rotation-y={ - Math.PI * 0.25}
@@ -122,19 +137,14 @@ export default function Experience()
                 <CameraControls 
                     ref={cameraControlsRef}
                     enabled={true}
-                    makeDefault={false}
-                    boundaryEnclosesCamera={true}
+                    makeDefault={false}                    
                     mouseButtons = {{
                         left: CameraControlsReact.ACTION.ROTATE,
                         right: CameraControlsReact.ACTION.NONE,
                         wheel: CameraControlsReact.ACTION.NONE,
                         middle: CameraControlsReact.ACTION.NONE,
                     }}
-                    // minAzimuthAngle={-Math.PI * 0.25} // Minimum horizontal rotation angle
-                    // maxAzimuthAngle={Math.PI * 0.25}  // Maximum horizontal rotation angle
-                    minPolarAngle={0}              // Minimum vertical rotation angle
-                    maxPolarAngle={0}        // Maximum vertical rotation angle
-                    lookInDirectionOf={new THREE.Vector3(-0.6899, 10.2, 3.6)}
+                   
                 />
             </group>
             <FireScene />
