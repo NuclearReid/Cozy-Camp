@@ -56,6 +56,8 @@ export default function Experience()
             // console.log(cameraControlsRef.current)
             cameraControlsRef.current.maxAzimuthAngle = Math.PI * 0.05
             cameraControlsRef.current.minAzimuthAngle = -Math.PI * 0.25
+            cameraControlsRef.current.maxPolarAngle = Math.PI * 0.5
+            cameraControlsRef.current.minPolarAngle = Math.PI * 0.5
 
         }
     }, [])
