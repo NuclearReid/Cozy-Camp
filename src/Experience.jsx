@@ -1,4 +1,4 @@
-import { OrbitControls, PresentationControls, Text3D, CameraControls } from '@react-three/drei'
+import { OrbitControls, PresentationControls, Text3D, CameraControls, SpotLight } from '@react-three/drei'
 import { Perf } from 'r3f-perf'
 import { useFrame, useThree } from '@react-three/fiber'
 import { useRef, useState, useEffect } from 'react'
@@ -54,11 +54,14 @@ export default function Experience()
             // Sets the camera positiong and target at the same time ( position, target)
             cameraControlsRef.current.setLookAt(-3.9, 10.2, 11.9, -0.6899, 10.2, 3.6)
             // console.log(cameraControlsRef.current)
+
+            // The '+ Math.PI * 2' is needed because the base camera position was not in range yet and would cause the whole scene to spin till it was in range
             cameraControlsRef.current.maxAzimuthAngle = Math.PI * 0.05 + Math.PI * 2
             cameraControlsRef.current.minAzimuthAngle = -Math.PI * 0.25 + Math.PI * 2
+
+            // I think this is something similar to the Azimuth angle where the PolarMax is not in range either.
             cameraControlsRef.current.maxPolarAngle = Math.PI * 0.5
             cameraControlsRef.current.minPolarAngle = Math.PI * 0.5
-
         }
     }, [])
 
@@ -132,35 +135,7 @@ export default function Experience()
                 <meshToonMaterial color={'#916302'} />
             </mesh>      
 
-            {/* <FireScene /> */}
-            {/* Fire pit */}
-            <mesh 
-                position={[positionFire.x, positionFire.y, positionFire.z]}
-                rotation-x={-Math.PI * 0.5}
-                scale={0.75}
-            >
-                <torusGeometry/>
-                <meshToonMaterial color="brown" />
-            </mesh>
-            {/* Tent */}
-            <mesh
-                position={[positionTent.x, positionTent.y, positionTent.z]}
-                rotation={[rotationTent.x, rotationTent.y, rotationTent.z ]}
-                scale={3.0}
-            >
-
-                <boxGeometry />
-                <meshToonMaterial color='tan'/>
-            </mesh>
-            {/* The floor */}
-            <mesh 
-                position-y={ - 1 } 
-                rotation-x={ - Math.PI * 0.5 } 
-                scale={ 10 }
-            >
-                <circleGeometry />
-                <meshStandardMaterial color="greenyellow" />
-            </mesh>
+            <FireScene />
 
             <CameraControls 
                 ref={cameraControlsRef}
@@ -173,5 +148,7 @@ export default function Experience()
                     middle: CameraControlsReact.ACTION.NONE,
                 }}                   
             />
+
+
     </>
 }
