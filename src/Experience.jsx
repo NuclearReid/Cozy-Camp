@@ -54,8 +54,8 @@ export default function Experience()
             // Sets the camera positiong and target at the same time ( position, target)
             cameraControlsRef.current.setLookAt(-3.9, 10.2, 11.9, -0.6899, 10.2, 3.6)
             // console.log(cameraControlsRef.current)
-            cameraControlsRef.current.maxAzimuthAngle = Math.PI * 0.05
-            cameraControlsRef.current.minAzimuthAngle = -Math.PI * 0.25
+            cameraControlsRef.current.maxAzimuthAngle = Math.PI * 0.05 + Math.PI * 2
+            cameraControlsRef.current.minAzimuthAngle = -Math.PI * 0.25 + Math.PI * 2
             cameraControlsRef.current.maxPolarAngle = Math.PI * 0.5
             cameraControlsRef.current.minPolarAngle = Math.PI * 0.5
 
