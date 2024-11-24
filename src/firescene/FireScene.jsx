@@ -36,34 +36,34 @@ export default function FireScene()
     return (
         <>
             
-                {/* Fire pit */}
-                <mesh 
-                    position={[positionFire.x, positionFire.y, positionFire.z]}
-                    rotation-x={-Math.PI * 0.5}
-                    scale={0.75}
-                >
-                    <torusGeometry/>
-                    <meshToonMaterial color="brown" />
-                </mesh>
-                {/* Tent */}
-                <mesh
-                    position={[positionTent.x, positionTent.y, positionTent.z]}
-                    rotation={[rotationTent.x, rotationTent.y, rotationTent.z ]}
-                    scale={3.0}
-                >
+            {/* Fire pit */}
+            <mesh 
+                position={[positionFire.x, positionFire.y, positionFire.z]}
+                rotation-x={-Math.PI * 0.5}
+                scale={0.75}
+            >
+                <torusGeometry/>
+                <meshToonMaterial color="brown" />
+            </mesh>
+            {/* Tent */}
+            <mesh
+                position={[positionTent.x, positionTent.y, positionTent.z]}
+                rotation={[rotationTent.x, rotationTent.y, rotationTent.z ]}
+                scale={3.0}
+            >
 
-                    <boxGeometry />
-                    <meshToonMaterial color='tan'/>
-                </mesh>
-                {/* The floor */}
-                <mesh 
-                    position-y={ - 1 } 
-                    rotation-x={ - Math.PI * 0.5 } 
-                    scale={ 10 }
-                >
-                    <circleGeometry />
-                    <meshStandardMaterial color="greenyellow" />
-                </mesh>
+                <boxGeometry />
+                <meshToonMaterial color='tan'/>
+            </mesh>
+            {/* The floor */}
+            <mesh 
+                position-y={ - 1 } 
+                rotation-x={ - Math.PI * 0.5 } 
+                scale={ 10 }
+            >
+                <circleGeometry />
+                <meshStandardMaterial color="greenyellow" />
+            </mesh>
         </>
     )
 }
