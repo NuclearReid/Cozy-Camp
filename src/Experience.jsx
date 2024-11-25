@@ -15,11 +15,13 @@ import FireScene from './firescene/FireScene'
 import Lighting from './environement/Lighting'
 
 const degToRad = (degrees) => degrees * (Math.PI /180)
+const finalPolarPositionRadians = 1.255
 
 export default function Experience()
 {
     const textRef = useRef()
     const [ cameraControls, setCameraControls ] = useState(true)
+    const [finalPosition, setFinalPosition] = useState(false)
 
     const panelRef = useRef()
 
@@ -30,23 +32,23 @@ export default function Experience()
     // Moves the camera
     const handleClick = (click) => 
     {
-
-            const posA = [camera.position.x, camera.position.y, camera.position.y] 
-            const tgtA = [panelRef.current.position.x, panelRef.current.position.y, panelRef.current.position.z]
-            const posB = [-10, 4, 7]
-            const tgtB = [0, 0, 0]
-            return cameraControlsRef.current?.lerpLookAt(
-                ...posA,
-                ...tgtA,
-                ...posB,
-                ...tgtB,
-                1,
-                true
-            ) 
+        setFinalPosition(true)
+        const posA = [camera.position.x, camera.position.y, camera.position.y] 
+        const tgtA = [panelRef.current.position.x, panelRef.current.position.y, panelRef.current.position.z]
+        const posB = [-10, 4, 7]
+        const tgtB = [0, 0, 0]
+        return cameraControlsRef.current?.lerpLookAt(
+            ...posA,
+            ...tgtA,
+            ...posB,
+            ...tgtB,
+            1,
+            true
+        )
+        // This is the polar position when the camera moved
+        
     }
 
-
-    // How to rotate the camera to have it start by looking at the panel
     useEffect(() =>
     {
         if(cameraControlsRef.current)
@@ -56,46 +58,22 @@ export default function Experience()
             // console.log(cameraControlsRef.current)
 
             // The '+ Math.PI * 2' is needed because the base camera position was not in range yet and would cause the whole scene to spin till it was in range
-            cameraControlsRef.current.maxAzimuthAngle = Math.PI * 0.05 + Math.PI * 2
-            cameraControlsRef.current.minAzimuthAngle = -Math.PI * 0.25 + Math.PI * 2
 
-            // I think this is something similar to the Azimuth angle where the PolarMax is not in range either.
-            cameraControlsRef.current.maxPolarAngle = Math.PI * 0.5
-            cameraControlsRef.current.minPolarAngle = Math.PI * 0.5
+            // play with the *0.25 a bit more to get the angle i want
+            cameraControlsRef.current.maxAzimuthAngle = Math.PI * 0.05 + Math.PI * 2
+            cameraControlsRef.current.minAzimuthAngle = -Math.PI * 0.55 + Math.PI * 2
         }
     }, [])
 
-
-    // Firepit debugging
-    const { positionFire } = useControls('firePit',{
-        positionFire:
-        {
-            value: {x:-2.5, y:-0.9, z: 1.8},
-            min: -10,
-            max: 10,
-            step: 0.1,
-            joystick: 'invertY',
-        }
-    })
-
-    const { positionTent, rotationTent } = useControls('tent', {
-        positionTent:
-        {
-            value: {x:-1.6, y:-1.1, z: -2.2},
-            min: -10,
-            max: 10,
-            step: 0.1,
-            joystick: 'invertY',
-        },
-        rotationTent:
-        {
-            value: {x:0, y:0, z: Math.PI * 0.25},
-            min: - Math.PI * 2,
-            max: Math.PI * 2,
-            step: 0.01,
-        }
+    // I'm using useFrame for the PolarAngle becasue I want it to be dynamic depending if the camera is in the final position or not
+    useFrame(() =>
+    {
+        // When this is 90, that's why the camera is going to y:0. Because that is where the PolarAngle would be 90. I need to find what the polar angle is to looking at 0 after the camera moves and then lock it in place there
+        cameraControlsRef.current.maxPolarAngle = finalPosition? 1.255: Math.PI * 0.5
+        cameraControlsRef.current.minPolarAngle = finalPosition? 1.255: Math.PI * 0.5
         
     })
+
 
     return <>
         <Perf position='top-left' />
@@ -148,7 +126,5 @@ export default function Experience()
                     middle: CameraControlsReact.ACTION.NONE,
                 }}                   
             />
-
-
     </>
 }
