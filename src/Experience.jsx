@@ -49,6 +49,7 @@ export default function Experience()
         
     }
 
+    // For setting up where the camera is looking and sets the max/min horizontal rotation angles
     useEffect(() =>
     {
         if(cameraControlsRef.current)
@@ -66,13 +67,15 @@ export default function Experience()
     }, [])
 
     // I'm using useFrame for the PolarAngle becasue I want it to be dynamic depending if the camera is in the final position or not
+    // locks off verticle rotation. either at 1.255 if looking at the camp scene or 90degrees if looking at the sign
     useFrame(() =>
     {
         // When this is 90, that's why the camera is going to y:0. Because that is where the PolarAngle would be 90. I need to find what the polar angle is to looking at 0 after the camera moves and then lock it in place there
         cameraControlsRef.current.maxPolarAngle = finalPosition? 1.255: Math.PI * 0.5
         cameraControlsRef.current.minPolarAngle = finalPosition? 1.255: Math.PI * 0.5
-        
     })
+
+
 
 
     return <>
@@ -102,6 +105,7 @@ export default function Experience()
             </Text3D>
             
             {/*  The wood for the panel/Sign  */}
+
             <mesh 
                 ref={panelRef}
                 onClick={handleClick}
@@ -111,7 +115,8 @@ export default function Experience()
             >
                 <boxGeometry/>
                 <meshToonMaterial color={'#916302'} />
-            </mesh>      
+            </mesh>
+                  
 
             <FireScene />
 
@@ -126,5 +131,7 @@ export default function Experience()
                     middle: CameraControlsReact.ACTION.NONE,
                 }}                   
             />
+
+
     </>
 }
