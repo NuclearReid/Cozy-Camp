@@ -1,12 +1,13 @@
-import { OrbitControls, PresentationControls, Text3D, CameraControls, SpotLight } from '@react-three/drei'
+import { OrbitControls, PresentationControls, Text3D, CameraControls, SpotLight, useGLTF } from '@react-three/drei'
 import { Perf } from 'r3f-perf'
 import { useFrame, useThree } from '@react-three/fiber'
-import { useRef, useState, useEffect } from 'react'
+import { useRef, useState, useEffect, Suspense } from 'react'
 import { useControls } from 'leva'
 import * as THREE from 'three'
 import { Physics, RigidBody } from '@react-three/rapier'
-// These two are needed to make the CameraControls tag work better
 
+
+// These two are needed to make the CameraControls tag work better
 import CameraControlsReact from 'camera-controls'
 CameraControlsReact.install({THREE:THREE})
 
@@ -14,7 +15,7 @@ CameraControlsReact.install({THREE:THREE})
 import useWorld from './stores/useWorld'
 import FireScene from './firescene/FireScene'
 import Lighting from './environement/Lighting'
-import CozyCampText from './CozyCampText'
+import CozyCampText from './startScreen/CozyCampText'
 
 const degToRad = (degrees) => degrees * (Math.PI /180)
 const finalPolarPositionRadians = 1.255
@@ -23,6 +24,7 @@ export default function Experience()
 {
     const [ cameraControls, setCameraControls ] = useState(true)
     const [finalPosition, setFinalPosition] = useState(false)
+    const [supportCollider, setSupportCollider] = useState(true)
 
     let panelRef = useRef()
 
@@ -30,10 +32,14 @@ export default function Experience()
     const { camera } = useThree()
     const { DEG2RAD } = THREE.MathUtils
 
+    // Loading the models: flightHelmet is a test model
+    const flightHelmet = useGLTF('./FlightHelmet/glTF/FlightHelmet.gltf')
+
     // Moves the camera
     const handleClick = (click) => 
     {
         setFinalPosition(true)
+        setSupportCollider(false)
         const posA = [camera.position.x, camera.position.y, camera.position.y] 
         const tgtA = [panelRef.current.position.x, panelRef.current.position.y, panelRef.current.position.z]
         const posB = [-10, 4, 7]
@@ -71,6 +77,7 @@ export default function Experience()
     // locks off verticle rotation. either at 1.255 if looking at the camp scene or 90degrees if looking at the sign
     useFrame(() =>
     {
+
         // When this is 90, that's why the camera is going to y:0. Because that is where the PolarAngle would be 90. I need to find what the polar angle is to looking at 0 after the camera moves and then lock it in place there
         cameraControlsRef.current.maxPolarAngle = finalPosition? 1.255: Math.PI * 0.5
         cameraControlsRef.current.minPolarAngle = finalPosition? 1.255: Math.PI * 0.5
@@ -78,17 +85,25 @@ export default function Experience()
 
 
     /* 
-     * Rope Joint
+     * Rope Joint (i'll get there)
     */
-    // panelRef += useRef<RapierRigidBody>(null)
-
-
-
+    
+    const {supportPosition} = useControls('SupportBox',
+        {
+            supportPosition:
+            {
+                value: {x: -0.2452, z: 3.2},
+                step: 0.1,
+            }
+        }
+    )
 
     return <>
         <Perf position='top-left' />
         <OrbitControls 
             makeDefault
+            enabled={true}
+            enableDamping={false}
         />
         <CameraControls 
                 ref={cameraControlsRef}
@@ -100,8 +115,21 @@ export default function Experience()
                     middle: CameraControlsReact.ACTION.NONE,
                 }}                   
             />
-
         <Lighting />
+
+        <Suspense
+            fallback={
+                <mesh>
+                    <boxGeometry/>
+                    <meshBasicMaterial />
+                </mesh>
+            }
+        >
+            <primitive 
+                object={flightHelmet.scene}
+                scale={5}
+            />
+        </Suspense>
 
         {/* The Text on the sign*/}
         <CozyCampText />
@@ -124,14 +152,37 @@ export default function Experience()
                         <meshToonMaterial color={'#916302'} />
                     </mesh>
                 </RigidBody>
+
+                {/* Support Box */}
+                {/* Once the scene loads, this will disapear allowing the 'move camera' sign behind the 'cozy camp' sign to fall and the use can click on that */}
+                { !flightHelmet && (<RigidBody
+                    type='fixed'
+                    colliders='cuboid'
+                    position={[supportPosition.x, 9.25, supportPosition.z]}
+                    scale={[1.3, 0.5, 3 ]}
+                    rotation-y={Math.PI * 0.25}
+                >
+                    <mesh>
+                        <boxGeometry />
+                        <meshBasicMaterial />
+                    </mesh>
+                </RigidBody> 
+                )}
+                {/* The 'click to start' sign that will fall */}
+                <RigidBody
+                    position={[supportPosition.x, 10.6, supportPosition.z]}
+                    scale={[0.5, 1.5, 2.5 ]}
+                    rotation-y={Math.PI * 0.25}                
+                >
+                    <mesh>
+                        <boxGeometry />
+                        <meshToonMaterial />
+                    </mesh>
+                </RigidBody>
             </group>
         </Physics>
-                
-
+        
+        
         <FireScene />
-
-            
-
-
     </>
 }
