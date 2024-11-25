@@ -4,8 +4,9 @@ import { useFrame, useThree } from '@react-three/fiber'
 import { useRef, useState, useEffect } from 'react'
 import { useControls } from 'leva'
 import * as THREE from 'three'
-
+import { Physics, RigidBody } from '@react-three/rapier'
 // These two are needed to make the CameraControls tag work better
+
 import CameraControlsReact from 'camera-controls'
 CameraControlsReact.install({THREE:THREE})
 
@@ -13,17 +14,17 @@ CameraControlsReact.install({THREE:THREE})
 import useWorld from './stores/useWorld'
 import FireScene from './firescene/FireScene'
 import Lighting from './environement/Lighting'
+import CozyCampText from './CozyCampText'
 
 const degToRad = (degrees) => degrees * (Math.PI /180)
 const finalPolarPositionRadians = 1.255
 
 export default function Experience()
 {
-    const textRef = useRef()
     const [ cameraControls, setCameraControls ] = useState(true)
     const [finalPosition, setFinalPosition] = useState(false)
 
-    const panelRef = useRef()
+    let panelRef = useRef()
 
     const cameraControlsRef = useRef()
     const { camera } = useThree()
@@ -76,54 +77,22 @@ export default function Experience()
     })
 
 
+    /* 
+     * Rope Joint
+    */
+    // panelRef += useRef<RapierRigidBody>(null)
+
+
 
 
     return <>
         <Perf position='top-left' />
-        <Lighting />
-
-        {/* The Text */}
-            <Text3D 
-                ref={textRef}
-                font='./text/FingerPaint-Regular.ttf'
-                rotation-y={ - Math.PI * 0.25}
-                // position-y={1.4}
-                position={[-2.19, 10.6, 2.2]}
-            >
-                Cozy 
-                <meshToonMaterial color={'#E13C42'}/>
-            </Text3D>
-
-            <Text3D 
-                font='./text/FingerPaint-Regular.ttf'
-                rotation-y={ - Math.PI * 0.25}
-                textAlign={'center'}
-                position={[-2.19, 9.2, 2.2]}
-            >
-                Camp! 
-                <meshToonMaterial color={'#E13C42'}/>
-            </Text3D>
-            
-            {/*  The wood for the panel/Sign  */}
-
-            <mesh 
-                ref={panelRef}
-                onClick={handleClick}
-                position={[-0.6899, 10.2, 3.6]}
-                scale={[5.8, 3.3, 0.2]}
-                rotation-y={Math.PI * 0.75}
-            >
-                <boxGeometry/>
-                <meshToonMaterial color={'#916302'} />
-            </mesh>
-                  
-
-            <FireScene />
-
-            <CameraControls 
+        <OrbitControls 
+            makeDefault
+        />
+        <CameraControls 
                 ref={cameraControlsRef}
-                enabled={true}
-                // makeDefault={false}                    
+                enabled={false}
                 mouseButtons = {{
                     left: CameraControlsReact.ACTION.ROTATE,
                     right: CameraControlsReact.ACTION.NONE,
@@ -131,6 +100,37 @@ export default function Experience()
                     middle: CameraControlsReact.ACTION.NONE,
                 }}                   
             />
+
+        <Lighting />
+
+        {/* The Text on the sign*/}
+        <CozyCampText />
+            
+            
+        {/*  The wood for the panel/Sign  */}
+        <Physics>
+            <group>
+                <RigidBody
+                    type='fixed'
+                >
+                    <mesh 
+                        ref={panelRef}
+                        onClick={handleClick}
+                        position={[-0.6899, 10.2, 3.6]}
+                        scale={[5.8, 3.3, 0.2]}
+                        rotation-y={Math.PI * 0.75}
+                    >
+                        <boxGeometry/>
+                        <meshToonMaterial color={'#916302'} />
+                    </mesh>
+                </RigidBody>
+            </group>
+        </Physics>
+                
+
+        <FireScene />
+
+            
 
 
     </>
