@@ -80,6 +80,7 @@ export default function Experience()
         // When this is 90, that's why the camera is going to y:0. Because that is where the PolarAngle would be 90. I need to find what the polar angle is to looking at 0 after the camera moves and then lock it in place there
         cameraControlsRef.current.maxPolarAngle = finalPosition? 1.255: Math.PI * 0.5
         cameraControlsRef.current.minPolarAngle = finalPosition? 1.255: Math.PI * 0.5
+
     })
 
 
@@ -117,20 +118,8 @@ export default function Experience()
                 enabled={false}
                 enableDamping={false}
             /> */}
-            <CameraControls 
-                    ref={cameraControlsRef}
-                    enabled={true}
-                    mouseButtons = {{
-                        left: CameraControlsReact.ACTION.ROTATE,
-                        right: CameraControlsReact.ACTION.NONE,
-                        wheel: CameraControlsReact.ACTION.NONE,
-                        middle: CameraControlsReact.ACTION.NONE,
-                    }}                   
-                />
-            <Lighting />
-
             
-
+            <Lighting />
             {/* The Text on the sign*/}
             <CozyCampText />
                 
@@ -183,6 +172,16 @@ export default function Experience()
             </Physics>
 
             <FireScene />
+            <CameraControls 
+                ref={cameraControlsRef}
+                enabled={true}
+                mouseButtons = {{
+                    left: CameraControlsReact.ACTION.ROTATE,
+                    right: CameraControlsReact.ACTION.NONE,
+                    wheel: CameraControlsReact.ACTION.NONE,
+                    middle: CameraControlsReact.ACTION.NONE,
+                }}                   
+            />
         </Suspense>
     </>
 }
