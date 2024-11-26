@@ -32,6 +32,8 @@ export default function Experience()
     const { camera } = useThree()
     const { DEG2RAD } = THREE.MathUtils
 
+    useGLTF.preload('./FlightHelmet/glTF/FlightHelmet.gltf')
+
     // Loading the models: flightHelmet is a test model
     const flightHelmet = useGLTF('./FlightHelmet/glTF/FlightHelmet.gltf')
 
@@ -52,10 +54,8 @@ export default function Experience()
             1,
             true
         )
-        // This is the polar position when the camera moved
         
     }
-
     // For setting up where the camera is looking and sets the max/min horizontal rotation angles
     useEffect(() =>
     {
@@ -76,8 +76,7 @@ export default function Experience()
     // I'm using useFrame for the PolarAngle becasue I want it to be dynamic depending if the camera is in the final position or not
     // locks off verticle rotation. either at 1.255 if looking at the camp scene or 90degrees if looking at the sign
     useFrame(() =>
-    {
-
+    { 
         // When this is 90, that's why the camera is going to y:0. Because that is where the PolarAngle would be 90. I need to find what the polar angle is to looking at 0 after the camera moves and then lock it in place there
         cameraControlsRef.current.maxPolarAngle = finalPosition? 1.255: Math.PI * 0.5
         cameraControlsRef.current.minPolarAngle = finalPosition? 1.255: Math.PI * 0.5
@@ -99,24 +98,6 @@ export default function Experience()
     )
 
     return <>
-        <Perf position='top-left' />
-        <OrbitControls 
-            makeDefault
-            enabled={true}
-            enableDamping={false}
-        />
-        <CameraControls 
-                ref={cameraControlsRef}
-                enabled={false}
-                mouseButtons = {{
-                    left: CameraControlsReact.ACTION.ROTATE,
-                    right: CameraControlsReact.ACTION.NONE,
-                    wheel: CameraControlsReact.ACTION.NONE,
-                    middle: CameraControlsReact.ACTION.NONE,
-                }}                   
-            />
-        <Lighting />
-
         <Suspense
             fallback={
                 <mesh>
@@ -125,64 +106,83 @@ export default function Experience()
                 </mesh>
             }
         >
+            {/* The Flight helmet model */}
             <primitive 
-                object={flightHelmet.scene}
+                object={flightHelmet.scene} 
                 scale={5}
             />
-        </Suspense>
+            <Perf position='top-left' />
+            {/* <OrbitControls 
+                makeDefault
+                enabled={false}
+                enableDamping={false}
+            /> */}
+            <CameraControls 
+                    ref={cameraControlsRef}
+                    enabled={true}
+                    mouseButtons = {{
+                        left: CameraControlsReact.ACTION.ROTATE,
+                        right: CameraControlsReact.ACTION.NONE,
+                        wheel: CameraControlsReact.ACTION.NONE,
+                        middle: CameraControlsReact.ACTION.NONE,
+                    }}                   
+                />
+            <Lighting />
 
-        {/* The Text on the sign*/}
-        <CozyCampText />
             
-            
-        {/*  The wood for the panel/Sign  */}
-        <Physics>
-            <group>
-                <RigidBody
-                    type='fixed'
-                >
-                    <mesh 
-                        ref={panelRef}
-                        onClick={handleClick}
-                        position={[-0.6899, 10.2, 3.6]}
-                        scale={[5.8, 3.3, 0.2]}
-                        rotation-y={Math.PI * 0.75}
+
+            {/* The Text on the sign*/}
+            <CozyCampText />
+                
+                
+            {/*  The wood for the panel/Sign  */}
+            <Physics>
+                <group>
+                    <RigidBody
+                        type='fixed'
                     >
-                        <boxGeometry/>
-                        <meshToonMaterial color={'#916302'} />
-                    </mesh>
-                </RigidBody>
+                        <mesh 
+                            ref={panelRef}
+                            onClick={handleClick}
+                            position={[-0.6899, 10.2, 3.6]}
+                            scale={[5.8, 3.3, 0.2]}
+                            rotation-y={Math.PI * 0.75}
+                        >
+                            <boxGeometry/>
+                            <meshToonMaterial color={'#916302'} />
+                        </mesh>
+                    </RigidBody>
 
-                {/* Support Box */}
-                {/* Once the scene loads, this will disapear allowing the 'move camera' sign behind the 'cozy camp' sign to fall and the use can click on that */}
-                { !flightHelmet && (<RigidBody
-                    type='fixed'
-                    colliders='cuboid'
-                    position={[supportPosition.x, 9.25, supportPosition.z]}
-                    scale={[1.3, 0.5, 3 ]}
-                    rotation-y={Math.PI * 0.25}
-                >
-                    <mesh>
-                        <boxGeometry />
-                        <meshBasicMaterial />
-                    </mesh>
-                </RigidBody> 
-                )}
-                {/* The 'click to start' sign that will fall */}
-                <RigidBody
-                    position={[supportPosition.x, 10.6, supportPosition.z]}
-                    scale={[0.5, 1.5, 2.5 ]}
-                    rotation-y={Math.PI * 0.25}                
-                >
-                    <mesh>
-                        <boxGeometry />
-                        <meshToonMaterial />
-                    </mesh>
-                </RigidBody>
-            </group>
-        </Physics>
-        
-        
-        <FireScene />
+                    {/* Support Box */}
+                    {/* Once the scene loads, this will disapear allowing the 'move camera' sign behind the 'cozy camp' sign to fall and the use can click on that */}
+                    { !flightHelmet && (<RigidBody
+                        type='fixed'
+                        colliders='cuboid'
+                        position={[supportPosition.x, 9.25, supportPosition.z]}
+                        scale={[1.3, 0.5, 3 ]}
+                        rotation-y={Math.PI * 0.25}
+                    >
+                        <mesh>
+                            <boxGeometry />
+                            <meshBasicMaterial />
+                        </mesh>
+                    </RigidBody> 
+                    )}
+                    {/* The 'click to start' sign that will fall */}
+                    <RigidBody
+                        position={[supportPosition.x, 10.6, supportPosition.z]}
+                        scale={[0.5, 1.5, 2.5 ]}
+                        rotation-y={Math.PI * 0.25}                
+                    >
+                        <mesh>
+                            <boxGeometry />
+                            <meshToonMaterial />
+                        </mesh>
+                    </RigidBody>
+                </group>
+            </Physics>
+
+            <FireScene />
+        </Suspense>
     </>
 }
