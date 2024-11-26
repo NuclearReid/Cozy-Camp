@@ -32,7 +32,6 @@ export default function Experience()
     const { camera } = useThree()
     const { DEG2RAD } = THREE.MathUtils
 
-    useGLTF.preload('./FlightHelmet/glTF/FlightHelmet.gltf')
 
     // Loading the models: flightHelmet is a test model
     const flightHelmet = useGLTF('./FlightHelmet/glTF/FlightHelmet.gltf')
@@ -99,6 +98,17 @@ export default function Experience()
     )
 
     return <>
+        {/* Make sure to keep this out of the suspence or this controls won't work till the whole scene is loaded */}
+        <CameraControls 
+            ref={cameraControlsRef}
+            enabled={true}
+            mouseButtons = {{
+                left: CameraControlsReact.ACTION.ROTATE,
+                right: CameraControlsReact.ACTION.NONE,
+                wheel: CameraControlsReact.ACTION.NONE,
+                middle: CameraControlsReact.ACTION.NONE,
+            }}                   
+        />
         <Suspense
             fallback={
                 <mesh>
@@ -172,16 +182,7 @@ export default function Experience()
             </Physics>
 
             <FireScene />
-            <CameraControls 
-                ref={cameraControlsRef}
-                enabled={true}
-                mouseButtons = {{
-                    left: CameraControlsReact.ACTION.ROTATE,
-                    right: CameraControlsReact.ACTION.NONE,
-                    wheel: CameraControlsReact.ACTION.NONE,
-                    middle: CameraControlsReact.ACTION.NONE,
-                }}                   
-            />
+            
         </Suspense>
     </>
 }
