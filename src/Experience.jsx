@@ -4,7 +4,7 @@ import { useFrame, useThree } from '@react-three/fiber'
 import { useRef, useState, useEffect, Suspense } from 'react'
 import { useControls } from 'leva'
 import * as THREE from 'three'
-import { Physics, RigidBody } from '@react-three/rapier'
+import { Physics, RigidBody, useRopeJoint } from '@react-three/rapier'
 
 
 // These two are needed to make the CameraControls tag work better
@@ -26,7 +26,7 @@ export default function Experience()
     const [finalPosition, setFinalPosition] = useState(false)
     const [supportCollider, setSupportCollider] = useState(true)
 
-    let panelRef = useRef()
+    
 
     const cameraControlsRef = useRef()
     const { camera } = useThree()
@@ -41,8 +41,9 @@ export default function Experience()
     {
         setFinalPosition(true)
         setSupportCollider(false)
-        const posA = [camera.position.x, camera.position.y, camera.position.y] 
-        const tgtA = [panelRef.current.position.x, panelRef.current.position.y, panelRef.current.position.z]
+        // seems like posA and tgtA can bee whatever coords. I'm not sure what difference they make. I think because of the .setLookAt() these are being overridden
+        const posA = [0,0,0] 
+        const tgtA = [0,0,0]
         const posB = [-10, 4, 7]
         const tgtB = [0, 0, 0]
         return cameraControlsRef.current?.lerpLookAt(
@@ -97,16 +98,25 @@ export default function Experience()
     )
 
 
+    const cozySignRef = useRef()
+    const startSignRef = useRef()
+
+    const joint = useRopeJoint(cozySignRef, startSignRef, [
+        [0,0,0],
+        [0,0,0],
+        2
+    ])
+
     return <>
         
         <Suspense
             fallback={null}
         >
             {/* The Flight helmet model */}
-            <primitive 
+            {/* <primitive 
                 object={flightHelmet.scene} 
                 scale={5}
-            />
+            /> */}
             <Perf position='top-left' />
             {/* <OrbitControls 
                 makeDefault
@@ -125,7 +135,7 @@ export default function Experience()
                         type='fixed'
                     >
                         <mesh 
-                            ref={panelRef}
+                            ref={cozySignRef}
                             onClick={handleClick}
                             position={[-0.6899, 10.2, 3.6]}
                             scale={[5.8, 3.3, 0.2]}
@@ -153,6 +163,7 @@ export default function Experience()
                     )}
                     {/* The 'click to start' sign that will fall */}
                     <RigidBody
+                        ref={startSignRef}
                         position={[supportPosition.x, 10.6, supportPosition.z]}
                         scale={[0.5, 1.5, 2.5 ]}
                         rotation-y={Math.PI * 0.25}                
@@ -163,6 +174,7 @@ export default function Experience()
                         </mesh>
                     </RigidBody>
                 </group>
+
             </Physics>
             <FireScene />
             
@@ -177,6 +189,10 @@ export default function Experience()
                 wheel: CameraControlsReact.ACTION.NONE,
                 middle: CameraControlsReact.ACTION.NONE,
             }}                   
+        />
+        <OrbitControls 
+            enabled={false}
+            enableDamping={false}
         />
     </>
 }
