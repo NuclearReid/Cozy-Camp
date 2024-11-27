@@ -4,7 +4,7 @@ import { useFrame, useThree } from '@react-three/fiber'
 import { useRef, useState, useEffect, Suspense } from 'react'
 import { useControls } from 'leva'
 import * as THREE from 'three'
-import { Physics, RigidBody, useRopeJoint } from '@react-three/rapier'
+import { Physics, RapierRigidBody, RigidBody, useRopeJoint } from '@react-three/rapier'
 
 
 // These two are needed to make the CameraControls tag work better
@@ -22,11 +22,7 @@ const finalPolarPositionRadians = 1.255
 
 export default function Experience()
 {
-    const [ cameraControls, setCameraControls ] = useState(true)
-    const [finalPosition, setFinalPosition] = useState(false)
-    const [supportCollider, setSupportCollider] = useState(true)
-
-    
+    const [finalPosition, setFinalPosition] = useState(false)    
 
     const cameraControlsRef = useRef()
     const { camera } = useThree()
@@ -85,57 +81,27 @@ export default function Experience()
 
 
     /* 
-     * Rope Joint (i'll get there)
+     * Rope Joint (This has been rough :) )
     */
-    const {supportPosition} = useControls('SupportBox',
-        {
-            supportPosition:
-            {
-                value: {x: -0.2452, z: 3.2},
-                step: 0.1,
-            }
-        }
-    )
+    const SignRopeJoint = () =>
+    {
+        const cozySignRef = useRef<RapierRigidBody>(null)
+        const startSignRef = useRef<RapierRigidBody>(null)
 
-
-    const cozySignRef = useRef()
-    const startSignRef = useRef()
-
-    const joint = useRopeJoint(cozySignRef, startSignRef, [
-        [0,0,0],
-        [0,0,0],
-        2
-    ])
-
-    return <>
-        
-        <Suspense
-            fallback={null}
-        >
-            {/* The Flight helmet model */}
-            {/* <primitive 
-                object={flightHelmet.scene} 
-                scale={5}
-            /> */}
-            <Perf position='top-left' />
-            {/* <OrbitControls 
-                makeDefault
-                enabled={false}
-                enableDamping={false}
-            /> */}
-            
-            <Lighting />
-            {/* The Text on the sign*/}
-            <CozyCampText />  
-                
-            {/*  The wood for the panel/Sign  */}
-            <Physics>
+        const joint = useRopeJoint(cozySignRef, startSignRef, [
+            [0,0,0], // position of the joint in cozySign's local space
+            [0,0,0], // position of the joint in startSign's local space
+            2 // How far they can move from eachother
+        ])
+        return(
+            <>
+             {/*  The wood for the panel/Sign. It has the onClick function right now but that will be swapped to the startSign once the rope joint is working :)  */}
                 <group>
                     <RigidBody
+                        ref={cozySignRef}
                         type='fixed'
                     >
                         <mesh 
-                            ref={cozySignRef}
                             onClick={handleClick}
                             position={[-0.6899, 10.2, 3.6]}
                             scale={[5.8, 3.3, 0.2]}
@@ -147,11 +113,11 @@ export default function Experience()
                     </RigidBody>
 
                     {/* Support Box */}
-                    {/* Once the scene loads, this will disapear allowing the 'move camera' sign behind the 'cozy camp' sign to fall and the use can click on that */}
+                    {/* The intention is that once the model, this block disapear allowing the 'move camera' sign behind the 'cozy camp' sign to fall and the use can click on that. This sign should be attached to the 'Cozy' sign via a rope joint*/}
                     { !flightHelmet && (<RigidBody
                         type='fixed'
                         colliders='cuboid'
-                        position={[supportPosition.x, 9.25, supportPosition.z]}
+                        position={[-0.2452, 9.25, 3.2]}
                         scale={[1.3, 0.5, 3 ]}
                         rotation-y={Math.PI * 0.25}
                     >
@@ -161,10 +127,11 @@ export default function Experience()
                         </mesh>
                     </RigidBody> 
                     )}
+
                     {/* The 'click to start' sign that will fall */}
                     <RigidBody
                         ref={startSignRef}
-                        position={[supportPosition.x, 10.6, supportPosition.z]}
+                        position={[-0.2452, 10.6, 3.2]}
                         scale={[0.5, 1.5, 2.5 ]}
                         rotation-y={Math.PI * 0.25}                
                     >
@@ -174,25 +141,55 @@ export default function Experience()
                         </mesh>
                     </RigidBody>
                 </group>
+            </>
+        )
+    }
 
-            </Physics>
-            <FireScene />
-            
-        </Suspense>
-        {/* Make sure to keep this out of the suspence or this controls won't work till the whole scene is loaded */}
-        <CameraControls 
-            ref={cameraControlsRef}
-            enabled={true}
-            mouseButtons = {{
-                left: CameraControlsReact.ACTION.ROTATE,
-                right: CameraControlsReact.ACTION.NONE,
-                wheel: CameraControlsReact.ACTION.NONE,
-                middle: CameraControlsReact.ACTION.NONE,
-            }}                   
-        />
-        <OrbitControls 
-            enabled={false}
-            enableDamping={false}
-        />
-    </>
+    return (
+    <>
+        {/* I wrapped everything in the physics tag to make sure nothing that uses physics was left out */}
+        <Physics>
+            <Suspense
+                fallback={null}
+            >
+                {/* The Flight helmet model, it's commented out, causes a stutter with the camera movement */}
+                {/* <primitive 
+                    object={flightHelmet.scene} 
+                    scale={5}
+                /> */}
+
+                <Perf position='top-left' />
+                
+                <Lighting />
+                {/* The Text on the sign*/}
+                <CozyCampText />  
+
+                {/* Where i'm trying to get the start sign to fall but be on a rope  */}
+                <SignRopeJoint /> 
+
+                {/* The grass, tent, firepit */}
+                <FireScene /> 
+
+
+            </Suspense>
+
+
+            {/* Make sure to keep this out of the suspence or this controls won't work till the whole scene is loaded */}
+            <CameraControls 
+                ref={cameraControlsRef}
+                enabled={true}
+                mouseButtons = {{
+                    left: CameraControlsReact.ACTION.ROTATE,
+                    right: CameraControlsReact.ACTION.NONE,
+                    wheel: CameraControlsReact.ACTION.NONE,
+                    middle: CameraControlsReact.ACTION.NONE,
+                }}                   
+            />
+            <OrbitControls 
+                enabled={false}
+                enableDamping={false}
+            />
+        </Physics>      
+
+    </>)
 }
