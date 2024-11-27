@@ -91,9 +91,15 @@ export default function Experience()
         const startSignRef = useRef()
         useRopeJoint(cozySignRef, startSignRef, [
             [-0.6899, 10.2, 3.6], // position of the joint in cozySign's local space
-            [0,1,0], // position of the joint in startSign's local space
-            2 // How far they can move from eachother
+            [-0.5, 0, 0], // position of the joint in startSign's local space
+            2.75 // How far they can move from eachother
         ])
+        useRopeJoint(cozySignRef, startSignRef, [
+            [-0.6899, 10.2, 3.6], // position of the joint in cozySign's local space
+            [0.5, 0, 0], // position of the joint in startSign's local space
+            2.75 // How far they can move from eachother
+        ])
+
         return(
             <>
              {/*  The wood for the panel/Sign. It has the onClick function right now but that will be swapped to the startSign once the rope joint is working :)  */}
