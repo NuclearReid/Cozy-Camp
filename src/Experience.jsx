@@ -23,6 +23,7 @@ const finalPolarPositionRadians = 1.255
 export default function Experience()
 {
     const [finalPosition, setFinalPosition] = useState(false)    
+    const [supportCollider, setSupportCollider] = useState(true)
 
     const cameraControlsRef = useRef()
     const { camera } = useThree()
@@ -57,7 +58,7 @@ export default function Experience()
         if(cameraControlsRef.current)
         {   
             // Sets the camera positiong and target at the same time ( position, target)
-            cameraControlsRef.current.setLookAt(-3.9, 10.2, 11.9, -0.6899, 10.2, 3.6)
+            cameraControlsRef.current.setLookAt(-3.9, 7.2, 11.9, -0.6899, 10.2, 3.6)
             // console.log(cameraControlsRef.current)
 
             // The '+ Math.PI * 2' is needed because the base camera position was not in range yet and would cause the whole scene to spin till it was in range
@@ -83,17 +84,16 @@ export default function Experience()
     /* 
      * Rope Joint (This has been rough :) )
     */
+
     const SignRopeJoint = () =>
     {
-        const cozySignRef = useRef<RapierRigidBody>(null)
-        const startSignRef = useRef<RapierRigidBody>(null)
-        const joint = useRopeJoint(cozySignRef, startSignRef, [
-            [0,0,0], // position of the joint in cozySign's local space
-            [0,0,0], // position of the joint in startSign's local space
+        const cozySignRef = useRef()
+        const startSignRef = useRef()
+        useRopeJoint(cozySignRef, startSignRef, [
+            [-0.6899, 10.2, 3.6], // position of the joint in cozySign's local space
+            [0,1,0], // position of the joint in startSign's local space
             2 // How far they can move from eachother
         ])
-
-
         return(
             <>
              {/*  The wood for the panel/Sign. It has the onClick function right now but that will be swapped to the startSign once the rope joint is working :)  */}
@@ -102,7 +102,7 @@ export default function Experience()
                         type='fixed'
                     >
                         <mesh 
-                            onClick={handleClick}
+                             
                             position={[-0.6899, 10.2, 3.6]}
                             scale={[5.8, 3.3, 0.2]}
                             rotation-y={Math.PI * 0.75}
@@ -131,6 +131,8 @@ export default function Experience()
                     {/* The 'click to start' sign that will fall */}
                     <RigidBody
                         ref={startSignRef}
+                        density={30}
+                        onClick={handleClick}
                         position={[-0.2452, 10.6, 3.2]}
                         scale={[0.5, 1.5, 2.5 ]}
                         rotation-y={Math.PI * 0.25}                
