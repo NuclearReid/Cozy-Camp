@@ -1,4 +1,4 @@
-import { OrbitControls, PresentationControls, Text3D, CameraControls, SpotLight, useGLTF } from '@react-three/drei'
+import { OrbitControls, PresentationControls, Text3D, CameraControls, SpotLight, useGLTF, Text } from '@react-three/drei'
 import { Perf } from 'r3f-perf'
 import { useFrame, useThree } from '@react-three/fiber'
 import { useRef, useState, useEffect, Suspense } from 'react'
@@ -58,7 +58,7 @@ export default function Experience()
         if(cameraControlsRef.current)
         {   
             // Sets the camera positiong and target at the same time ( position, target)
-            cameraControlsRef.current.setLookAt(-3.9, 7.2, 11.9, -0.6899, 10.2, 3.6)
+            cameraControlsRef.current.setLookAt(-3.9, 9.2, 11.9, -0.6899, 9.2, 3.6)
             // console.log(cameraControlsRef.current)
 
             // The '+ Math.PI * 2' is needed because the base camera position was not in range yet and would cause the whole scene to spin till it was in range
@@ -140,13 +140,27 @@ export default function Experience()
                         density={30}
                         onClick={handleClick}
                         position={[-0.2452, 10.6, 3.2]}
-                        scale={[0.5, 1.5, 2.5 ]}
+                        scale={[0.2, 1.5, 2.5 ]}
                         rotation-y={Math.PI * 0.25}                
                     >
                         <mesh>
                             <boxGeometry />
-                            <meshToonMaterial />
+                            <meshToonMaterial 
+                                color='#916302'
+                            />
                         </mesh>
+                        <Text
+                            rotation-y={ - Math.PI * 0.5}
+                            scale={0.3}
+                            position={[-0.52,0,0]}
+                            anchorX='center'
+                            anchorY='middle'
+                            font='./text/FingerPaint-Regular.ttf'
+                            color='#E13C42'
+                            
+                        >
+                            Start!
+                        </Text>
                     </RigidBody>
             </>
         )
