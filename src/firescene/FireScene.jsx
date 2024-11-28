@@ -1,5 +1,6 @@
-import { PresentationControls } from "@react-three/drei"
 import { useControls } from "leva"
+import FireTexture from "./FireTexture"
+
 
 export default function FireScene() 
 {
@@ -45,6 +46,10 @@ export default function FireScene()
                 <torusGeometry/>
                 <meshToonMaterial color="brown" />
             </mesh>
+            {/* The fire texture */}
+            <FireTexture />
+            
+
             {/* Tent */}
             <mesh
                 position={[positionTent.x, positionTent.y, positionTent.z]}
