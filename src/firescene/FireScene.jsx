@@ -1,5 +1,6 @@
 import { useControls } from "leva"
 import FireTexture from "./FireTexture"
+import PortalTexturePractice from './PortalTexturePractice'
 
 
 export default function FireScene() 
@@ -37,7 +38,7 @@ export default function FireScene()
     return (
         <>
             
-            {/* Fire pit */}
+            {/* Fire ring */}
             <mesh 
                 position={[positionFire.x, positionFire.y, positionFire.z]}
                 rotation-x={-Math.PI * 0.5}
@@ -46,9 +47,10 @@ export default function FireScene()
                 <torusGeometry/>
                 <meshToonMaterial color="brown" />
             </mesh>
-            {/* The fire texture */}
+
+            {/* The Fire */}
             <FireTexture />
-            
+            {/* <PortalTexturePractice /> */}
 
             {/* Tent */}
             <mesh
@@ -69,6 +71,7 @@ export default function FireScene()
                 <circleGeometry />
                 <meshStandardMaterial color="greenyellow" />
             </mesh>
+            
         </>
     )
 }

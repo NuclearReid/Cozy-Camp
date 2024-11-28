@@ -92,12 +92,12 @@ export default function Experience()
         useRopeJoint(cozySignRef, startSignRef, [
             [-0.6899, 10.2, 3.6], // position of the joint in cozySign's local space
             [-0.5, 0, 0], // position of the joint in startSign's local space
-            2.75 // How far they can move from eachother
+            2.85 // How far they can move from eachother
         ])
         useRopeJoint(cozySignRef, startSignRef, [
             [-0.6899, 10.2, 3.6], // position of the joint in cozySign's local space
             [0.5, 0, 0], // position of the joint in startSign's local space
-            2.75 // How far they can move from eachother
+            2.85 // How far they can move from eachother
         ])
 
         return(
@@ -141,7 +141,8 @@ export default function Experience()
                         onClick={handleClick}
                         position={[-0.2452, 10.6, 3.2]}
                         scale={[0.2, 1.5, 2.5 ]}
-                        rotation-y={Math.PI * 0.25}                
+                        rotation={[Math.PI * 0.1, Math.PI * 0.25, Math.PI * 0.1]}
+                        // rotation-x = {Math.PI * 0.1}                
                     >
                         <mesh>
                             <boxGeometry />
@@ -198,7 +199,7 @@ export default function Experience()
             {/* Make sure to keep this out of the suspence or this controls won't work till the whole scene is loaded */}
             <CameraControls 
                 ref={cameraControlsRef}
-                enabled={true}
+                enabled={false}
                 mouseButtons = {{
                     left: CameraControlsReact.ACTION.ROTATE,
                     right: CameraControlsReact.ACTION.NONE,
@@ -207,7 +208,7 @@ export default function Experience()
                 }}                   
             />
             <OrbitControls 
-                enabled={false}
+                enabled={true}
                 enableDamping={false}
             />
         </Physics>      
