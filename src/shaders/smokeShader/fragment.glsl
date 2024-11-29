@@ -16,12 +16,12 @@ void main()
     float smoke = texture(uPerlinTexture, smokeUv).r; // need to use the .r chanel cause it's a float
 
     // Remap
-    smoke = smoothstep(0.4, 1.0, smoke); // smoothstep does the step() but it's 'softer' at the two points
+    smoke = smoothstep(0.1, 0.8, smoke); // smoothstep does the step() but it's 'softer' at the two points
     
     // Edges
     // smoke = 1.0;
-    smoke *= smoothstep(0.0, 0.1, vUv.x);
-    smoke *= 1.0 - smoothstep(0.9, 1.0, vUv.x);
+    smoke *= smoothstep(0.0, 0.2, vUv.x);
+    smoke *= 1.0 - smoothstep(0.5, 1.0, vUv.x);
     // Can also do it this way
     // smoke *= smoothstep(1.0, 0.9, vUv.x);
     smoke *= smoothstep(0.0, 0.1, vUv.y);
@@ -29,8 +29,9 @@ void main()
 
 
 
+
     // Final color
-    gl_FragColor = vec4( 0.6, 0.3, 0.2, smoke);
+    gl_FragColor = vec4( 1, 1, 1, smoke);
     // gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
 
     // It's good to always add these two includes
