@@ -87,7 +87,7 @@ void main()
     vec2 displacedUv = vUv + cnoise(vec3(vUv * 5.0, uTime * 0.1));
 
     // Perlin noise
-    float strength = cnoise(vec3(displacedUv * 5.0, uTime * 0.2));
+    float strength = cnoise(vec3(displacedUv * 1.0, uTime * 0.2));
 
     // Outer glow
     float outerGlow = distance(vUv, vec2(0.5)) * 5.0 - 1.4;
