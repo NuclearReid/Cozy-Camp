@@ -14,7 +14,7 @@ const FireMaterial = shaderMaterial(
     fireSmokeVertexShader,
     fireSmokeFragmentShader
 )
-extend({FireMaterial}) // Makes FireMaterial into a .jsx tag
+extend({FireMaterial}) // this can now be used as <fireMaterial/>
 
 export default function FireTexture()
 {
@@ -22,8 +22,6 @@ export default function FireTexture()
     const perlinTexture = useTexture('./fire/perlin.png')
     perlinTexture.wrapS = THREE.RepeatWrapping
     perlinTexture.wrapT = THREE.RepeatWrapping
-
-
     useFrame((state, delta) =>
     {
         if(materialRef.current)
