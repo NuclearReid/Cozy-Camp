@@ -1,6 +1,8 @@
 import { useControls } from "leva"
 import FireTexture from "./FireTexture"
 import PortalTexturePractice from './PortalTexturePractice'
+import Marshmellows from "./Marshmellows"
+import { RigidBody } from "@react-three/rapier"
 
 
 export default function FireScene() 
@@ -50,7 +52,10 @@ export default function FireScene()
 
             {/* The Fire */}
             <FireTexture />
-            {/* <PortalTexturePractice /> */}
+
+            {/* Marshmellows */}
+            <Marshmellows />
+            
 
             {/* Tent */}
             <mesh
@@ -63,6 +68,9 @@ export default function FireScene()
                 <meshToonMaterial color='tan'/>
             </mesh>
             {/* The floor */}
+            <RigidBody
+                type='fixed'
+            >
             <mesh 
                 position-y={ - 1 } 
                 rotation-x={ - Math.PI * 0.5 } 
@@ -71,6 +79,7 @@ export default function FireScene()
                 <circleGeometry />
                 <meshStandardMaterial color="greenyellow" />
             </mesh>
+            </RigidBody>
             
         </>
     )

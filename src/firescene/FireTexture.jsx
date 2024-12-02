@@ -6,7 +6,7 @@ import fireSmokeVertexShader from '../shaders/smokeShader/vertex.glsl'
 import fireSmokeFragmentShader from '../shaders/smokeShader/fragment.glsl'
 
 
-const FireMaterial = shaderMaterial(
+const SmokeMaterial = shaderMaterial(
     { 
         uTime: 0,
         uPerlinTexture: null
@@ -14,7 +14,7 @@ const FireMaterial = shaderMaterial(
     fireSmokeVertexShader,
     fireSmokeFragmentShader
 )
-extend({FireMaterial}) // Makes FireMaterial into a .jsx tag
+extend({SmokeMaterial}) // this can now be used as <fireMaterial/>
 
 export default function FireTexture()
 {
@@ -22,8 +22,6 @@ export default function FireTexture()
     const perlinTexture = useTexture('./fire/perlin.png')
     perlinTexture.wrapS = THREE.RepeatWrapping
     perlinTexture.wrapT = THREE.RepeatWrapping
-
-
     useFrame((state, delta) =>
     {
         if(materialRef.current)
@@ -41,7 +39,7 @@ export default function FireTexture()
                 <planeGeometry
                     args={[1.5, 6, 16, 64]} 
                 />
-                <fireMaterial
+                <smokeMaterial
                     ref={materialRef} 
                     uPerlinTexture={perlinTexture}
                     transparent
