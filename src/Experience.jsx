@@ -210,6 +210,7 @@ export default function Experience()
             <OrbitControls 
                 enabled={false}
                 enableDamping={false}
+                makeDefault={true}
             />
         </Physics>      
 

@@ -1,53 +1,62 @@
+import { shaderMaterial, useTexture } from "@react-three/drei"
+import { extend, useFrame, useThree } from "@react-three/fiber"
+import fireVertexShader from '../shaders/fireShader/vertex.glsl'
+import fireFragmentShader from '../shaders/fireShader/fragment.glsl'
+import { useRef } from "react"
 import * as THREE from 'three'
-import { useTexture, shaderMaterial } from "@react-three/drei"
-import { extend, useFrame } from "@react-three/fiber"
-import { useRef } from 'react'
-import fireSmokeVertexShader from '../shaders/smokeShader/vertex.glsl'
-import fireSmokeFragmentShader from '../shaders/smokeShader/fragment.glsl'
 
 
-const SmokeMaterial = shaderMaterial(
-    { 
+
+const FireMaterial = shaderMaterial(
+    {
         uTime: 0,
-        uPerlinTexture: null
+        uFirePng: null,
+        
     },
-    fireSmokeVertexShader,
-    fireSmokeFragmentShader
+    fireVertexShader,
+    fireFragmentShader
 )
-extend({SmokeMaterial}) // this can now be used as <fireMaterial/>
+extend({FireMaterial})
+
 
 export default function FireTexture()
 {
-    const materialRef = useRef()
-    const perlinTexture = useTexture('./fire/perlin.png')
-    perlinTexture.wrapS = THREE.RepeatWrapping
-    perlinTexture.wrapT = THREE.RepeatWrapping
+    const fireMaterialRef = useRef()
+    const fireMeshRef = useRef()
+
+    const fireTexture = useTexture('./fire/fireTexture.png')
+    const { camera } = useThree()
+
+    fireTexture.wrapS = THREE.RepeatWrapping
+    fireTexture.wrapT = THREE.RepeatWrapping
+
     useFrame((state, delta) =>
     {
-        if(materialRef.current)
+        if(fireMaterialRef.current)
         {
-            materialRef.current.uTime += delta
+            fireMeshRef.current.rotation.copy(camera.rotation) // Makes it so the fire will always face the camera
+            fireMaterialRef.current.uTime += delta
         }
     })
 
     return(
         <>
-            <mesh
-                rotation-y={-Math.PI * 0.85}
-                position={[-2.4, 2, 1.9]}
-            >
-                <planeGeometry
-                    args={[1.5, 6, 16, 64]} 
-                />
-                <smokeMaterial
-                    ref={materialRef} 
-                    uPerlinTexture={perlinTexture}
-                    transparent
-                    side={THREE.DoubleSide}
-                    depthWrite={false}
-                />
-            </mesh>
-        
+                <mesh
+                    ref={fireMeshRef}
+                    position={[-2.4, -0.5, 1.9]}
+                    scale={[0.8, 0.3, 0.5]}
+                >
+                    <planeGeometry
+                        args={[1.5,6, 16, 64]}   
+                    />
+                    <fireMaterial
+                        ref={fireMaterialRef}
+                        uFirePng={fireTexture}
+                        transparent={true}
+                        depthWrite={true}
+                        side={THREE.DoubleSide}
+                    />
+                </mesh>
         </>
     )
 }
