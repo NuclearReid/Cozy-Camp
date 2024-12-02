@@ -27,9 +27,6 @@ void main()
     smoke *= smoothstep(0.0, 0.1, vUv.y);
     smoke *= smoothstep(1.0, 0.4, vUv.y);
 
-
-
-
     // Final color
     gl_FragColor = vec4( 1, 1, 1, smoke);
     // gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);

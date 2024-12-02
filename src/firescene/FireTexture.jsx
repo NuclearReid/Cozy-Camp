@@ -9,7 +9,9 @@ import * as THREE from 'three'
 
 const FireMaterial = shaderMaterial(
     {
+        uTime: 0,
         uFirePng: null,
+        
     },
     fireVertexShader,
     fireFragmentShader
@@ -25,11 +27,15 @@ export default function FireTexture()
     const fireTexture = useTexture('./fire/fireTexture.png')
     const { camera } = useThree()
 
+    fireTexture.wrapS = THREE.RepeatWrapping
+    fireTexture.wrapT = THREE.RepeatWrapping
+
     useFrame((state, delta) =>
     {
         if(fireMaterialRef.current)
         {
             fireMeshRef.current.rotation.copy(camera.rotation) // Makes it so the fire will always face the camera
+            fireMaterialRef.current.uTime += delta
         }
     })
 
@@ -37,8 +43,8 @@ export default function FireTexture()
         <>
                 <mesh
                     ref={fireMeshRef}
-                    position={[-2.2, -0.5, 1.8]}
-                    scale={[0.5, 0.15, 0.5]}
+                    position={[-2.4, -0.5, 1.9]}
+                    scale={[0.8, 0.3, 0.5]}
                 >
                     <planeGeometry
                         args={[1.5,6, 16, 64]}   
@@ -46,6 +52,9 @@ export default function FireTexture()
                     <fireMaterial
                         ref={fireMaterialRef}
                         uFirePng={fireTexture}
+                        transparent={true}
+                        depthWrite={true}
+                        side={THREE.DoubleSide}
                     />
                 </mesh>
         </>
