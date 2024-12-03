@@ -1,58 +1,39 @@
 import { useControls } from "leva"
+import { useGLTF } from '@react-three/drei'
 import SmokeTexture from "./SmokeTexture"
-import PortalTexturePractice from './PortalTexturePractice'
 import Marshmellows from "./Marshmellows"
+
 import { RigidBody } from "@react-three/rapier"
 import FireTexture from "./FireTexture"
 
 
 export default function FireScene() 
 {
-    const { positionFire } = useControls('firePit',{
-        positionFire:
-        {
-            value: {x:-2.5, y:-0.9, z: 1.8},
-            min: -10,
-            max: 10,
-            step: 0.1,
-            joystick: 'invertY',
-        }
-    })
-
-    const { positionTent, rotationTent } = useControls('tent', {
-        positionTent:
-        {
-            value: {x:-1.6, y:-1.1, z: -2.2},
-            min: -10,
-            max: 10,
-            step: 0.1,
-            joystick: 'invertY',
-        },
-        rotationTent:
-        {
-            value: {x:0, y:0, z: Math.PI * 0.25},
-            min: - Math.PI * 2,
-            max: Math.PI * 2,
-            step: 0.01,
-        }
-        
-    })
+    const fireLogs = useGLTF('./Models/fireLogs.glb')
 
     return (
         <>
             
             {/* Fire ring */}
             <mesh 
-                position={[positionFire.x, positionFire.y, positionFire.z]}
+                position={[-2.5, -1.2, 1.8]}
                 rotation-x={-Math.PI * 0.5}
-                scale={0.75}
+                scale={[1, 1, 1]}
             >
                 <torusGeometry/>
                 <meshToonMaterial color="brown" />
             </mesh>
 
             {/* FireLogs */}
-            
+            <mesh
+                castShadow
+                receiveShadow
+                geometry={fireLogs.nodes.Logs.geometry}
+                material={fireLogs.materials.FireLog}
+                scale={[0.1, 0.45, 0.1]}
+                rotation={[-0.61, 2.36, 2.055]}
+                position={[-2.5, -0.9, 1.8]}
+            />
 
             {/* The Fire */}        
             <FireTexture />
@@ -66,8 +47,8 @@ export default function FireScene()
 
             {/* Tent */}
             <mesh
-                position={[positionTent.x, positionTent.y, positionTent.z]}
-                rotation={[rotationTent.x, rotationTent.y, rotationTent.z ]}
+                position={[-1.6, -1.1, -2.2]}
+                rotation={[0, 0, Math.PI * 0.25 ]}
                 scale={3.0}
             >
                 <boxGeometry />
