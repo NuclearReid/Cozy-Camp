@@ -15,7 +15,7 @@ void main()
             uPerlinTexture, // This is making the twist based off the perlin texture
             vec2(0.5, uv.y * 0.2 - uTime * 0.005) // sets up the location to be in the center, then adjusts the twist based off the uv.y position, changing the uTime is what then animates it
         ).r; // need to pick the red chanel cause this is a float
-    float angle = twistPerlin * 10.0; // angle is set to newPosition.y to make it newPosition.xz change as the Y value goes up
+    float angle = twistPerlin * 5.0; // angle is set to newPosition.y to make it newPosition.xz change as the Y value goes up
     newPosition.xz = rotate2D(newPosition.xz, angle);
 
 

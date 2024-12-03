@@ -39,9 +39,10 @@ export default function FireTexture()
         <>
             <mesh
                 ref={meshRef}
-                // rotation-y={-Math.PI * 0.85}
+                rotation-y={-Math.PI * 0.5}
                 position={[-2.4, 2.8, 1.9]}
                 scale={[1, 1.2, 1]}
+
             >
                 <planeGeometry
                     args={[1.5, 6, 16, 64]} 
