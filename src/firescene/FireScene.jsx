@@ -51,6 +51,9 @@ export default function FireScene()
                 <meshToonMaterial color="brown" />
             </mesh>
 
+            {/* FireLogs */}
+            
+
             {/* The Fire */}        
             <FireTexture />
 
