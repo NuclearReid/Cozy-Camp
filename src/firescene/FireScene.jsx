@@ -1,28 +1,34 @@
 import { useControls } from "leva"
 import { useGLTF } from '@react-three/drei'
 import SmokeTexture from "./SmokeTexture"
-import Marshmellows from "./Marshmellows"
-
 import { RigidBody } from "@react-three/rapier"
 import FireTexture from "./FireTexture"
+import MarshmellowOne from "./MarshmellowOne"
 
 
 export default function FireScene() 
 {
     const fireLogs = useGLTF('./Models/fireLogs.glb')
 
+    
+
+
     return (
         <>
             
             {/* Fire ring */}
-            <mesh 
-                position={[-2.5, -1.2, 1.8]}
-                rotation-x={-Math.PI * 0.5}
-                scale={[1, 1, 1]}
+            <RigidBody
+                type="fixed"
             >
-                <torusGeometry/>
-                <meshToonMaterial color="brown" />
-            </mesh>
+                <mesh 
+                    position={[-2.5, -1.2, 1.8]}
+                    rotation-x={-Math.PI * 0.5}
+                    scale={[1, 1, 1]}
+                >
+                    <torusGeometry/>
+                    <meshToonMaterial color="brown" />
+                </mesh>
+            </RigidBody>
 
             {/* FireLogs */}
             <mesh
@@ -42,7 +48,11 @@ export default function FireScene()
             <SmokeTexture />
 
             {/* Marshmellows */}
-            <Marshmellows />
+            <MarshmellowOne 
+                position={[-2.5, -0.5, 3]}
+                scale={0.5}
+                rotation-x={ - Math.PI * 0.25}
+            />
             
 
             {/* Tent */}
