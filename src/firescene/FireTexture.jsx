@@ -44,7 +44,7 @@ export default function FireTexture()
                 <mesh
                     ref={fireMeshRef}
                     position={[-2.4, -0.5, 1.9]}
-                    scale={[0.8, 0.3, 0.5]}
+                    scale={[1, 0.3, 0.5]}
                 >
                     <planeGeometry
                         args={[1.5,6, 16, 64]}   
