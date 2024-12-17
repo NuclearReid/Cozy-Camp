@@ -16,6 +16,7 @@ import useWorld from './stores/useWorld'
 import FireScene from './firescene/FireScene'
 import Lighting from './environement/Lighting'
 import CozyCampText from './startScreen/CozyCampText'
+import Grass from './grass/Grass'
 
 const degToRad = (degrees) => degrees * (Math.PI /180)
 const finalPolarPositionRadians = 1.255
@@ -189,8 +190,12 @@ export default function Experience()
                 {/* Where i'm trying to get the start sign to fall but be on a rope  */}
                 <SignRopeJoint /> 
 
-                {/* The grass, tent, firepit */}
+                {/* The tent, firepit, marshmellows */}
                 <FireScene /> 
+
+
+                {/* the grass particles */}
+                <Grass />
 
 
             </Suspense>
