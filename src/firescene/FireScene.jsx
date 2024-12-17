@@ -4,13 +4,32 @@ import SmokeTexture from "./SmokeTexture"
 import { RigidBody } from "@react-three/rapier"
 import FireTexture from "./FireTexture"
 import MarshmellowOne from "./MarshmellowOne"
+import MarshmellowTwo from "./MarshmellowTwo"
 
 
 export default function FireScene() 
 {
     const fireLogs = useGLTF('./Models/fireLogs.glb')
+    const fireRing = useGLTF('./Models/fireRing.glb')
 
-    
+    const { position, rotation, scale } = useControls('Positioning', {
+        // position={[-2.5, -0.6, 3]}
+        position:
+        {
+            value: {x: -2.5, y: 1, z: 3},
+            step: 0.1
+        },
+        rotation:
+        {
+            value: 0.25,
+            step: 0.01
+        },
+        scale:
+        {
+            value: 0.25,
+            step: 0.01,
+        }
+    })
 
 
     return (
@@ -19,15 +38,17 @@ export default function FireScene()
             {/* Fire ring */}
             <RigidBody
                 type="fixed"
+
+
             >
                 <mesh 
-                    position={[-2.5, -1.2, 1.8]}
-                    rotation-x={-Math.PI * 0.5}
-                    scale={[1, 1, 1]}
-                >
-                    <torusGeometry/>
-                    <meshToonMaterial color="brown" />
-                </mesh>
+                    castShadow
+                    receiveShadow
+                    geometry={fireRing.nodes.fireRocks.geometry}
+                    material={fireRing.materials.Material}
+                    position={[-3.4, 0.9, 3.2]}
+                    scale={0.23}
+                />
             </RigidBody>
 
             {/* FireLogs */}
@@ -49,9 +70,19 @@ export default function FireScene()
 
             {/* Marshmellows */}
             <MarshmellowOne 
-                position={[-2.5, -0.5, 3]}
+                position={[-3.53, -0.8, 2.35]}
+                scale={0.5}
+                rotation={ [-0.66, 0, -0.77] }
+            />
+            <MarshmellowTwo 
+                position={[-2.5, -0.8, 3]}
                 scale={0.5}
                 rotation-x={ - Math.PI * 0.25}
+            />
+            <MarshmellowTwo 
+                position={[-1.26, -0.8, 1.67]}
+                scale={0.5}
+                rotation={ [-0.8, 0.61, 1.27]}
             />
             
 

@@ -2,7 +2,8 @@ import { RigidBody } from "@react-three/rapier"
 import { useGLTF } from "@react-three/drei"
 import { useState, useRef, useEffect } from "react"
 
-export default function MarshmellowOne(props)
+
+export default function MarshmellowTwo(props)
 {
     const [physicsType, setPhysicsType ] = useState('fixed')
     const {nodes, materials} = useGLTF('./Models/marshmellows.glb')
@@ -41,6 +42,12 @@ export default function MarshmellowOne(props)
                         geometry={nodes.Cube002.geometry}
                         material={materials.Marshmellow}
                         position={[0,1.4,0]}
+                        scale={[0.2,0.2,0.2]}
+                    />
+                    <mesh
+                        geometry={nodes.Cylinder.geometry}
+                        material={materials.Marshmellow}
+                        position={[0,0.8,0]}
                         scale={[0.2,0.2,0.2]}
                     />
                     <mesh
