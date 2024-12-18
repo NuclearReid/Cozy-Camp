@@ -7,7 +7,7 @@ export default {
     root: 'src/',
     publicDir: '../public/',
     optimizeDeps: {
-    exclude: ['chunk-AUFBKMCN']
+    exclude: ['problematic-dependency']
     },
     plugins:
     [

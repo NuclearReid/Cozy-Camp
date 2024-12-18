@@ -5,6 +5,7 @@ import { RigidBody } from "@react-three/rapier"
 import FireTexture from "./FireTexture"
 import MarshmellowOne from "./MarshmellowOne"
 import MarshmellowTwo from "./MarshmellowTwo"
+import Grass from "../grass/Grass"
 
 
 export default function FireScene() 
@@ -12,6 +13,7 @@ export default function FireScene()
     const fireLogs = useGLTF('./Models/fireLogs.glb')
     const fireRing = useGLTF('./Models/fireRing.glb')
 
+    // These are just used to position everything when needed
     const { position, rotation, scale } = useControls('Positioning', {
         // position={[-2.5, -0.6, 3]}
         position:
@@ -31,6 +33,7 @@ export default function FireScene()
         }
     })
 
+    
 
     return (
         <>
@@ -99,14 +102,15 @@ export default function FireScene()
             <RigidBody
                 type='fixed'
             >
-            <mesh 
-                position-y={ - 1 } 
-                rotation-x={ - Math.PI * 0.5 } 
-                scale={ 10 }
-            >
-                <circleGeometry />
-                <meshStandardMaterial color="greenyellow" />
-            </mesh>
+                <Grass />
+                {/* <mesh 
+                    position-y={ - 1 } 
+                    rotation-x={ - Math.PI * 0.5 } 
+                    scale={ 10 }
+                >
+                    <circleGeometry />
+                    <meshStandardMaterial color="greenyellow" />
+                </mesh> */}
             </RigidBody>
             
         </>
