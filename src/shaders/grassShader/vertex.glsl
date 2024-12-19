@@ -8,7 +8,6 @@ void main()
     #ifdef USE_INSTANCING 
         mvPosition = instanceMatrix * mvPosition; 
     #endif
-    
     float dispPower = 1.0 - cos(uv.y * 3.1416 / 2.0); 
     float displacement = sin(mvPosition.z + (uTime * 0.25) * 10.0) * (0.1 * dispPower); 
     mvPosition.z += displacement; 

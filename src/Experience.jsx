@@ -196,12 +196,6 @@ export default function Experience()
 
                 {/* the grass particles */}
                 <Grass />
-                {/* {console.log('second grass')}
-                <Grass 
-                    rotation={[0, Math.PI, 0]}
-                    position={[0,2,0]}
-                /> */}
-
 
             </Suspense>
 
