@@ -25,22 +25,22 @@ export default function Grass()
 
     useEffect(() =>
     {
-        const dummy = new THREE.Object3D()
+        const grassBlade = new THREE.Object3D() // This is used to create an object for each blade of grass 
         const radius = 0.5 * Math.PI * 5
-        const segments = 2000
 
+        // This is for the positioning if each blade of grass
         for(let i =0; i < instanceNumber; i ++)
         {
-            const angle = Math.random() * Math.PI * 2
-            const r = Math.sqrt(Math.random()) * radius
+            const angle = Math.random() * Math.PI * 2 
+            const r = Math.sqrt(Math.random()) * radius // Gets a random spot within the circle. Without this, the grass would only be along the parimeter
             const x = Math.cos(angle) * r
             const z = Math.sin(angle) * r
 
-            dummy.position.set(x, 0, z)
-            dummy.scale.setScalar(0.5 + Math.random() * 0.5)
-            dummy.rotation.y = Math.random() * Math.PI
-            dummy.updateMatrix()
-            meshRef.current.setMatrixAt(i, dummy.matrix)
+            grassBlade.position.set(x, 0, z)
+            grassBlade.scale.setScalar(0.5 + Math.random() * 0.5) // sets a random scale to each blade of grass from 0.5 to 1
+            grassBlade.rotation.y = Math.random() * Math.PI
+            grassBlade.updateMatrix()
+            meshRef.current.setMatrixAt(i, grassBlade.matrix)
         }
 
         meshRef.current.instanceMatrix.needsUpdate = true
@@ -51,69 +51,9 @@ export default function Grass()
         materialRef.current.uniforms.uTime.value = state.clock.getElapsedTime()
     })
 
-    // const { radius, segments, thetaStart, thetaLength} = useControls('grass Circle',{
-    //     radius:
-    //     {
-    //         value: 5,
-    //         step: 1,
-    //         min: 0
-    //     },
-    //     segments:
-    //     {
-    //         value: 32,
-    //         step: 1,
-    //         min: 0
-    //     },
-    //     thetaStart:
-    //     {
-    //         value: 0,
-    //         step: 0.01,
-    //         min: 0,
-    //         max: Math.PI * 2
-    //     },
-    //     thetaLength:
-    //     {
-    //         value: Math.PI * 2,
-    //         step: 0.01,
-    //         min: 0,
-    //         max: Math.PI * 2
-    //     }
-    // })
-
-    // const { width, height, widthSegments, heightSegments} = useControls('grass square',{
-    //     width:
-    //     {
-    //         value: 0.1,
-    //         step: 1,
-    //         min: 0
-    //     },
-    //     height:
-    //     {
-    //         value: 1,
-    //         step: 1,
-    //         min: 0
-    //     },
-    //     widthSegments:
-    //     {
-    //         value: 1,
-    //         step: 1,
-    //         min: 0,
-    //     },
-    //     heightSegments:
-    //     {
-    //         value: 4,
-    //         step: 1,
-    //         min: 0,
-    //     }
-    // })
-
-
-    // To make the grass a circle
-    // const geometry = new THREE.CircleGeometry(radius, segments, thetaStart, thetaLength)
-    // geometry.translate(0, 0.15, 0) // Adjust the position of the circle
 
     // To make the grass a plane
-    const geometry = new THREE.PlaneGeometry(0.1, 1, 1, 4)
+    const geometry = new THREE.PlaneGeometry(0.1, 1, 1, 4) // Needs to be a PlaneGeometry because that's what the shader will use for the shape of each blade of grass
 
     return(
         <>
