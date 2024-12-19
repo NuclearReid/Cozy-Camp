@@ -6,6 +6,9 @@ import glsl from 'vite-plugin-glsl'
 export default {
     root: 'src/',
     publicDir: '../public/',
+    optimizeDeps: {
+    exclude: ['problematic-dependency']
+    },
     plugins:
     [
         // Restart server on static/public file change
