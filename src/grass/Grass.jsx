@@ -1,10 +1,10 @@
-import { useRef, useEffect } from "react"
+import { useRef, useEffect, useMemo } from "react"
 // import { ShaderMaterial } from "three"
 import { extend, useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 import grassVertexShader from '../shaders/grassShader/vertex.glsl'
 import grassFragmentShader from '../shaders/grassShader/fragment.glsl'
-import { shaderMaterial, useTexture } from "@react-three/drei"
+import { shaderMaterial } from "@react-three/drei"
 import { useControls } from "leva"
 
 const GrassMaterial = shaderMaterial(
@@ -23,7 +23,8 @@ export default function Grass()
     const meshRef = useRef()
     const instanceNumber = 7000 // Change this if i want more or less grass
 
-    const { position, rotation, scale } = useControls('Positioning', {
+
+    const { position, rotation, scale } = useControls('Positioning ', {
         // position={[-2.5, -0.6, 3]}
         position:
         {
@@ -45,6 +46,10 @@ export default function Grass()
 
     useEffect(() =>
     {
+
+        console.log(materialRef)
+        console.log(meshRef)
+
         const grassBlade = new THREE.Object3D() // This is used to create an object for each blade of grass 
         const radius = 0.5 * Math.PI * 5
         
@@ -62,6 +67,7 @@ export default function Grass()
 
             // Makes a circle where the fire pit is and does not place any grass here
             const grassPosition = new THREE.Vector3(x, 0, z)
+
             if (grassPosition.distanceTo(fireRingPosition) < exclusionRadius) {
                 continue // Skip this position if it's within the exclusion radius
             }
@@ -72,13 +78,15 @@ export default function Grass()
             grassBlade.updateMatrix()
             meshRef.current.setMatrixAt(i, grassBlade.matrix)
         }
-
         meshRef.current.instanceMatrix.needsUpdate = true
     }, [ instanceNumber] )
 
     useFrame((state, delta) =>
     {
-        materialRef.current.uniforms.uTime.value = state.clock.getElapsedTime()
+        if(materialRef.current)
+        {
+            materialRef.current.uniforms.uTime.value = state.clock.getElapsedTime()
+        }
     })
 
     // To make the grass a plane
@@ -101,9 +109,6 @@ export default function Grass()
         </>
     )
 }
-
-
-
 
 
 // Possiblity for the grass: make a whole bunch of triangles and use the same geometry over and over and over again? and just place them everywhere? 

@@ -27,11 +27,10 @@ export default function Experience()
     const [supportCollider, setSupportCollider] = useState(true)
 
     const cameraControlsRef = useRef()
-    const { camera } = useThree()
-    const { DEG2RAD } = THREE.MathUtils
 
-    useGLTF.preload('./FlightHelmet/glTF/FlightHelmet.gltf')
+
     // Loading the models: flightHelmet is a test model
+    useGLTF.preload('./FlightHelmet/glTF/FlightHelmet.gltf')
     const flightHelmet = useGLTF('./FlightHelmet/glTF/FlightHelmet.gltf')
 
     // Moves the camera
@@ -135,6 +134,7 @@ export default function Experience()
                     </RigidBody> 
                     )}
 
+
                     {/* The 'click to start' sign that will fall */}
                     <RigidBody
                         ref={startSignRef}
@@ -164,6 +164,8 @@ export default function Experience()
                             Start!
                         </Text>
                     </RigidBody>
+                    {/* Grass is here to give it some time to render. If it's in the return() below, only one blade of grass is rendered */}
+                    <Grass/>
             </>
         )
     }
@@ -193,17 +195,13 @@ export default function Experience()
                 {/* The tent, firepit, marshmellows */}
                 <FireScene /> 
 
-
-                {/* the grass particles */}
-                <Grass />
-
             </Suspense>
 
 
             {/* Make sure to keep this out of the suspence or this controls won't work till the whole scene is loaded */}
             <CameraControls 
                 ref={cameraControlsRef}
-                enabled={false}
+                enabled={true}
                 mouseButtons = {{
                     left: CameraControlsReact.ACTION.ROTATE,
                     right: CameraControlsReact.ACTION.NONE,
@@ -212,7 +210,7 @@ export default function Experience()
                 }}                   
             />
             <OrbitControls 
-                enabled={true}
+                enabled={false}
                 enableDamping={false}
                 makeDefault={true}
             />
