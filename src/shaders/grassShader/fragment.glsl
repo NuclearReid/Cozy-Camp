@@ -1,12 +1,8 @@
-varying vec2 vUv;
+varying vec2 vUv; 
 
-void main()
+void main() 
 {
-    vec2 grassUv = vUv;
-
-    gl_FragColor = vec4(grassUv, 1.0, 1.0); 
-
-    // It's good to always add these two includes
-    #include <tonemapping_fragment> // adds support to for the tonemapping 
-    #include <colorspace_fragment> // adds support for colorspace in three.js 
+    vec3 baseColor = vec3(0.41, 1.0, 0.5); 
+    float clarity = (vUv.y * 0.5) + 0.5; 
+    gl_FragColor = vec4(baseColor * clarity, 1); 
 }

@@ -1,31 +1,18 @@
-varying vec2 vUv;
+varying vec2 vUv; 
+uniform float uTime; 
 
-#include ../includes/perlinClassic3D.glsl
-#include ./grassElevation.glsl
+void main() 
+{ 
+    vUv = uv; 
+    vec4 mvPosition = vec4(position, 1.0);
+    #ifdef USE_INSTANCING 
+        mvPosition = instanceMatrix * mvPosition; 
+    #endif
+    
+    float dispPower = 1.0 - cos(uv.y * 3.1416 / 2.0); 
+    float displacement = sin(mvPosition.z + (uTime * 0.25) * 10.0) * (0.1 * dispPower); 
+    mvPosition.z += displacement; 
+    vec4 modelViewPosition = modelViewMatrix * mvPosition; 
+    gl_Position = projectionMatrix * modelViewPosition; 
 
-void main()
-{
-    float shift = 0.01;
-    vec4 modelPosition = modelMatrix * vec4(position, 1.0);
-
-    vec3 modelPositionA = modelPosition.xyz + vec3(shift, 0.0, 0.0);
-    vec3 modelPositionB = modelPosition.xyz + vec3(0.0, 0.0, - shift);
-
-    float elevation = grassElevation(modelPosition.xyz);
-    modelPosition.y += elevation;
-    modelPositionA.y += grassElevation(modelPositionA);
-    modelPositionB.y += grassElevation(modelPositionB);
-
-
-    vec3 toA = normalize(modelPositionA - modelPosition.xyz);
-    vec3 toB = normalize(modelPositionB - modelPosition.xyz);
-
-    vec3 computeNormal = cross(toA, toB);
-
-
-    vec4 viewPosition = viewMatrix * modelPosition;
-    vec4 projectionPosition = projectionMatrix * viewPosition;
-    gl_Position = projectionPosition;
-
-    vUv = uv;
 }
