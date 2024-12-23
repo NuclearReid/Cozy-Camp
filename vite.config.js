@@ -7,7 +7,7 @@ export default {
     root: 'src/',
     publicDir: '../public/',
     optimizeDeps: {
-    exclude: ['problematic-dependency']
+    // exclude: ['problematic-dependency'] // run 'rm -rf node_modules/.vite' to clear the cache if vite is not working. This error 'The file does not exist at "/Users/monks/Documents/threejs/practice/Cozy-CampFire/node_modules/.vite/deps/chunk-5DVSGM7Q.js?v=313eda2c" which is in the optimize deps directory. The dependency might be incompatible with the dep optimizer. Try adding it to `optimizeDeps.exclude`.' 
     },
     plugins:
     [
