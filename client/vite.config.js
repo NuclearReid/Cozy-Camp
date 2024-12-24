@@ -1,9 +1,10 @@
 import react from '@vitejs/plugin-react'
-import { transformWithEsbuild } from 'vite'
+import { transformWithEsbuild, defineConfig } from 'vite'
 import restart from 'vite-plugin-restart'
 import glsl from 'vite-plugin-glsl'
+import { Environment } from '@react-three/drei'
 
-export default {
+export default defineConfig ({
     root: 'src/',
     publicDir: '../public/',
     optimizeDeps: {
@@ -38,7 +39,20 @@ export default {
     server:
     {
         host: true, // Open to local network and display URL
-        open: !('SANDBOX_URL' in process.env || 'CODESANDBOX_HOST' in process.env) // Open if it's not a CodeSandbox
+        open: !('SANDBOX_URL' in process.env || 'CODESANDBOX_HOST' in process.env), // Open if it's not a CodeSandbox
+        port: 3000,
+        open: true,
+        proxy: {
+            '/graphql': {
+                target: 'http://localhost:3001',
+                sercure: false,
+                changeOrigin: true
+            }
+        }
+    },
+    test: {
+        globals: true,
+        environment: 'happy-dom'
     },
     build:
     {
@@ -46,4 +60,4 @@ export default {
         emptyOutDir: true, // Empty the folder first
         sourcemap: true // Add sourcemap
     },
-}
+})
