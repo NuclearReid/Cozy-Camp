@@ -201,7 +201,7 @@ export default function Experience()
             {/* Make sure to keep this out of the suspence or this controls won't work till the whole scene is loaded */}
             <CameraControls 
                 ref={cameraControlsRef}
-                enabled={false}
+                enabled={true}
                 mouseButtons = {{
                     left: CameraControlsReact.ACTION.ROTATE,
                     right: CameraControlsReact.ACTION.NONE,
@@ -210,7 +210,7 @@ export default function Experience()
                 }}                   
             />
             <OrbitControls 
-                enabled={true}
+                enabled={false}
                 enableDamping={false}
                 makeDefault={true}
             />
