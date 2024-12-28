@@ -172,6 +172,14 @@ export default function Experience()
 
     return (
     <>
+        {/* <Canvas // I don't think i'll want this here
+            camera={{
+                fov: 45,
+                near: 0.1,
+                far: 200,
+                position: [-3.9, 10.2, 11.9],
+            }}
+        > */}
         {/* I wrapped everything in the physics tag to make sure nothing that uses physics was left out */}
         <Physics>
             <Suspense
@@ -215,6 +223,7 @@ export default function Experience()
                 makeDefault={true}
             />
         </Physics>      
+        {/* </Canvas> */}
 
     </>)
 }
