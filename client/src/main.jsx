@@ -9,7 +9,7 @@ import App from './App.jsx'
 import NoMatch from './pages/NoMatch'
 import Landing from './pages/Landing'
 
-
+// Just a comment to do another push
 const ProtectedRoute = ({ children }) => {
     const isLoggedIn = Auth.loggedIn()
 
