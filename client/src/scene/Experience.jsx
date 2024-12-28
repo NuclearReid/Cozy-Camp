@@ -171,59 +171,50 @@ export default function Experience()
     }
 
     return (
-    <>
-        {/* <Canvas // I don't think i'll want this here
-            camera={{
-                fov: 45,
-                near: 0.1,
-                far: 200,
-                position: [-3.9, 10.2, 11.9],
-            }}
-        > */}
-        {/* I wrapped everything in the physics tag to make sure nothing that uses physics was left out */}
-        <Physics>
-            <Suspense
-                fallback={null}
-            >
-                {/* The Flight helmet model, it's commented out, causes a stutter with the camera movement */}
-                {/* <primitive 
-                    object={flightHelmet.scene} 
-                    scale={5}
-                /> */}
+        <>
+            
+            {/* I wrapped everything in the physics tag to make sure nothing that uses physics was left out */}
+            <Physics>
+                <Suspense
+                    fallback={null}
+                >
+                    {/* The Flight helmet model, it's commented out, causes a stutter with the camera movement */}
+                    {/* <primitive 
+                        object={flightHelmet.scene} 
+                        scale={5}
+                    /> */}
 
-                <Perf position='top-left' />
-                
-                <Lighting />
-                {/* The Text on the sign*/}
-                <CozyCampText />  
+                    <Perf position='top-left' />
+                    
+                    <Lighting />
+                    {/* The Text on the sign*/}
+                    <CozyCampText />  
 
-                {/* Where i'm trying to get the start sign to fall but be on a rope  */}
-                <SignRopeJoint /> 
+                    {/* Where i'm trying to get the start sign to fall but be on a rope  */}
+                    <SignRopeJoint /> 
 
-                {/* The tent, firepit, marshmellows */}
-                <FireScene /> 
+                    {/* The tent, firepit, marshmellows */}
+                    <FireScene /> 
 
-            </Suspense>
-
-
-            {/* Make sure to keep this out of the suspence or this controls won't work till the whole scene is loaded */}
-            <CameraControls 
-                ref={cameraControlsRef}
-                enabled={true}
-                mouseButtons = {{
-                    left: CameraControlsReact.ACTION.ROTATE,
-                    right: CameraControlsReact.ACTION.NONE,
-                    wheel: CameraControlsReact.ACTION.NONE,
-                    middle: CameraControlsReact.ACTION.NONE,
-                }}                   
-            />
-            <OrbitControls 
-                enabled={false}
-                enableDamping={false}
-                makeDefault={true}
-            />
-        </Physics>      
-        {/* </Canvas> */}
-
-    </>)
+                </Suspense>
+                {/* Make sure to keep this out of the suspence or this controls won't work till the whole scene is loaded */}
+                <CameraControls 
+                    ref={cameraControlsRef}
+                    enabled={true}
+                    mouseButtons = {{
+                        left: CameraControlsReact.ACTION.ROTATE,
+                        right: CameraControlsReact.ACTION.NONE,
+                        wheel: CameraControlsReact.ACTION.NONE,
+                        middle: CameraControlsReact.ACTION.NONE,
+                    }}                   
+                />
+                <OrbitControls 
+                    enabled={false}
+                    enableDamping={false}
+                    makeDefault={true}
+                />
+            </Physics>      
+        </>
+    
+)
 }
