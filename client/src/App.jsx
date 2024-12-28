@@ -5,6 +5,7 @@ import{
     ApolloProvider,
     createHttpLink,
 } from '@apollo/client'
+import auth from './utils/auth.js'
 
 import { Outlet } from 'react-router-dom'
 import { setContext } from '@apollo/client/link/context'
@@ -29,7 +30,7 @@ const client = new ApolloClient({
 })
 
 function App() {
-    const isLoggedIn = auth.isLoggedIn()
+    const isLoggedIn = auth.loggedIn()
 
     return(
         <ApolloProvider client={client}>

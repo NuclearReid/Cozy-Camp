@@ -8,6 +8,7 @@ import Experience from './scene/Experience.jsx'
 import App from './App.jsx'
 import NoMatch from './pages/NoMatch'
 import Landing from './pages/Landing'
+import Scene from './scene/Experience.jsx'
 
 
 const ProtectedRoute = ({ children }) => {
