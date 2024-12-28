@@ -172,14 +172,14 @@ export default function Experience()
 
     return (
     <>
-        <Canvas
+        {/* <Canvas // I don't think i'll want this here
             camera={{
                 fov: 45,
                 near: 0.1,
                 far: 200,
                 position: [-3.9, 10.2, 11.9],
             }}
-        >
+        > */}
         {/* I wrapped everything in the physics tag to make sure nothing that uses physics was left out */}
         <Physics>
             <Suspense
@@ -209,7 +209,7 @@ export default function Experience()
             {/* Make sure to keep this out of the suspence or this controls won't work till the whole scene is loaded */}
             <CameraControls 
                 ref={cameraControlsRef}
-                enabled={false}
+                enabled={true}
                 mouseButtons = {{
                     left: CameraControlsReact.ACTION.ROTATE,
                     right: CameraControlsReact.ACTION.NONE,
@@ -218,12 +218,12 @@ export default function Experience()
                 }}                   
             />
             <OrbitControls 
-                enabled={true}
+                enabled={false}
                 enableDamping={false}
                 makeDefault={true}
             />
         </Physics>      
-        </Canvas>
+        {/* </Canvas> */}
 
     </>)
 }

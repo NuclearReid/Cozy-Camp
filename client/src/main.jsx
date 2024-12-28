@@ -8,7 +8,6 @@ import Experience from './scene/Experience.jsx'
 import App from './App.jsx'
 import NoMatch from './pages/NoMatch'
 import Landing from './pages/Landing'
-import Scene from './scene/Experience.jsx'
 
 
 const ProtectedRoute = ({ children }) => {
@@ -30,6 +29,21 @@ const router = createBrowserRouter([
                 index: true,
                 element:
                     <Landing />
+            },
+            {
+                path: '/scene',
+                element: <>
+                            <Canvas
+                                camera={{
+                                    fov: 45,
+                                    near: 0.1,
+                                    far: 200,
+                                    position: [-3.9, 10.2, 11.9],
+                                }}
+                            >
+                                <Experience />
+                            </Canvas>
+                        </>,
             },
         ]
     }
