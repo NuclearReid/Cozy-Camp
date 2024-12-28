@@ -1,7 +1,7 @@
 require('dotenv').config()
 const express = require('express')
 const { ApolloServer} = require('@apollo/server')
-const expressMiddleware = require('@apollo/server/express4')
+const {expressMiddleware} = require('@apollo/server/express4')
 const path = require('path')
 const { authMiddleware } = require('./utils/auth')
 
@@ -15,6 +15,7 @@ const server = new ApolloServer({
     typeDefs,
     resolvers
 })
+
 
 const startApolloServer = async () =>{
     await server.start()
@@ -39,7 +40,7 @@ const startApolloServer = async () =>{
 
     db.once('open', () =>{
         app.listen(PORT, () => {
-            console.log(`API server running on port ${PORT}`);
+            console.log(`API server running on port http://localhost:${PORT}`);
             console.log(`GraphQL running on http://localhost:${PORT}/graphql`)
         });
     });
