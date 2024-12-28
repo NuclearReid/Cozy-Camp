@@ -52,21 +52,3 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")).render(
     <RouterProvider router={router} />
 )
-
-
-// const root = ReactDOM.createRoot(document.querySelector('#root'))
-
-// root.render(
-//     <>
-//         <Canvas
-//             camera={{
-//                 fov: 45,
-//                 near: 0.1,
-//                 far: 200,
-//                 position: [-3.9, 10.2, 11.9],
-//             }}
-//         >
-//             <Experience />
-//         </Canvas>
-//     </>
-// )
