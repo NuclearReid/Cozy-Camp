@@ -41,6 +41,7 @@ export default function Login() {
             email: '',
             password: ''
         })
+        
     }
 
     
@@ -58,6 +59,7 @@ export default function Login() {
                         id="loginEmailField" 
                         aria-describedby="loginEmailHelp" 
                         name='email'
+                        value={formState.email}
                         onChange={handleChange}
                     />
                 </div>
@@ -72,6 +74,7 @@ export default function Login() {
                         className="form-control"
                         name='password'
                         id="exampleLoginInputPassword1"
+                        value={formState.password}
                         onChange={handleChange} 
                     />
                 </div>

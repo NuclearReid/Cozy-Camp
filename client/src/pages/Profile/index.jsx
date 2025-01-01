@@ -2,14 +2,13 @@ import { useQuery } from "@apollo/client"
 
 
 import { QUERY_ME } from "../../utils/queries"
-import { use } from "react"
 
 
 export default function Profile(){
 
     const { loading, data} = useQuery(QUERY_ME)
 
-    console.log(data)
+    // console.log(data)
 
     return(
         <>

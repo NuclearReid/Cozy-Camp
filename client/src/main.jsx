@@ -14,8 +14,6 @@ import Profile from './pages/Profile/index.jsx';
 
 const ProtectedRoute = ({ children }) => {
     const isLoggedIn = Auth.loggedIn()
-    console.log(isLoggedIn)
-
     if(!isLoggedIn){
         return <Landing />
     }
@@ -31,7 +29,9 @@ const router = createBrowserRouter([
             {
                 index: true,
                 element:
-                    <Landing />
+                <ProtectedRoute>                            
+                    <Profile />
+                </ProtectedRoute>,
             },
             {
                 path: '/scene',
@@ -40,13 +40,6 @@ const router = createBrowserRouter([
                         <Scene />
                     </ProtectedRoute>,
             },
-            {
-                path: '/profile',
-                element: 
-                    <ProtectedRoute>                            
-                        <Profile />
-                    </ProtectedRoute>,
-            }
         ]
     }
 ])

@@ -9,6 +9,7 @@ import auth from './utils/auth.js'
 
 import { Outlet } from 'react-router-dom'
 import { setContext } from '@apollo/client/link/context'
+import Header from './components/Header.jsx'
 
 const httpLink = createHttpLink({
     uri: '/graphql',
@@ -30,10 +31,9 @@ const client = new ApolloClient({
 })
 
 function App() {
-    const isLoggedIn = auth.loggedIn()
-
     return(
         <ApolloProvider client={client}>
+            <Header />
             <Outlet />
         </ApolloProvider>
     )
