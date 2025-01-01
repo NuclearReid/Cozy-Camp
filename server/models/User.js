@@ -6,6 +6,7 @@ const userSchema = new Schema({
         type: String,
         required: true,
         unique: true,
+        // match: [/.+@.+\..+/, 'Must match an email address!'],
     },
     password: {
         type: String,
@@ -16,7 +17,7 @@ const userSchema = new Schema({
 
 userSchema.pre('save', async function(next) {
     if (this.isNew || this.isModified('password')){
-        this.password = await bcrypt.hash(this.password, 10)
+        this.password = await bcrypt.hash(this.password, 10) // the 10 is salt rounds
     }
     next()
 })

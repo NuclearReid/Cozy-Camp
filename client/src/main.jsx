@@ -1,21 +1,24 @@
 import './style.css'
+import "bootstrap/dist/css/bootstrap.min.css";
 import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom'
 import Auth from '../src/utils/auth.js'
 
-import { Canvas} from '@react-three/fiber'
-import Experience from './scene/Experience.jsx'
 import App from './App.jsx'
 import NoMatch from './pages/NoMatch'
 import Landing from './pages/Landing'
+import Scene from './pages/Experience/index.jsx'
+import Profile from './pages/Profile/index.jsx';
 
-// Just a comment to do another push
+
+
 const ProtectedRoute = ({ children }) => {
     const isLoggedIn = Auth.loggedIn()
+    console.log(isLoggedIn)
 
-    // if(!isLoggedIn){
-    //     return <Landing />
-    // }
+    if(!isLoggedIn){
+        return <Landing />
+    }
     return children;
 }
 
@@ -32,19 +35,18 @@ const router = createBrowserRouter([
             },
             {
                 path: '/scene',
-                element: <>
-                            <Canvas
-                                camera={{
-                                    fov: 45,
-                                    near: 0.1,
-                                    far: 200,
-                                    position: [-3.9, 10.2, 11.9],
-                                }}
-                            >
-                                <Experience />
-                            </Canvas>
-                        </>,
+                element: 
+                    <ProtectedRoute>                            
+                        <Scene />
+                    </ProtectedRoute>,
             },
+            {
+                path: '/profile',
+                element: 
+                    <ProtectedRoute>                            
+                        <Profile />
+                    </ProtectedRoute>,
+            }
         ]
     }
 ])
