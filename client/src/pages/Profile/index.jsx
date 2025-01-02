@@ -25,6 +25,9 @@ export default function Profile(){
             <h1> Your email is: {data?.me?.email} </h1>
             <p> Your current shelter of choice is a {shelter} </p>
             <ShelterForm onShelterUpdate={handleShelterUpdate}/>
+            <a href="/scene" className="btn btn-primary mt-3">
+                Your scene
+            </a>
         </>
     )
 }
