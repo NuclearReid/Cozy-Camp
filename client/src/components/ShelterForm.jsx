@@ -1,10 +1,15 @@
 import { useState } from "react"
 import { FormCheck, Row, Col } from "react-bootstrap"
 
+import { SET_SHELTER } from "../utils/mutations"
+import { useMutation } from "@apollo/client"
+
  export default function ShelterForm(){
 
+    const [setShelter, {error, data: setShelterData }] = useMutation(SET_SHELTER)
+
     const [formState, setFormState] = useState({
-        shelter: '',
+        shelter: 'cowboy', // The default is cowboy because it's no shelter
     })
 
     const handleChange = (event) => {
@@ -15,11 +20,15 @@ import { FormCheck, Row, Col } from "react-bootstrap"
         })
     }
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault()
-        console.log('Form submitted')
-        console.log(formState)
-        
+        try {
+            await setShelter({
+                variables: { shelter: formState.shelter}
+            })
+        } catch (error) {
+            console.log(error)
+        }        
     }
 
   return (
@@ -27,7 +36,7 @@ import { FormCheck, Row, Col } from "react-bootstrap"
         <Row>
             <Col className='mb-3' xs={12} md={12}>
                 <label className='form-label fs-3'>
-                    Type of Shelter? <span style={{color: 'red'}}>*</span>
+                    Type of Shelter?
                 </label>
                 <FormCheck
                     value={'tent'}
@@ -57,7 +66,7 @@ import { FormCheck, Row, Col } from "react-bootstrap"
                     name="shelter"
                     id="cowboy"
                     onChange={handleChange}
-                    checked={formState.shelter === 'cowboy'}
+                    checked={formState.shelter === 'cowboy'} 
                 />
             </Col>
         </Row>

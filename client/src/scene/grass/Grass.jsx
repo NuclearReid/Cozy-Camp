@@ -24,32 +24,28 @@ export default function Grass()
     const instanceNumber = 7000 // Change this if i want more or less grass
 
 
-    const { position, rotation, scale } = useControls('Positioning ', {
-        // position={[-2.5, -0.6, 3]}
-        position:
-        {
-            value: {x: -2.5, y: 1, z: 3},
-            step: 0.1
-        },
-        rotation:
-        {
-            value: 0.25,
-            step: 0.01
-        },
-        scale:
-        {
-            value: 0.25,
-            step: 0.01,
-        }
-    })
+    // const { position, rotation, scale } = useControls('Positioning ', {
+    //     // position={[-2.5, -0.6, 3]}
+    //     position:
+    //     {
+    //         value: {x: -2.5, y: 1, z: 3},
+    //         step: 0.1
+    //     },
+    //     rotation:
+    //     {
+    //         value: 0.25,
+    //         step: 0.01
+    //     },
+    //     scale:
+    //     {
+    //         value: 0.25,
+    //         step: 0.01,
+    //     }
+    // })
 
 
     useEffect(() =>
     {
-
-        console.log(materialRef)
-        console.log(meshRef)
-
         const grassBlade = new THREE.Object3D() // This is used to create an object for each blade of grass 
         const radius = 0.5 * Math.PI * 5
         

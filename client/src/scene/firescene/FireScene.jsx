@@ -6,7 +6,7 @@ import FireTexture from "./FireTexture"
 import MarshmellowOne from "./MarshmellowOne"
 import MarshmellowTwo from "./MarshmellowTwo"
 import Grass from "../grass/Grass"
-
+import Shelter from '../options/shelter'
 
 export default function FireScene() 
 {
@@ -86,16 +86,9 @@ export default function FireScene()
                 rotation={ [-0.8, 0.61, 1.27]}
             />
             
+            {/* Shelter */}
+            <Shelter />
 
-            {/* Tent */}
-            <mesh
-                position={[-1.6, -1.1, -2.2]}
-                rotation={[0, 0, Math.PI * 0.25 ]}
-                scale={3.0}
-            >
-                <boxGeometry />
-                <meshToonMaterial color='tan'/>
-            </mesh>
             {/* The floor */}
             <RigidBody
                 type='fixed'

@@ -41,8 +41,19 @@ const resolvers = {
             const token = signToken(user)
 
             return{token, user} 
-
+        },
+        setShelter: async (parent, { shelter }, context) => {
+            if ( context.user ){
+                const updatedUser = await User.findByIdAndUpdate(
+                    context.user._id,
+                    {$set: {shelter: shelter}},
+                    {new: true}
+                )
+                return updatedUser
+            }
+            throw AuthenticationError            
         }
+
     }
 }
 

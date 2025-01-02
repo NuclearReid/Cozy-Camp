@@ -84,7 +84,6 @@ export default function Experience()
     /* 
      * Rope Joint (This has been rough :) ) 
     */
-
     const SignRopeJoint = () =>
     {
         const cozySignRef = useRef()
@@ -170,6 +169,8 @@ export default function Experience()
         )
     }
 
+
+
     return (
         <>
             
@@ -184,7 +185,7 @@ export default function Experience()
                         scale={5}
                     /> */}
 
-                    <Perf position='top-left' />
+                    {/* <Perf position='top-left' /> */}
                     
                     <Lighting />
                     {/* The Text on the sign*/}

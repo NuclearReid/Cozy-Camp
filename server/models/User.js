@@ -14,7 +14,8 @@ const userSchema = new Schema({
         // Set up other requirements later
     },
     shelter: {
-        type: String
+        type: String,
+        default: 'cowboy'
     }
 })
 
