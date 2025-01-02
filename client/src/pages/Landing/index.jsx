@@ -1,3 +1,4 @@
+import CreateAccountForm from '../../components/CreateAccountForm'
 import LoginForm from '../../components/LoginForm'
 
 export default function NoMatch() {
@@ -6,6 +7,7 @@ export default function NoMatch() {
         <div>
             <h1>Landing!</h1>
             <LoginForm />
+            <CreateAccountForm />
         </div>
     )
 }
