@@ -22,8 +22,8 @@ export default function Shelter() {
                 <primitive
                     object={tent.scene}
                     position={[-1.6, 0, -2.2]}
-                    rotation={[-Math.PI * 0.45, Math.PI * 0.015, -Math.PI * 0.3 ]}
-                    scale={3.0}
+                    rotation={[0,1.5,0 ]}
+                    scale={2.0}
                 />
             ) 
         } else if(userShelter === 'hammock'){
