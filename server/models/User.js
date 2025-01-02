@@ -13,6 +13,9 @@ const userSchema = new Schema({
         required: true,
         // Set up other requirements later
     },
+    shelter: {
+        type: String
+    }
 })
 
 userSchema.pre('save', async function(next) {

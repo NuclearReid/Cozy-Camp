@@ -6,6 +6,7 @@ const typeDefs = gql`
         _id: ID
         email: String!
         password: String!
+        shelter: String
     }
 
     type Auth {
