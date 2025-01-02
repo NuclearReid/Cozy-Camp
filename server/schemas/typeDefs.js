@@ -6,6 +6,7 @@ const typeDefs = gql`
         _id: ID
         email: String!
         password: String!
+        shelter: String
     }
 
     type Auth {
@@ -28,6 +29,10 @@ const typeDefs = gql`
             email: String!
             password: String!
         ): Auth
+
+        setShelter(
+            shelter: String
+        ): User
     }
 `
 

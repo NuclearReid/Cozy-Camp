@@ -1,18 +1,30 @@
 import { useQuery } from "@apollo/client"
-
-
 import { QUERY_ME } from "../../utils/queries"
+
+import ShelterForm from '../../components/ShelterForm'
+import { useEffect, useState } from "react"
 
 
 export default function Profile(){
 
     const { loading, data} = useQuery(QUERY_ME)
+    const [shelter, setShelter ] = useState('cowboy')
 
-    // console.log(data)
+    useEffect(() =>{
+        if(data) {
+            setShelter(data?.me?.shelter)
+        }
+    }, [data])
+
+    const handleShelterUpdate = (newShelter) => {
+        setShelter(newShelter)
+    }
 
     return(
         <>
             <h1> Your email is: {data?.me?.email} </h1>
+            <p> Your current shelter of choice is a {shelter} </p>
+            <ShelterForm onShelterUpdate={handleShelterUpdate}/>
         </>
     )
 }

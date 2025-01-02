@@ -15,16 +15,26 @@ export const ADD_USER = gql`
             }
         }
     }
-`;
+`
 
 export const LOGIN = gql`
- mutation Login($email: String!, $password: String!) {
-  login(email: $email, password: $password) {
-    token
-    user {
-      _id
-      email
+    mutation Login($email: String!, $password: String!) {
+        login(email: $email, password: $password) {
+            token
+            user {
+            _id
+            email
+            }
+        }
     }
-  }
-}
-`;
+`
+
+export const SET_SHELTER = gql`
+    mutation SetShelter($shelter: String) {
+        setShelter(shelter: $shelter) {
+            _id
+            email
+            shelter
+        }
+    }
+`

@@ -40,12 +40,8 @@ export default function Login() {
         setFormState({
             email: '',
             password: ''
-        })
-        
+        }) 
     }
-
-    
-    
 
     return(
         <>
