@@ -14,13 +14,17 @@ const resolvers = {
                 return foundUser
             }
             throw AuthenticationError
-        }
+        },
+        // findUser: async(parent, {email}) =>{
+        //     const findUser = await User.findById
+        // }
     },
 
     Mutation: {
-        addUser: async (parent, {email, password}) =>{
+        addUser: async (parent, {email, username, password}) =>{
             const user = await User.create({
                 email,
+                username,
                 password
             })
             const token = signToken(user)

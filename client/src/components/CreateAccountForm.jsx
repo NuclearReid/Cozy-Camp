@@ -8,6 +8,7 @@ import Auth from '../utils/auth';
 export default function CreateAccountForm() {
     const [formState, setFormState ] = useState({
         signupEmail: '',
+        signupUsername: '',
         signupPassword: '',
         confirmPassword: '',
     });
@@ -22,6 +23,7 @@ export default function CreateAccountForm() {
                 const mutationResponse = await addUser({
                     variables: {
                         email: formState.signupEmail,
+                        username: formState.signupUsername,
                         password: formState.signupPassword
                     }
                 });
@@ -54,6 +56,17 @@ export default function CreateAccountForm() {
                         id="emailField" 
                         aria-describedby="emailHelp" 
                         name='signupEmail'
+                        onChange={handleChange}
+                    />
+                </div>
+                <div className="mb-3">
+                    <label htmlFor="exampleInputEmail" className="form-label">username</label>
+                    <input 
+                        type="username" 
+                        className="form-control" 
+                        id="usernameField" 
+                        aria-describedby="usernameHelp" 
+                        name='signupUsername'
                         onChange={handleChange}
                     />
                 </div>

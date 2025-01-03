@@ -22,7 +22,7 @@ export default function Profile(){
 
     return(
         <>
-            <h1> Your email is: {data?.me?.email} </h1>
+            <h1> Hey there! {data?.me?.username} </h1>
             <p> Your current shelter of choice is a {shelter} </p>
             <ShelterForm onShelterUpdate={handleShelterUpdate}/>
             <a href="/scene" className="btn btn-primary mt-3">
