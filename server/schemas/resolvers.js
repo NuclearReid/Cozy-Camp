@@ -15,9 +15,20 @@ const resolvers = {
             }
             throw AuthenticationError
         },
-        // findUser: async(parent, {email}) =>{
-        //     const findUser = await User.findById
-        // }
+
+        findUser: async(parent, {username}) => {
+            try {
+                const foundUser = await User.findOne({username: username});
+                if(foundUser){
+                    return foundUser;
+                }
+                return null;
+            } catch (error) {
+                console.error('Error finding user:', error);
+                throw new Error('Error finding user');
+            }
+        }
+
     },
 
     Mutation: {

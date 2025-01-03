@@ -18,6 +18,7 @@ const typeDefs = gql`
     type Query{
         users: [User]
         me: User
+        findUser: User
     }
 
     type Mutation{

@@ -10,3 +10,13 @@ export const QUERY_ME = gql`
         }
     }
 `;
+
+export const FIND_USER = gql`
+    query findUser($username: String!){
+        findUser(username: $username){
+            _id
+            username
+            shelter
+        }
+    }
+`

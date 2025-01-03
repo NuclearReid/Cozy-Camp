@@ -1,9 +1,8 @@
-import { useState } from 'react';
-import { useMutation } from '@apollo/client';
+import { useState } from 'react'
+import { useMutation } from '@apollo/client'
+import { ADD_USER } from '../utils/mutations'
 
-import { ADD_USER } from '../utils/mutations';
-
-import Auth from '../utils/auth';
+import Auth from '../utils/auth'
 
 export default function CreateAccountForm() {
     const [formState, setFormState ] = useState({
@@ -11,12 +10,12 @@ export default function CreateAccountForm() {
         signupUsername: '',
         signupPassword: '',
         confirmPassword: '',
-    });
+    })
 
     const [addUser, {error}] = useMutation(ADD_USER);
 
     const handleFormSubmit = async (event) => {
-        event.preventDefault();
+        event.preventDefault()
         
         try {
             if(formState.confirmPassword === formState.signupPassword){
@@ -26,23 +25,23 @@ export default function CreateAccountForm() {
                         username: formState.signupUsername,
                         password: formState.signupPassword
                     }
-                });
+                })
                 const token = mutationResponse.data.addUser.token;
-                Auth.login(token);
+                Auth.login(token)
             } else{
                 alert('passwords did not match')
             }
         } catch (error) {
-            console.error(error);
+            console.error(error)
         }
     }
 
     const handleChange = (event) => {
-        const {name, value} = event.target;
+        const {name, value} = event.target
         setFormState({
             ...formState,
             [name]: value,
-        });
+        })
     }
 
     return (
