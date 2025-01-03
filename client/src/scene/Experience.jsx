@@ -31,7 +31,7 @@ export default function Experience()
 
     // Loading the models: flightHelmet is a test model
     useGLTF.preload('./FlightHelmet/glTF/FlightHelmet.gltf')
-    const flightHelmet = useGLTF('./FlightHelmet/glTF/FlightHelmet.gltf')
+    // const flightHelmet = useGLTF('./FlightHelmet/glTF/FlightHelmet.gltf')
 
     // Moves the camera
     const handleClick = (click) => 
@@ -119,7 +119,7 @@ export default function Experience()
 
                     {/* Support Box */}
                     {/* The intention is that once the model, this block disapear allowing the 'move camera' sign behind the 'cozy camp' sign to fall and the use can click on that. This sign should be attached to the 'Cozy' sign via a rope joint*/}
-                    { !flightHelmet && (<RigidBody
+                    {/* { !flightHelmet && (<RigidBody
                         type='fixed'
                         colliders='cuboid'
                         position={[-0.2452, 9.25, 3.2]}
@@ -131,7 +131,7 @@ export default function Experience()
                             <meshBasicMaterial />
                         </mesh>
                     </RigidBody> 
-                    )}
+                    )} */}
 
 
                     {/* The 'click to start' sign that will fall */}
