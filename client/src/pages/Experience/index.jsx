@@ -1,4 +1,5 @@
 // I have this as a page to make it less cluttered to work with for checking if logged in, sending props etc
+import { Loader } from "@react-three/drei";
 import Experience from "../../scene/Experience";
 import { Canvas} from '@react-three/fiber'
 
@@ -17,6 +18,7 @@ export default function Scene() {
             >
                 <Experience />
             </Canvas>
+            <Loader />
         </>
     )
 }
