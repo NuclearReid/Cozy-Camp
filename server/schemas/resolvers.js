@@ -14,13 +14,26 @@ const resolvers = {
                 return foundUser
             }
             throw AuthenticationError
+        },
+        user: async(parent, {username}) => {
+            const foundUser = await User.findOne({username})
+            try {
+                if(!foundUser){
+                    throw new Error('no user found')
+                }
+                return foundUser
+            } catch (error) {
+                console.error(error)
+            }
         }
+
     },
 
     Mutation: {
-        addUser: async (parent, {email, password}) =>{
+        addUser: async (parent, {email, username, password}) =>{
             const user = await User.create({
                 email,
+                username,
                 password
             })
             const token = signToken(user)
