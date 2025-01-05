@@ -2,6 +2,7 @@ import { useQuery } from "@apollo/client"
 import { QUERY_ME } from "../../utils/queries"
 
 import ShelterForm from '../../components/ShelterForm'
+import SearchBar from "../../components/SearchBar"
 import { useEffect, useState } from "react"
 
 
@@ -22,6 +23,7 @@ export default function Profile(){
 
     return(
         <>
+            <SearchBar />
             <h1> Hey there! {data?.me?.username} </h1>
             <p> Your current shelter of choice is a {shelter} </p>
             <ShelterForm onShelterUpdate={handleShelterUpdate}/>
