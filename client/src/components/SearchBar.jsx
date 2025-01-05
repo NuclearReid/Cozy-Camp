@@ -12,18 +12,21 @@ export default function SearchBar() {
 
     const handleFormSubmit = async (event) => {
         event.preventDefault()
+
         try {
             const searchUser = await findUser({
-                variables: { username: formState.usernameSearch }
+                variables: { 
+                    username: formState.usernameSearch 
+                }
             })
-            console.log(searchUser)
-            return searchUser
+            console.log(data)
+            return searchUser           
 
         } catch (error) {
             console.error(error)
         }
-
     }
+
     const handleChange = ( event ) => {
         const { name, value } = event.target
         setFormState({
@@ -31,6 +34,7 @@ export default function SearchBar() {
             [name]: value
         })
     }
+
     return(
         <>
             <form
@@ -56,10 +60,22 @@ export default function SearchBar() {
                 </div>
                 <button type="submit" className='btn btn-primary'> Search </button>
             </form>
-
-            
+            {/* This is just where I can make sure the user info is showing up! */}
+            {/* I'll send this data to the scene and have their scene Render */}
+            {loading && <p>Loading...</p>}
+            {error && <p>Error: {error.message}</p>}
+            {data && data.user ?(
+                <div>
+                    <h1>User Details</h1>
+                    <p>ID: {data.user._id}</p>
+                    <p>Email: {data.user.email}</p>
+                    <p>Username: {data.user.username}</p>
+                    <p>Shelter: {data.user.shelter}</p>
+                </div>
+            ): (
+                <h1> Look up a user! </h1>
+            )}
         </>
-
     )
 }
 

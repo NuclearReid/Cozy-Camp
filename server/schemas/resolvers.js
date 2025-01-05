@@ -15,17 +15,15 @@ const resolvers = {
             }
             throw AuthenticationError
         },
-
-        findUser: async(parent, {username}) => {
+        user: async(parent, {username}) => {
+            const foundUser = await User.findOne({username})
             try {
-                const foundUser = await User.findOne({username: username});
-                if(foundUser){
-                    return foundUser;
+                if(!foundUser){
+                    throw new Error('no user found')
                 }
-                return null;
+                return foundUser
             } catch (error) {
-                console.error('Error finding user:', error);
-                throw new Error('Error finding user');
+                console.error(error)
             }
         }
 

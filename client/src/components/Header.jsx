@@ -11,7 +11,7 @@ export default function Header(){
     return(
         <>
             <h1> this is the header! </h1>
-            <SearchBar />
+            {Auth.loggedIn() &&<SearchBar />}
             {Auth.loggedIn() && 
                 <> 
                     <button className='btn btn-lg btn-light m-2' onClick={logout}>
