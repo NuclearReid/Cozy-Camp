@@ -1,0 +1,32 @@
+[
+    {
+        "email": "user1@example.com",
+        "username": "user1",
+        "password": "password123",
+        "shelter": "cowboy"
+    },
+    {
+        "email": "user2@example.com",
+        "username": "user2",
+        "password": "password123",
+        "shelter": "hammock"
+    },
+    {
+        "email": "user3@example.com",
+        "username": "user3",
+        "password": "password123",
+        "shelter": "tent"
+    },
+    {
+        "email": "user4@example.com",
+        "username": "user4",
+        "password": "password123",
+        "shelter": "cowboy"
+    },
+    {
+        "email": "user5@example.com",
+        "username": "user5",
+        "password": "password123",
+        "shelter": "hammock"
+    }
+]
