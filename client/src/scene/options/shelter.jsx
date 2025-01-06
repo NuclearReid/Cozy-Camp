@@ -2,9 +2,6 @@ import { useGLTF } from '@react-three/drei'
 import { useQuery } from '@apollo/client'
 import { QUERY_ME } from '../../utils/queries'
 
-
-
-
 export default function Shelter() {
     const {loading, data} = useQuery(QUERY_ME)
     const userShelter = data?.me?.shelter
@@ -13,6 +10,8 @@ export default function Shelter() {
     const hammock = useGLTF('./Models/AIhammock.glb')
     const cowboy = useGLTF('./Models/AIcowboyCamp.glb')
     console.log(tent)
+
+    // Maybe do a check. if the props is null, then use the user data. If it's not null, use the props data
 
     const ShelterType = () =>{
 
@@ -45,8 +44,6 @@ export default function Shelter() {
                 />
             )
         }
-
-        
     }
 
     return(
