@@ -7,10 +7,15 @@ export default function Header(){
         Auth.logout()
     }
 
-
     return(
         <>
-            <h1> this is the header! </h1>
+            {/* This is just here because I want a bit of seperation between the top of the page and everything else on the login screen */}
+            {!Auth.loggedIn() &&
+                <div
+                    className='mb-5'
+                />
+            }
+
             {Auth.loggedIn() && 
                 <> 
                     <button className='btn btn-lg btn-light m-2' onClick={logout}>

@@ -48,7 +48,9 @@ export default function CreateAccountForm() {
         <form onSubmit={handleFormSubmit}>
             SignUp
                 <div className="mb-3">
-                    <label htmlFor="exampleInputEmail" className="form-label">email</label>
+                    <label htmlFor="exampleInputEmail" className="form-label">
+                        Email
+                    </label>
                     <input 
                         type="email" 
                         className="form-control" 
@@ -59,7 +61,9 @@ export default function CreateAccountForm() {
                     />
                 </div>
                 <div className="mb-3">
-                    <label htmlFor="exampleInputEmail" className="form-label">username</label>
+                    <label htmlFor="exampleInputEmail" className="form-label">
+                        Username
+                    </label>
                     <input 
                         type="username" 
                         className="form-control" 
