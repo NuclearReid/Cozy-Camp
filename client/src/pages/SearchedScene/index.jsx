@@ -1,19 +1,29 @@
 import useStore from "../../stores/useStore";
+import { Loader } from "@react-three/drei";
+import Experience from "../../scene/Experience";
+import { Canvas } from "@react-three/fiber";
 
 export default function SearchedScene() {
   const searchedUser = useStore((state) => state.searchedUser);
 
   console.log(useStore.getState().searchedUser)
-  
+
   return (
     <>
-      <h1>Searched Scene is here!</h1>
+      <h1>{searchedUser.username}'s Camp</h1>
       {searchedUser ? (
-        <>
-          <h2>{searchedUser.username}'s Scene</h2>
-          <p>ID: {searchedUser._id}</p>
-          <p>Email: {searchedUser.email}</p>
-          <p>Shelter: {searchedUser.shelter}</p>
+        <> 
+          <Canvas
+                  camera={{
+                      fov: 45,
+                      near: 0.1,
+                      far: 200,
+                      position: [-3.9, 10.2, 11.9],
+                  }}
+              >
+                  <Experience />
+              </Canvas>
+              <Loader />
         </>
       ) : (
         <p>No user data available</p>
@@ -21,3 +31,11 @@ export default function SearchedScene() {
     </>
   );
 }
+
+        // Just a quick reference to see the searched user's data
+        // <>
+        //   <h2>{searchedUser.username}'s Scene</h2>
+        //   <p>ID: {searchedUser._id}</p>
+        //   <p>Email: {searchedUser.email}</p>
+        //   <p>Shelter: {searchedUser.shelter}</p>
+        // </>
