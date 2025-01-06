@@ -1,4 +1,4 @@
-import { OrbitControls, PresentationControls, Text3D, CameraControls, SpotLight, useGLTF, Text } from '@react-three/drei'
+import { OrbitControls, PresentationControls, Text3D, CameraControls, SpotLight, useGLTF, Text, Sparkles } from '@react-three/drei'
 import { Perf } from 'r3f-perf'
 import { useFrame, useThree } from '@react-three/fiber'
 import { useRef, useState, useEffect, Suspense } from 'react'
@@ -136,14 +136,26 @@ export default function Experience()
                         <Text
                             rotation-y={ - Math.PI * 0.5}
                             scale={0.3}
-                            position={[-0.52,0,0]}
+                            position={[-0.52,0.15,0]}
                             anchorX='center'
                             anchorY='middle'
                             font='./text/FingerPaint-Regular.ttf'
                             color='#E13C42'
                             
                         >
-                            Start!
+                            Click
+                        </Text>
+                        <Text
+                            rotation-y={ - Math.PI * 0.5}
+                            scale={0.3}
+                            position={[-0.52,-0.10,0]}
+                            anchorX='center'
+                            anchorY='middle'
+                            font='./text/FingerPaint-Regular.ttf'
+                            color='#E13C42'
+                            
+                        >
+                            Me!
                         </Text>
                     </RigidBody>
                     {/* Grass is here to give it some time to render. If it's in the return() below, only one blade of grass is rendered */}
@@ -168,6 +180,16 @@ export default function Experience()
 
                 {/* <Shelter/>, firepit, marshmellows are in here */}
                 <FireScene /> 
+
+                {/* Fireflies */}
+                <Sparkles // to create the fireflies
+                    scale={[15, 5, 15]}
+                    position={[0,0.5,0]} // or position-y={1.2}
+                    size={10}
+                    count={50}
+                    noise={300}
+                    speed={0.9}
+                />
                 {/* Make sure to keep this out of the suspence or this controls won't work till the whole scene is loaded */}
                 <CameraControls 
                     ref={cameraControlsRef}
