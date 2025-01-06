@@ -117,23 +117,6 @@ export default function Experience()
                         </mesh>
                     </RigidBody>
 
-                    {/* Support Box */}
-                    {/* The intention is that once the model, this block disapear allowing the 'move camera' sign behind the 'cozy camp' sign to fall and the use can click on that. This sign should be attached to the 'Cozy' sign via a rope joint*/}
-                    {/* { !flightHelmet && (<RigidBody
-                        type='fixed'
-                        colliders='cuboid'
-                        position={[-0.2452, 9.25, 3.2]}
-                        scale={[1.3, 0.5, 3 ]}
-                        rotation-y={Math.PI * 0.25}
-                    >
-                        <mesh>
-                            <boxGeometry />
-                            <meshBasicMaterial />
-                        </mesh>
-                    </RigidBody> 
-                    )} */}
-
-
                     {/* The 'click to start' sign that will fall */}
                     <RigidBody
                         ref={startSignRef}
@@ -176,28 +159,15 @@ export default function Experience()
             
             {/* I wrapped everything in the physics tag to make sure nothing that uses physics was left out */}
             <Physics>
-                <Suspense
-                    fallback={null}
-                >
-                    {/* The Flight helmet model, it's commented out, causes a stutter with the camera movement */}
-                    {/* <primitive 
-                        object={flightHelmet.scene} 
-                        scale={5}
-                    /> */}
+                {/* <Perf position='top-left' /> */}
+                <Lighting />
+                {/* The Text on the sign*/}
+                <CozyCampText />  
+                {/* Where i'm trying to get the start sign to fall but be on a rope  */}
+                <SignRopeJoint /> 
 
-                    {/* <Perf position='top-left' /> */}
-                    
-                    <Lighting />
-                    {/* The Text on the sign*/}
-                    <CozyCampText />  
-
-                    {/* Where i'm trying to get the start sign to fall but be on a rope  */}
-                    <SignRopeJoint /> 
-
-                    {/* The tent, firepit, marshmellows */}
-                    <FireScene /> 
-
-                </Suspense>
+                {/* <Shelter/>, firepit, marshmellows are in here */}
+                <FireScene /> 
                 {/* Make sure to keep this out of the suspence or this controls won't work till the whole scene is loaded */}
                 <CameraControls 
                     ref={cameraControlsRef}

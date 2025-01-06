@@ -69,25 +69,31 @@ export default function FireScene()
             {/* The smoke */}
             <SmokeTexture />
 
-            {/* Marshmellows */}
-            <MarshmellowOne 
-                position={[-3.53, -0.8, 2.35]}
-                scale={0.5}
-                rotation={ [-0.66, 0, -0.77] }
-            />
-            <MarshmellowTwo 
-                position={[-2.5, -0.8, 3]}
-                scale={0.5}
-                rotation-x={ - Math.PI * 0.25}
-            />
-            <MarshmellowTwo 
-                position={[-1.26, -0.8, 1.67]}
-                scale={0.5}
-                rotation={ [-0.8, 0.61, 1.27]}
-            />
+            {/* Marshmellows */} 
+            <>
+                <MarshmellowOne 
+                    position={[-3.53, -0.8, 2.35]}
+                    scale={0.5}
+                    rotation={ [-0.66, 0, -0.77] }
+                />
+                <MarshmellowTwo 
+                    position={[-2.5, -0.8, 3]}
+                    scale={0.5}
+                    rotation-x={ - Math.PI * 0.25}
+                />
+                <MarshmellowTwo 
+                    position={[-1.26, -0.8, 1.67]}
+                    scale={0.5}
+                    rotation={ [-0.8, 0.61, 1.27]}
+                />
+            </>
             
+
             {/* Shelter */}
+            {/*  */}
             <Shelter />
+
+
 
             {/* The floor */}
             <RigidBody

@@ -7,8 +7,9 @@ import Auth from '../src/utils/auth.js'
 import App from './App.jsx'
 import NoMatch from './pages/NoMatch'
 import Landing from './pages/Landing'
-import Scene from './pages/Experience/index.jsx'
+import MyScene from './pages/myScene/index.jsx';
 import Profile from './pages/Profile/index.jsx';
+import SearchedScene from './pages/SearchedScene/index.jsx';
 
 
 
@@ -37,9 +38,16 @@ const router = createBrowserRouter([
                 path: '/scene',
                 element: 
                     <ProtectedRoute>                            
-                        <Scene />
+                        <MyScene />
                     </ProtectedRoute>,
             },
+            {
+                path: '/searchedScene',
+                element:
+                    <ProtectedRoute>
+                        <SearchedScene />
+                    </ProtectedRoute>
+            }
         ]
     }
 ])
