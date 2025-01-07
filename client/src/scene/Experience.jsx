@@ -69,6 +69,19 @@ export default function Experience()
         }
     }, [])
 
+    // It's a bit wonky but rerenders the grass each time the screen resizes. 
+    // The reason for this is because without it, when the screen resized all the grass blades would lose their instantiation and I'd just have one blade of grass in the center of the screen.
+    // Without this, the grass would work after a vite HMR and I don't know why
+    const {invalidate } = useThree()
+    useEffect(() => {
+        const handleResize = () => {
+            invalidate()
+        }
+        window.addEventListener('resize', handleResize);
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, [invalidate]);
 
     // I'm using useFrame for the PolarAngle becasue I want it to be dynamic depending if the camera is in the final position or not
     // locks off verticle rotation. either at 1.255 if looking at the camp scene or 90degrees if looking at the sign
@@ -79,6 +92,8 @@ export default function Experience()
         cameraControlsRef.current.minPolarAngle = finalPosition? 1.255: Math.PI * 0.5
 
     })
+
+
 
 
     /* 
