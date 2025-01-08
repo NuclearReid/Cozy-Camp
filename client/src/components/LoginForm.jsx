@@ -7,6 +7,9 @@ import Auth from '../utils/auth'
 
 export default function Login() {
 
+    // Used to let the user know if they entered in wrong email or password
+    const [errorMessage, setErrorMessage] = useState('')
+
     const [ formState, setFormState] = useState({
         email: '',
         password: ''
@@ -24,23 +27,21 @@ export default function Login() {
 
     const handleFormSubmit = async (event) =>{
         event.preventDefault()
-        console.log(formState)
         try{
             const { data } = await login({
                 variables: { ...formState }
             })
             Auth.login(data.login.token)
-            console.log(data.login.token)
-
         } catch( error ) {
             console.error(error)
+            setErrorMessage('Wrong Email or Password!')
         }
-
         // clear the form
         setFormState({
             email: '',
             password: ''
         }) 
+        
     }
 
     return(
@@ -80,7 +81,20 @@ export default function Login() {
                         Submit
                 </button>
             </form>
+            
+            {/* This lets the user know if the entered credentials were wrong */}
+            {errorMessage && (
+                <div className="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>{errorMessage}</strong>
+                    <button 
+                        type="button" 
+                        className="btn-close" 
+                        data-bs-dismiss="alert" 
+                        aria-label="Close"
+                        onClick={() => setErrorMessage('')}
+                    />
+                </div>
+            )}
         </>
     )
-
 }

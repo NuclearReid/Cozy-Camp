@@ -28,11 +28,6 @@ const SearchButton = ({ data }) => {
     )
 }
 
-
-
-
-
-
 export default function SearchBar() {
   // useLazyQuery is to make it so the query runs when i click the search button instead of when the page loads
   const [findUser, { loading, data, error }] = useLazyQuery(FIND_USER);
@@ -40,25 +35,33 @@ export default function SearchBar() {
     usernameSearch: "",
   });
 
-  const handleFormSubmit = async (event) => {
-    event.preventDefault();
-
-    // try {
-    const searchUser = await findUser({
-      variables: {
-        username: formState.usernameSearch,
-      },
-    })
-    // console.log(searchUser.data?.user)
-  }
-
   const handleChange = (event) => {
     const { name, value } = event.target;
+
     setFormState({
       ...formState,
       [name]: value,
     })
   }
+
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      const searchUser = await findUser({
+        variables: {
+          username: formState.usernameSearch,
+        },
+      })
+    } catch (error) {
+      console.error(error)
+    }
+    
+    // setFormState({
+    //   usernameSearch: ''
+    // })
+  }
+
 
   return (
     <>
@@ -85,7 +88,9 @@ export default function SearchBar() {
         </button>
       </form>
       {/* This is just where I can make sure the user info is showing up! */}
-      {/* I'll send this data to the scene and have their scene Render */}
+      {/* This data is being saved in the global State with Zustand */}
+
+
       {loading && <p>Loading...</p>}
       {/* Lets the user know a username was not found */}
       {data?.user?._id == null && <p>Unable to find that username</p>}

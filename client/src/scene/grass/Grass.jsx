@@ -1,6 +1,6 @@
-import { useRef, useEffect, useMemo } from "react"
+import { useRef, useEffect } from "react"
 // import { ShaderMaterial } from "three"
-import { extend, useFrame } from '@react-three/fiber'
+import { extend, useFrame, useThree } from '@react-three/fiber'
 import * as THREE from 'three'
 import grassVertexShader from '../shaders/grassShader/vertex.glsl'
 import grassFragmentShader from '../shaders/grassShader/fragment.glsl'
@@ -16,32 +16,12 @@ const GrassMaterial = shaderMaterial(
 )
 
 extend({GrassMaterial})
-
+ 
 export default function Grass()
 {
     const materialRef = useRef()
     const meshRef = useRef()
     const instanceNumber = 7000 // Change this if i want more or less grass
-
-
-    // const { position, rotation, scale } = useControls('Positioning ', {
-    //     // position={[-2.5, -0.6, 3]}
-    //     position:
-    //     {
-    //         value: {x: -2.5, y: 1, z: 3},
-    //         step: 0.1
-    //     },
-    //     rotation:
-    //     {
-    //         value: 0.25,
-    //         step: 0.01
-    //     },
-    //     scale:
-    //     {
-    //         value: 0.25,
-    //         step: 0.01,
-    //     }
-    // })
 
 
     useEffect(() =>
@@ -75,7 +55,7 @@ export default function Grass()
             meshRef.current.setMatrixAt(i, grassBlade.matrix)
         }
         meshRef.current.instanceMatrix.needsUpdate = true
-    }, [ instanceNumber] )
+    }, [ instanceNumber ] )      
 
     useFrame((state, delta) =>
     {
@@ -83,7 +63,7 @@ export default function Grass()
         {
             materialRef.current.uniforms.uTime.value = state.clock.getElapsedTime()
         }
-    })
+    })  
 
     // To make the grass a plane
     const geometry = new THREE.PlaneGeometry(0.1, 1, 1, 4) // Needs to be a PlaneGeometry because that's what the shader will use for the shape of each blade of grass
@@ -92,7 +72,12 @@ export default function Grass()
         <>
             <instancedMesh
                 ref={meshRef}
-                args={[geometry, materialRef.current, instanceNumber]}
+                args={[
+                    geometry, 
+                    materialRef.current, 
+                    // new THREE.MeshBasicMaterial(), 
+                    instanceNumber
+                ]} 
                 scale={[1.25, 0.15, 1.25]}
                 position={[0, -0.90, 0]}
             >
@@ -110,3 +95,23 @@ export default function Grass()
 // Possiblity for the grass: make a whole bunch of triangles and use the same geometry over and over and over again? and just place them everywhere? 
 // take a look here: https://jsfiddle.net/felixmariotto/hvrg721n/
 // or this one https://smythdesign.com/blog/stylized-grass-webgl/     <-- I like this more but it seems to be causing issues
+
+
+    // const { position, rotation, scale } = useControls('Positioning ', {
+    //     // position={[-2.5, -0.6, 3]}
+    //     position:
+    //     {
+    //         value: {x: -2.5, y: 1, z: 3},
+    //         step: 0.1
+    //     },
+    //     rotation:
+    //     {
+    //         value: 0.25,
+    //         step: 0.01
+    //     },
+    //     scale:
+    //     {
+    //         value: 0.25,
+    //         step: 0.01,
+    //     }
+    // })

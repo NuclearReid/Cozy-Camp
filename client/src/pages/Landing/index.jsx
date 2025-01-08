@@ -19,13 +19,6 @@ export default function NoMatch() {
             <div 
                 className='row'
             >
-                {/* <div className='col-md-4'>
-                    <img 
-                        src='./images/AiLandingImage.png' alt='Cozy Campfire'
-                        className='img-fluid'
-                    />
-                </div> */}
-
                 <div className='col-8'>
                     <h1>Cozy Camp!</h1>
                     <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Natus asperiores sint, similique cumque possimus amet obcaecati necessitatibus rem fugiat harum voluptatem enim illum iusto ut molestiae, illo atque beatae error.</p>
@@ -35,7 +28,7 @@ export default function NoMatch() {
                     />
                 </div>
 
-                <div className='col-4'>
+                <div className='col-4 border-start'>
                     {!showSignup? (
                     <>
                         <LoginForm />
