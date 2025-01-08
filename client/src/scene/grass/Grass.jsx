@@ -24,7 +24,6 @@ export default function Grass()
     const instanceNumber = 7000 // Change this if i want more or less grass
 
 
-
     useEffect(() =>
     {
         const grassBlade = new THREE.Object3D() // This is used to create an object for each blade of grass 
