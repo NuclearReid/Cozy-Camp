@@ -12,7 +12,7 @@ export default function SearchedScene() {
     <>
       <h1>{searchedUser.username}'s Camp</h1>
       {searchedUser ? (
-        <> 
+        <div className="removeOverflow"> 
           <Canvas
                   camera={{
                       fov: 45,
@@ -24,7 +24,7 @@ export default function SearchedScene() {
                   <Experience />
               </Canvas>
               <Loader />
-        </>
+        </div>
       ) : (
         <p>No user data available</p>
       )}

@@ -1,10 +1,10 @@
-import { OrbitControls, PresentationControls, Text3D, CameraControls, SpotLight, useGLTF, Text, Sparkles } from '@react-three/drei'
+import { OrbitControls, CameraControls, Text, Sparkles } from '@react-three/drei'
 import { Perf } from 'r3f-perf'
 import { useFrame, useThree } from '@react-three/fiber'
-import { useRef, useState, useEffect, Suspense } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { useControls } from 'leva'
 import * as THREE from 'three'
-import { Physics, RapierRigidBody, RigidBody, useRopeJoint } from '@react-three/rapier'
+import { Physics, RigidBody, useRopeJoint } from '@react-three/rapier'
 
 
 // These two are needed to make the CameraControls tag work better
@@ -12,14 +12,10 @@ import CameraControlsReact from 'camera-controls'
 CameraControlsReact.install({THREE:THREE})
 
 // My fragments
-import useWorld from './stores/useWorld'
 import FireScene from './firescene/FireScene'
 import Lighting from './environement/Lighting'
 import CozyCampText from './startScreen/CozyCampText'
 import Grass from './grass/Grass'
-
-const degToRad = (degrees) => degrees * (Math.PI /180)
-const finalPolarPositionRadians = 1.255
 
 export default function Experience()
 {

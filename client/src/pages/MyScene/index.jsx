@@ -7,7 +7,7 @@ import { Canvas} from '@react-three/fiber'
 export default function Scene() {
 
     return(
-        <>
+        <div className="removeOverflow">
             <Canvas
                 camera={{
                     fov: 45,
@@ -19,6 +19,6 @@ export default function Scene() {
                 <Experience />
             </Canvas>
             <Loader />
-        </>
+        </div>
     )
 }
