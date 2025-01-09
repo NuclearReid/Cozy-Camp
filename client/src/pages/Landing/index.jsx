@@ -1,8 +1,5 @@
 import CreateAccountForm from '../../components/CreateAccountForm'
 import LoginForm from '../../components/LoginForm'
-import Experience from '../../scene/Experience'
-import { Canvas } from '@react-three/fiber'
-import { Loader } from '@react-three/drei'
 import { useState } from 'react'
 
 
@@ -15,11 +12,11 @@ export default function NoMatch() {
     }
 
     return (
-        <div className='container'>
+        <div className='container overflowAuto'>
             <div 
                 className='row'
             >
-                <div className='col-8'>
+                <div className='col-md-8'>
                     <h1>Cozy Camp!</h1>
                     <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Natus asperiores sint, similique cumque possimus amet obcaecati necessitatibus rem fugiat harum voluptatem enim illum iusto ut molestiae, illo atque beatae error.</p>
                     <img 

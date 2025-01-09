@@ -2,10 +2,23 @@ html,
 body,
 #root
 {
-    position: fixed;
+    /* position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 100%; */
     background: ivory;
+}
+
+/* try to make it so i can scroll unless i'm on the scene page */
+
+html body #root .overflowAuto{
+    overflow: auto;
+}
+html body #root .removeOverflow{
+    position: fixed;
+    top: 50;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }

@@ -1,7 +1,7 @@
-import './style.css'
+import './App.css'
 import "bootstrap/dist/css/bootstrap.min.css";
 import ReactDOM from 'react-dom/client'
-import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Auth from '../src/utils/auth.js'
 
 import App from './App.jsx'
@@ -10,8 +10,6 @@ import Landing from './pages/Landing'
 import MyScene from './pages/myScene/index.jsx';
 import Profile from './pages/Profile/index.jsx';
 import SearchedScene from './pages/SearchedScene/index.jsx';
-
-
 
 const ProtectedRoute = ({ children }) => {
     const isLoggedIn = Auth.loggedIn()
@@ -37,7 +35,7 @@ const router = createBrowserRouter([
             {
                 path: '/scene',
                 element: 
-                    <ProtectedRoute>                            
+                    <ProtectedRoute>                  
                         <MyScene />
                     </ProtectedRoute>,
             },
