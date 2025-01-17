@@ -6,7 +6,7 @@ const userSchema = new Schema({
         type: String,
         required: true,
         unique: true,
-        // match: [/.+@.+\..+/, 'Must match an email address!'],
+        match: [/.+@.+\..+/, 'Must match an email address!'],
     },
     username: {
         type: String,
@@ -18,9 +18,9 @@ const userSchema = new Schema({
         required: true,
         // Set up other requirements later
     },
-    shelter: {
-        type: String,
-        default: 'cowboy'
+    options: {
+        type: Schema.Types.ObjectId,
+        ref: 'Options'
     }
 })
 

@@ -1,12 +1,14 @@
 import { gql } from '@apollo/client';
 
 export const QUERY_ME = gql`
-    query Me {
+    query QueryMe {
         me {
-            _id
             email
             username
-            shelter
+            options {
+                shelter
+                shelterDescription
+            }
         }
     }
 `;
@@ -14,10 +16,12 @@ export const QUERY_ME = gql`
 export const FIND_USER = gql`
     query FindUser($username: String!) {
         user(username: $username) {
-            _id
-            email
             username
-            shelter
+            options {
+                shelter
+                shelterDescription
+            }
+            
         }
     }
 `
