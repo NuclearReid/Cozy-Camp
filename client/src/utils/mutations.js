@@ -33,9 +33,9 @@ export const LOGIN = gql`
 export const SET_SHELTER = gql`
     mutation SetShelter($shelter: String) {
         setShelter(shelter: $shelter) {
-            _id
-            email
-            shelter
+            options {
+                shelter
+            }
         }
     }
 `

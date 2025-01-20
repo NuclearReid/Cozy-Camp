@@ -1,16 +1,26 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { FormCheck, Row, Col } from "react-bootstrap"
 
 import { SET_SHELTER } from "../utils/mutations"
 import { useMutation } from "@apollo/client"
 
- export default function ShelterForm(){
+// onShelterUpdate is here to update the profile with the new shelter option
+ export default function ShelterForm( { onShelterUpdate, currentShelter }){
 
+    /* 
+        * Make it so the radio label selected is the user's chosen shelter
+    */
     const [setShelter, {error, data: setShelterData }] = useMutation(SET_SHELTER)
 
     const [formState, setFormState] = useState({
-        shelter: 'cowboy', // The default is cowboy because it's no shelter
+        shelter: currentShelter, // The default is cowboy because it's no shelter
     })
+
+    useEffect(() => {
+        setFormState({
+            shelter: currentShelter
+        })
+    },[currentShelter])
 
     const handleChange = (event) => {
         const {name, value} = event.target
@@ -23,9 +33,13 @@ import { useMutation } from "@apollo/client"
     const handleSubmit = async (event) => {
         event.preventDefault()
         try {
-            await setShelter({
+            const { data } = await setShelter({
                 variables: { shelter: formState.shelter}
             })
+            // update the shelter with the new data and send that to the parent (profile)
+            if(data) {
+                onShelterUpdate(formState.shelter)
+            }
         } catch (error) {
             console.log(error)
         }        
@@ -42,7 +56,7 @@ import { useMutation } from "@apollo/client"
                     value={'tent'}
                     className='fs-5'
                     type="radio"
-                    label="Tent"
+                    label="tent"
                     name="shelter"
                     id="tent"
                     onChange={handleChange}
@@ -52,7 +66,7 @@ import { useMutation } from "@apollo/client"
                     value={'hammock'}
                     className='fs-5'
                     type="radio"
-                    label="Hammock"
+                    label="hammock"
                     name="shelter"
                     id="hammock"
                     onChange={handleChange}
@@ -62,7 +76,7 @@ import { useMutation } from "@apollo/client"
                     value={'cowboy'}
                     className='fs-5'
                     type="radio"
-                    label="Cowboy"
+                    label="cowboy"
                     name="shelter"
                     id="cowboy"
                     onChange={handleChange}

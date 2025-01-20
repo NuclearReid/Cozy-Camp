@@ -12,7 +12,6 @@ const resolvers = {
                 const foundUser = await User.findOne({
                     _id: context.user._id,
                 }).populate('options')
-                console.log(foundUser)
                 return foundUser
             }
 
