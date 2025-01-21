@@ -10,12 +10,11 @@ export default function Shelter() {
 
     
 
-    console.log(userShelter)
+    // console.log(userShelter)
 
     // This is for when you look up a user
     // Gets the searched user Data from the store
-    const searchedUser = useStore((state) => {state.searchedUser})
-    const searchedUserShelter = searchedUser?.options?.shelter
+    const searchedUserShelter = useStore.getState().searchedUser.options.shelter
     /////////////////////////////////////////////////
     
 

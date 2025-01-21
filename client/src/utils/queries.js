@@ -16,14 +16,15 @@ export const QUERY_ME = gql`
 `;
 
 export const FIND_USER = gql`
-    query FindUser($username: String!) {
+    query findUser($username: String!) {
         user(username: $username) {
+            _id
             username
+            email
             options {
-                shelter
-                shelterDescription
+            shelter
+            shelterDescription
             }
-            
         }
     }
 `
