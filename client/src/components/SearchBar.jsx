@@ -102,7 +102,7 @@ export default function SearchBar() {
             <p>ID: {data.user._id}</p>
             <p>Email: {data.user.email}</p>
             <p>Username: {data.user.username}</p>
-            <p>Shelter: {data.user.shelter}</p>
+            <p>Shelter: {data.user.options.shelter}</p>
           </div>
           {/* Sends the searched user's data as a prop to SearchButton where it'll be put into the Zustand Global State */}
           <SearchButton data={data}/>

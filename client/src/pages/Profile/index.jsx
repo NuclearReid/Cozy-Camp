@@ -14,7 +14,6 @@ export default function Profile(){
     useEffect(() =>{
         if(data) {
             setShelter(data?.me?.options?.shelter)
-            console.log(data)
         }
     }, [data])
 
