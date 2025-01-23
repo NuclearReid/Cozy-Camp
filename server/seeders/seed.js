@@ -1,11 +1,11 @@
 const db = require('../config/connection');
-const {User} = require('../models');
+const {User, Options} = require('../models');
 const userSeeds = require('./userSeeds.json')
 const cleanDB = require('./cleanDB');
 
 db.once('open', async () => {
     try {
-        await cleanDB('User', 'users');
+        await cleanDB('User', 'users', 'Options', 'options');
         await User.create(userSeeds);
 
         console.log('seeding sowed!');

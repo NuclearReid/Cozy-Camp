@@ -1,5 +1,6 @@
 import useStore from '../../stores/useStore'
-import { useGLTF } from '@react-three/drei'
+
+import { useGLTF, Html } from '@react-three/drei'
 import { useQuery } from '@apollo/client'
 import { QUERY_ME } from '../../utils/queries'
 
@@ -7,6 +8,7 @@ export default function Shelter() {
 
     const { loading, data } = useQuery(QUERY_ME)
     const userShelter = data?.me?.options?.shelter
+    const shelterDescription = data?.me?.options?.shelterDescription
 
     
 
@@ -29,6 +31,21 @@ export default function Shelter() {
         return <>loading...</>
     }
     
+     const ShelterDescriptionHtml = () => {
+        return(
+            <Html
+            position={ [0, 1, 0]}
+            wrapperClass='label' // The name of the class in the html (in css can change it with '.label > div')
+            center // makes the pivot center of the html element to be the center of the element
+            distanceFactor={6} // 
+            >
+                {shelterDescription}
+            </Html>
+        )
+
+    }
+
+
     // The component that will be picking the shelter type
     const ShelterType = () =>{
         let currentPath = window.location.pathname
@@ -52,7 +69,9 @@ export default function Shelter() {
                     position={[-1.6, 0, -2.2]}
                     rotation={[0,1.5,0 ]}
                     scale={2.0}
-                />
+                >
+                    <ShelterDescriptionHtml/>
+                </primitive>
             ) 
         } else if(shelterType === 'hammock'){
             return(
@@ -61,16 +80,21 @@ export default function Shelter() {
                     position={[-1.6, 1, -2.2]}
                     rotation={[0, -0.5, 0 ]}
                     scale={3.0}
-                />
+                >
+                    <ShelterDescriptionHtml/>
+                </primitive>
             )
         } else if (shelterType === 'cowboy'){
             return(
+                
                 <primitive
                     object={cowboy.scene}
                     position={[-1.6, -0.5, -2.2]}
                     rotation={[ 0, -2, 0 ]}
                     scale={2.0}
-                />
+                >
+               <ShelterDescriptionHtml />
+                </primitive>
             )
         }
         
@@ -80,9 +104,11 @@ export default function Shelter() {
     }
 
 
+
     return(
         <>
             <ShelterType />
+
         </>
     )
 }

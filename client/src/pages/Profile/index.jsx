@@ -10,16 +10,20 @@ export default function Profile(){
 
     const { loading, data} = useQuery(QUERY_ME)
     const [shelter, setShelter ] = useState(data?.me?.options?.shelter)
+    const [shelterDescription, setShelterDescription] = useState(data?.me?.options?.shelterDescription)
 
     useEffect(() =>{
         if(data) {
             setShelter(data?.me?.options?.shelter)
+            setShelterDescription(data?.me?.options?.shelterDescription)
         }
     }, [data])
 
-    // Set the new shelter in the state and have it update on the profile
-    const handleShelterUpdate = async (newShelter) => {
+    // Set the new shelter in the state and have it upda'te on the profile
+    const handleShelterUpdate = async (newShelter, newShelterDescription) => {
+        // console.log(newShelter)
         setShelter(newShelter)
+        setShelterDescription(newShelterDescription)
     }
 
     return(
@@ -28,7 +32,11 @@ export default function Profile(){
             <h1> Hey there! {data?.me?.username} </h1>
             <p> Your current shelter of choice is a {shelter} </p>
             {/* Get the new shelter that was chosen in the form */}
-            <ShelterForm onShelterUpdate={handleShelterUpdate} currentShelter={data?.me?.options?.shelter}/>
+            <ShelterForm 
+                onShelterUpdate={handleShelterUpdate}
+                currentShelter={shelter} 
+                currentShelterDescription={shelterDescription}
+            />
             <a href="/scene" className="btn btn-primary mt-3">
                 Your scene
             </a>
