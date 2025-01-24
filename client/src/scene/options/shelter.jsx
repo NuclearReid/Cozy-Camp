@@ -10,22 +10,12 @@ export default function Shelter() {
     const userShelter = data?.me?.options?.shelter
     const userShelterDescription = data?.me?.options?.shelterDescription
 
-    
-
-    // console.log(userShelter)
-
     // This is for when you look up a user
     // Gets the searched user Data from the store
     const searchedUserShelter = useStore.getState().searchedUser.options.shelter
     const searchedUserShelterDescription = useStore.getState().searchedUser.options.shelterDescription
     /////////////////////////////////////////////////
     
-
-    // I'll need to optimize this by finding a way to not need to load each model everytime the scene opens. Will create a lot of issues down the line when I have bunch of user options
-    const tent = useGLTF('./Models/AIcanvasTent.glb')
-    const hammock = useGLTF('./Models/AIhammock.glb')
-    const cowboy = useGLTF('./Models/AIcowboyCamp.glb')    
-
 
     // This has to be after i declare the models, searched user, etc. or there is an issue with the rendering
     if( loading ) {
@@ -44,7 +34,6 @@ export default function Shelter() {
                 {description}
             </Html>
         )
-
     }
 
     // The component that will be picking the shelter type
@@ -53,6 +42,7 @@ export default function Shelter() {
         // will be used to be either the user's shelter or a searched user's shelter
         let shelterType = null
         let description = null
+
 
         // used to check if on the user's scene or the searched user's scene
         // Then changes shelterType and description to be the users or searched user's shelter. 
@@ -64,9 +54,11 @@ export default function Shelter() {
             description = searchedUserShelterDescription
         }
 
-        // Renders the model depending on the shelterType
+        // Loads and renders the model depending on the shelterType
+        // the model load is in here so that i'm not loading models that I'm not using
         if(shelterType === 'tent')
         {
+            const tent = useGLTF('./Models/AIcanvasTent.glb')
             return(
                 <primitive
                     object={tent.scene}
@@ -78,6 +70,7 @@ export default function Shelter() {
                 </primitive>
             ) 
         } else if(shelterType === 'hammock'){
+            const hammock = useGLTF('./Models/AIhammock.glb')
             return(
                 <primitive
                     object={hammock.scene}
@@ -89,6 +82,7 @@ export default function Shelter() {
                 </primitive>
             )
         } else if (shelterType === 'cowboy'){
+            const cowboy = useGLTF('./Models/AIcowboyCamp.glb')  
             return(
                 
                 <primitive
