@@ -22,8 +22,8 @@ export const FIND_USER = gql`
             username
             email
             options {
-            shelter
-            shelterDescription
+                shelter
+                shelterDescription
             }
         }
     }

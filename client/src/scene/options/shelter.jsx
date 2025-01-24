@@ -8,7 +8,7 @@ export default function Shelter() {
 
     const { loading, data } = useQuery(QUERY_ME)
     const userShelter = data?.me?.options?.shelter
-    const shelterDescription = data?.me?.options?.shelterDescription
+    const userShelterDescription = data?.me?.options?.shelterDescription
 
     
 
@@ -17,6 +17,7 @@ export default function Shelter() {
     // This is for when you look up a user
     // Gets the searched user Data from the store
     const searchedUserShelter = useStore.getState().searchedUser.options.shelter
+    const searchedUserShelterDescription = useStore.getState().searchedUser.options.shelterDescription
     /////////////////////////////////////////////////
     
 
@@ -31,7 +32,8 @@ export default function Shelter() {
         return <>loading...</>
     }
     
-     const ShelterDescriptionHtml = () => {
+    // description is just sending either the user or searched user's shelter description
+     const ShelterDescriptionHtml = ({description}) => {
         return(
             <Html
             position={ [0, 1, 0]}
@@ -39,25 +41,27 @@ export default function Shelter() {
             center // makes the pivot center of the html element to be the center of the element
             distanceFactor={6} // 
             >
-                {shelterDescription}
+                {description}
             </Html>
         )
 
     }
-
 
     // The component that will be picking the shelter type
     const ShelterType = () =>{
         let currentPath = window.location.pathname
         // will be used to be either the user's shelter or a searched user's shelter
         let shelterType = null
+        let description = null
 
         // used to check if on the user's scene or the searched user's scene
-        // Then changes shelterType to be the users or searched user's shelter. 
+        // Then changes shelterType and description to be the users or searched user's shelter. 
         if (currentPath === '/scene') {
             shelterType = userShelter
+            description = userShelterDescription
         } else if (currentPath === '/searchedScene') {
             shelterType = searchedUserShelter
+            description = searchedUserShelterDescription
         }
 
         // Renders the model depending on the shelterType
@@ -70,7 +74,7 @@ export default function Shelter() {
                     rotation={[0,1.5,0 ]}
                     scale={2.0}
                 >
-                    <ShelterDescriptionHtml/>
+                    <ShelterDescriptionHtml description={description}/>
                 </primitive>
             ) 
         } else if(shelterType === 'hammock'){
@@ -81,7 +85,7 @@ export default function Shelter() {
                     rotation={[0, -0.5, 0 ]}
                     scale={3.0}
                 >
-                    <ShelterDescriptionHtml/>
+                    <ShelterDescriptionHtml description={description}/>
                 </primitive>
             )
         } else if (shelterType === 'cowboy'){
@@ -93,14 +97,10 @@ export default function Shelter() {
                     rotation={[ 0, -2, 0 ]}
                     scale={2.0}
                 >
-               <ShelterDescriptionHtml />
+               <ShelterDescriptionHtml description={description}/>
                 </primitive>
             )
         }
-        
-        
-        return null
-
     }
 
 
@@ -108,7 +108,6 @@ export default function Shelter() {
     return(
         <>
             <ShelterType />
-
         </>
     )
 }
