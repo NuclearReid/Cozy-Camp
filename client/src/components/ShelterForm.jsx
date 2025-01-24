@@ -13,6 +13,9 @@ import { useMutation } from "@apollo/client"
 
     const [setShelter, {error: shelterError, data: setShelterData }] = useMutation(SET_SHELTER)
 
+    // Used to let the user know how many characters they have used/have left
+    const [charCount, setCharCount] = useState(0)
+
     // This is it's own mutation so that the user doesn't have to write the description everytime they do a shelter update
     const [setShelterDescription, {error: descriptionError, data: setShelterDescriptionDdata}] = useMutation(SET_SHELTER_DESCRIPTION)
 
@@ -24,7 +27,7 @@ import { useMutation } from "@apollo/client"
     useEffect(() => {
         setFormState({
             shelter: currentShelter,
-            shelterDescription: formState.shelterDescription || ""
+            shelterDescription: ""
         })
     },[currentShelter, currentShelterDescription])
 
@@ -34,6 +37,12 @@ import { useMutation } from "@apollo/client"
             ...formState,
             [name]: value
         })
+        
+        // updates the charCount to be the length of the description
+        if(name === 'shelterDescription'){
+            setCharCount(value.length)
+        }
+
     }
 
     const handleSubmit = async (event) => {
@@ -45,8 +54,7 @@ import { useMutation } from "@apollo/client"
             })
 
             // Trying to make the description only change if the user entered something into the input box
-
-            if(formState.shelterDescription.trim() !== ""){
+            if(formState.shelterDescription.trim() != ""){
                 await setShelterDescription({
                     variables: {shelterDescription: formState.shelterDescription}
                 })
@@ -61,7 +69,9 @@ import { useMutation } from "@apollo/client"
             }
         } catch (error) {
             console.log(error)
-        }        
+        }       
+        // Reset the Char count back to 0 after the form has been submitted 
+        setCharCount(0)
     }
 
   return (
@@ -111,7 +121,9 @@ import { useMutation } from "@apollo/client"
                     placeholder="Change the description?"
                     onChange={handleChange}
                     value={formState.shelterDescription}
+                    maxLength={200}
                 />
+                <p>character count: {charCount}/200</p>
             </Col>
         </Row>
         <button 

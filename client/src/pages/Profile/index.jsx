@@ -23,7 +23,10 @@ export default function Profile(){
     const handleShelterUpdate = async (newShelter, newShelterDescription) => {
         // console.log(newShelter)
         setShelter(newShelter)
-        setShelterDescription(newShelterDescription)
+        // Makes it so the shelter description will only update if I send it a value
+        if(newShelterDescription.trim() != ""){
+            setShelterDescription(newShelterDescription)
+        }
     }
 
     return(
