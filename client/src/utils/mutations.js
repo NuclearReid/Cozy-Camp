@@ -39,3 +39,14 @@ export const SET_SHELTER = gql`
         }
     }
 `
+
+export const SET_SHELTER_DESCRIPTION = gql`
+    mutation SetShelterDescription($shelterDescription: String) {
+        setShelterDescription(shelterDescription: $shelterDescription) {
+            options {
+                shelter
+                shelterDescription
+            }
+        }
+    }
+`

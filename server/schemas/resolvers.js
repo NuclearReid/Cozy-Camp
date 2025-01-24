@@ -88,6 +88,20 @@ const resolvers = {
                 return updatedUser
             }
             throw AuthenticationError            
+        },
+
+        setShelterDescription: async (parent, {shelterDescription }, context ) => {
+            if(context.user) {
+                const user = await User.findById(context.user._id).populate('options')
+                const options = await Options.findByIdAndUpdate(
+                    user.options._id,
+                    { shelterDescription: shelterDescription },
+                    { new: true }
+                )
+                const updatedUser = await User.findById(context.user._id).populate('options')
+                return updatedUser
+            }
+            throw AuthenticationError
         }
 
     }

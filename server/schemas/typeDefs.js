@@ -41,6 +41,10 @@ const typeDefs = gql`
         setShelter(
             shelter: String
         ): User
+
+        setShelterDescription(
+            shelterDescription: String
+        ): User
     }
 `
 
