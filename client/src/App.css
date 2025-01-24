@@ -27,11 +27,12 @@ html body #root .removeOverflow{
 .label > div
 {
     font-family: Helvetica, Arial;
-    position: absolute;
     background: #00000088;
     color: white;
+    font-size: 1.5rem;
     padding: 15px;
-    white-space: nowrap;
+    width: 20rem;
+    white-space: normal;
     overflow: hidden;
     border-radius: 30px;
     user-select: none;
