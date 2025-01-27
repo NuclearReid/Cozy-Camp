@@ -6,8 +6,6 @@ import { Canvas } from "@react-three/fiber";
 export default function SearchedScene() {
   const searchedUser = useStore((state) => state.searchedUser);
 
-  console.log(useStore.getState().searchedUser)
-
   return (
     <>
       <h1>{searchedUser.username}'s Camp</h1>

@@ -10,6 +10,8 @@ export const QUERY_ME = gql`
                 _id
                 shelter
                 shelterDescription
+                transport
+                transportDescription
             }
         }
     }
@@ -24,6 +26,8 @@ export const FIND_USER = gql`
             options {
                 shelter
                 shelterDescription
+                transport
+                transportDescription
             }
         }
     }

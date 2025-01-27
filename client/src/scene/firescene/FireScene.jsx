@@ -7,6 +7,7 @@ import MarshmellowOne from "./MarshmellowOne"
 import MarshmellowTwo from "./MarshmellowTwo"
 import Grass from "../grass/Grass"
 import Shelter from '../options/shelter'
+import Transport from "../options/transport"
 
 export default function FireScene() 
 {
@@ -92,6 +93,8 @@ export default function FireScene()
             {/* Shelter */}
             <Shelter />
 
+            {/* Transport */}
+            <Transport />
 
 
             {/* The floor */}

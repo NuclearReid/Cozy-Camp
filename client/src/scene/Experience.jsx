@@ -186,7 +186,7 @@ export default function Experience()
                 {/* Where i'm trying to get the start sign to fall but be on a rope  */}
                 <SignRopeJoint /> 
 
-                {/* <Shelter/>, firepit, marshmellows are in here */}
+                {/* User Options: <Shelter/>, <Transport/>, firepit, marshmellows are in here */}
                 <FireScene /> 
 
                 {/* Fireflies */}
