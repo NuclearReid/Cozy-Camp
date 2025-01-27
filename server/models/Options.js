@@ -9,6 +9,14 @@ const optionsSchema = new Schema({
         type: String,
         default: 'Just me and the stars!',
         maxlength: 500,
+    },
+    transport: {
+        type: String,
+        default: 'backpack'
+    },
+    transportDescription: {
+        type: String,
+        default: "It's not about the destination for me!"
     }
     
 })

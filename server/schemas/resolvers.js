@@ -71,8 +71,12 @@ const resolvers = {
 
             return{token, user} 
         },
+        /* 
+         * Options
+        */
 
-
+        
+        // Shelter
         setShelter: async (parent, { shelter }, context) => {
             if ( context.user ){
                 const user = await User.findById(context.user._id).populate('options')
@@ -89,7 +93,6 @@ const resolvers = {
             }
             throw AuthenticationError            
         },
-
         setShelterDescription: async (parent, {shelterDescription }, context ) => {
             if(context.user) {
                 const user = await User.findById(context.user._id).populate('options')
@@ -102,7 +105,39 @@ const resolvers = {
                 return updatedUser
             }
             throw AuthenticationError
-        }
+        },
+
+        // Transport
+        setTransport: async ( parent, { transport }, context) => {
+            if(context.user){
+                const user = await User.findById(context.user._id).populate('options')
+                const options = await Options.findByIdAndUpdate(
+                    user.options._id,
+                    { transport: transport },
+                    {new: true}
+                )
+            
+                const updatedUser = await User.findById(context.user._id).populate('options')
+                return updatedUser
+            }
+            throw AuthenticationError
+        },
+        setTransportDescription: async (parent, {transportDescription}, context ) =>{
+            if(context.user){
+                const user = await User.findById(context.user._id).populate('options')
+                const options = await Options.findByIdAndUpdate(
+                    user.options._id,
+                    { transportDescription: transportDescription },
+                    { new: true }
+                )
+                const updatedUser = await User.findById(context.user._id).populate('options')
+                return updatedUser
+            }
+            throw AuthenticationError
+        },
+
+
+
 
     }
 }

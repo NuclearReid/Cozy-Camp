@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { FormCheck, Row, Col } from "react-bootstrap"
 
-import { SET_SHELTER, SET_SHELTER_DESCRIPTION } from "../utils/mutations"
+import { SET_SHELTER, SET_SHELTER_DESCRIPTION } from "../../utils/mutations"
 import { useMutation } from "@apollo/client"
 
 // onShelterUpdate is here to update the profile with the new shelter option

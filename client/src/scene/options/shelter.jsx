@@ -58,7 +58,7 @@ export default function Shelter() {
         // the model load is in here so that i'm not loading models that I'm not using
         if(shelterType === 'tent')
         {
-            const tent = useGLTF('./Models/AIcanvasTent.glb')
+            const tent = useGLTF('./Models/shelter/AIcanvasTent.glb')
             return(
                 <primitive
                     object={tent.scene}
@@ -70,7 +70,7 @@ export default function Shelter() {
                 </primitive>
             ) 
         } else if(shelterType === 'hammock'){
-            const hammock = useGLTF('./Models/AIhammock.glb')
+            const hammock = useGLTF('./Models/shelter/AIhammock.glb')
             return(
                 <primitive
                     object={hammock.scene}
@@ -82,7 +82,7 @@ export default function Shelter() {
                 </primitive>
             )
         } else if (shelterType === 'cowboy'){
-            const cowboy = useGLTF('./Models/AIcowboyCamp.glb')  
+            const cowboy = useGLTF('./Models/shelter/AIcowboyCamp.glb')  
             return(
                 
                 <primitive
