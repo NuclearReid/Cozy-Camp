@@ -4,16 +4,16 @@ import { useGLTF, Html } from '@react-three/drei'
 import { useQuery } from '@apollo/client'
 import { QUERY_ME } from '../../utils/queries'
 
-export default function Shelter() {
+export default function Transport() {
 
     const { loading, data } = useQuery(QUERY_ME)
-    const userShelter = data?.me?.options?.shelter
-    const userShelterDescription = data?.me?.options?.shelterDescription
+    const userTransport = data?.me?.options?.transport
+    const userTransportDescription = data?.me?.options?.transportDescription
 
     // This is for when you look up a user
     // Gets the searched user Data from the store
-    const searchedUserShelter = useStore.getState().searchedUser.options.shelter
-    const searchedUserShelterDescription = useStore.getState().searchedUser.options.shelterDescription
+    const searchedUserTransport = useStore.getState().searchedUser.options.transport
+    const searchedUserTransportDescription = useStore.getState().searchedUser.options.transportDescription
     /////////////////////////////////////////////////
     
 
@@ -23,7 +23,7 @@ export default function Shelter() {
     }
     
     // description is just sending either the user or searched user's shelter description
-     const ShelterDescriptionHtml = ({description}) => {
+     const TransportDescriptionHtml = ({description}) => {
         return(
             <Html
             position={ [0, 1, 0]}
@@ -37,61 +37,67 @@ export default function Shelter() {
     }
 
     // The component that will be picking the shelter type
-    const ShelterType = () =>{
+    const TransportType = () =>{
         let currentPath = window.location.pathname
         // will be used to be either the user's shelter or a searched user's shelter
-        let shelterType = null
+        let transportType = null
         let description = null
 
 
         // used to check if on the user's scene or the searched user's scene
         // Then changes shelterType and description to be the users or searched user's shelter. 
         if (currentPath === '/scene') {
-            shelterType = userShelter
-            description = userShelterDescription
+            transportType = userTransport
+            description = userTransportDescription
         } else if (currentPath === '/searchedScene') {
-            shelterType = searchedUserShelter
-            description = searchedUserShelterDescription
+            transportType = searchedUserTransport
+            description = searchedUserTransportDescription
         }
+
+
+        // Work on putting the models for transport in the correct location
+
+
+
 
         // Loads and renders the model depending on the shelterType
         // the model load is in here so that i'm not loading models that I'm not using
-        if(shelterType === 'tent')
+        if(transportType === 'car')
         {
-            const tent = useGLTF('./Models/shelter/AIcanvasTent.glb')
+            const car = useGLTF('./Models/transport/aiCar.glb')
             return(
                 <primitive
-                    object={tent.scene}
-                    position={[-1.6, 0, -2.2]}
+                    object={car.scene}
+                    position={[0, 2, 0]}
                     rotation={[0,1.5,0 ]}
-                    scale={2.0}
+                    scale={1.0}
                 >
-                    <ShelterDescriptionHtml description={description}/>
+                    <TransportDescriptionHtml description={description}/>
                 </primitive>
             ) 
-        } else if(shelterType === 'hammock'){
-            const hammock = useGLTF('./Models/shelter/AIhammock.glb')
+        } else if(transportType === 'backpack'){
+            const backpack = useGLTF('./Models/transport/aiBackpack.glb')
             return(
                 <primitive
-                    object={hammock.scene}
-                    position={[-1.6, 1, -2.2]}
+                    object={backpack.scene}
+                    position={[1.6, 2, -2.2]}
                     rotation={[0, -0.5, 0 ]}
-                    scale={3.0}
+                    scale={1.0}
                 >
-                    <ShelterDescriptionHtml description={description}/>
+                    <TransportDescriptionHtml description={description}/>
                 </primitive>
             )
-        } else if (shelterType === 'cowboy'){
-            const cowboy = useGLTF('./Models/shelter/AIcowboyCamp.glb')  
+        } else if (transportType === 'canoe'){
+            const canoe = useGLTF('./Models/transport/aiCanoe.glb')  
             return(
                 
                 <primitive
-                    object={cowboy.scene}
-                    position={[-1.6, -0.5, -2.2]}
+                    object={canoe.scene}
+                    position={[1.6, -0.5, -2.2]}
                     rotation={[ 0, -2, 0 ]}
-                    scale={2.0}
+                    scale={1.0}
                 >
-               <ShelterDescriptionHtml description={description}/>
+               <TransportDescriptionHtml description={description}/>
                 </primitive>
             )
         }
@@ -101,7 +107,7 @@ export default function Shelter() {
 
     return(
         <>
-            <ShelterType />
+            <TransportType />
         </>
     )
 }

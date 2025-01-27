@@ -5,6 +5,8 @@ const typeDefs = gql`
         _id: ID
         shelter: String
         shelterDescription: String
+        transport: String
+        transportDescription: String
     }
 
     type User {
@@ -44,6 +46,14 @@ const typeDefs = gql`
 
         setShelterDescription(
             shelterDescription: String
+        ): User
+
+        setTransport(
+            transport: String
+        ): User
+
+        setTransportDescription(
+            transportDescription: String
         ): User
     }
 `
