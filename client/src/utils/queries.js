@@ -6,6 +6,7 @@ export const QUERY_ME = gql`
             _id
             email
             username
+            location
             options {
                 _id
                 shelter
@@ -23,6 +24,7 @@ export const FIND_USER = gql`
             _id
             username
             email
+            location
             options {
                 shelter
                 shelterDescription

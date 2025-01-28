@@ -18,6 +18,9 @@ const userSchema = new Schema({
         required: true,
         // Set up other requirements later
     },
+    location: {
+        type: String
+    },
     options: {
         type: Schema.Types.ObjectId,
         ref: 'Options'

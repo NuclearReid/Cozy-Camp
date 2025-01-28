@@ -14,6 +14,7 @@ const typeDefs = gql`
         email: String!
         username: String!
         password: String!
+        location: String
         options: Options
     }
 
