@@ -2,6 +2,12 @@ import { Environment, OrbitControls, Sky, Stage } from '@react-three/drei'
 
 export default function Lighting()
 {
+    
+
+
+
+
+
 
     return(
         <>
