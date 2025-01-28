@@ -10,7 +10,6 @@ import { useMutation } from "@apollo/client"
         currentShelter, 
         currentShelterDescription, 
     }){
-
     const [setShelter, {error: shelterError, data: setShelterData }] = useMutation(SET_SHELTER)
 
     // Used to let the user know how many characters they have used/have left

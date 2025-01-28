@@ -41,6 +41,10 @@ const typeDefs = gql`
             password: String!
         ): Auth
 
+        setLocation(
+            location: String
+        ): User
+
         setShelter(
             shelter: String
         ): User

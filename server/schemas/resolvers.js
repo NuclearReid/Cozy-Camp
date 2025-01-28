@@ -71,11 +71,25 @@ const resolvers = {
 
             return{token, user} 
         },
+        /*         
+         * Location
+        */
+       setLocation: async(parent, {location}, context ) =>{
+            if(context.user){
+                const user = await User.findByIdAndUpdate(
+                    context.user._id,
+                    {location: location},
+                    {new: true}
+                )
+                return user
+            }
+            throw AuthenticationError
+       },
+
+
         /* 
          * Options
         */
-
-        
         // Shelter
         setShelter: async (parent, { shelter }, context) => {
             if ( context.user ){
@@ -135,9 +149,6 @@ const resolvers = {
             }
             throw AuthenticationError
         },
-
-
-
 
     }
 }
