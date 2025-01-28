@@ -68,9 +68,9 @@ export default function Transport() {
             return(
                 <primitive
                     object={car.scene}
-                    position={[0, 2, 0]}
-                    rotation={[0,1.5,0 ]}
-                    scale={1.0}
+                    position={[0, 0.5, 6]}
+                    rotation={[0,5,0 ]}
+                    scale={2.5}
                 >
                     <TransportDescriptionHtml description={description}/>
                 </primitive>
@@ -80,9 +80,9 @@ export default function Transport() {
             return(
                 <primitive
                     object={backpack.scene}
-                    position={[1.6, 2, -2.2]}
-                    rotation={[0, -0.5, 0 ]}
-                    scale={1.0}
+                    position={[0, -0.5, 6]}
+                    rotation={[0, 5, 0 ]}
+                    scale={0.5}
                 >
                     <TransportDescriptionHtml description={description}/>
                 </primitive>
@@ -93,9 +93,9 @@ export default function Transport() {
                 
                 <primitive
                     object={canoe.scene}
-                    position={[1.6, -0.5, -2.2]}
-                    rotation={[ 0, -2, 0 ]}
-                    scale={1.0}
+                    position={[0, -0.4, 6]}
+                    rotation={[0, 6.5, 0 ]}
+                    scale={3}
                 >
                <TransportDescriptionHtml description={description}/>
                 </primitive>
