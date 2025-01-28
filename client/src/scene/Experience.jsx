@@ -85,10 +85,6 @@ export default function Experience()
         cameraControlsRef.current.minPolarAngle = finalPosition? 1.255: Math.PI * 0.5
 
     })
-
-
-
-
     /* 
      * Rope Joint (This has been rough :) ) 
     */

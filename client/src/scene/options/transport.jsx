@@ -54,12 +54,6 @@ export default function Transport() {
             description = searchedUserTransportDescription
         }
 
-
-        // Work on putting the models for transport in the correct location
-
-
-
-
         // Loads and renders the model depending on the shelterType
         // the model load is in here so that i'm not loading models that I'm not using
         if(transportType === 'car')
