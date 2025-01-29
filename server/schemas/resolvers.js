@@ -1,4 +1,7 @@
-const { User, Options } = require('../models')
+require('dotenv').config()
+const axios = require('axios')
+
+const { User, Options } = require('../models')    
 const {signToken, AuthenticationError } = require('../utils/auth')
 
 const resolvers = {
@@ -12,7 +15,31 @@ const resolvers = {
                 const foundUser = await User.findOne({
                     _id: context.user._id,
                 }).populate('options')
-                return foundUser
+
+                if(!foundUser){
+                    throw AuthenticationError
+                }
+                
+                // Fetch weather from OpenWeather API
+                const apiKey = process.env.OPENWEATHER_API_KEY
+                const location = foundUser.location
+                let weatherData = null
+
+                if(location) {
+                    try {
+                        const response = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${location}&appid=${apiKey}`)
+                        weatherData = response.data
+                        console.log(weatherData)
+
+                    } catch (error) {
+                        console.error('Unable to get the weather data ', error)
+                    }
+                }
+
+                return{
+                    ...foundUser.toObject(),
+                    weatherData
+                }
             }
 
             throw AuthenticationError

@@ -176,7 +176,9 @@ export default function Experience()
             {/* I wrapped everything in the physics tag to make sure nothing that uses physics was left out */}
             <Physics>
                 {/* <Perf position='top-left' /> */}
+
                 <Lighting />
+                
                 {/* The Text on the sign*/}
                 <CozyCampText />  
                 {/* Where i'm trying to get the start sign to fall but be on a rope  */}
