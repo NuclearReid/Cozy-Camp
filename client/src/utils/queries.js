@@ -47,6 +47,12 @@ export const QUERY_ME = gql`
                     }
                     dt_txt
                 }
+                city {
+                    name
+                    timezone
+                    sunrise
+                    sunset                
+                }
             }
         }
     }

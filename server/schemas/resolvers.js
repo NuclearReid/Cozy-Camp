@@ -29,7 +29,6 @@ const resolvers = {
                     try {
                         const response = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${location}&appid=${apiKey}`)
                         weatherData = response.data
-                        console.log(weatherData)
 
                     } catch (error) {
                         console.error('Unable to get the weather data ', error)

@@ -7,6 +7,7 @@ const typeDefs = gql`
         message: Int
         cnt: Int
         list: [WeatherList]
+        city: WeatherCity
     }
     
     type WeatherList {
@@ -47,6 +48,13 @@ const typeDefs = gql`
 
     type WeatherSys {
         pod: String
+    }
+    
+    type WeatherCity {
+        name: String
+        timezone: Int
+        sunrise: Int
+        sunset: Int
     }
 
 
