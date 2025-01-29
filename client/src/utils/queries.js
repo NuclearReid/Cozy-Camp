@@ -14,6 +14,46 @@ export const QUERY_ME = gql`
                 transport
                 transportDescription
             }
+            weatherData {
+                cod
+                message
+                cnt
+                list {
+                    dt
+                    main {
+                        temp
+                        feels_like
+                        temp_max
+                        pressure
+                        humidity
+                    }
+                    weather {
+                        id
+                        main
+                        description
+                        icon
+                    }
+                    clouds {
+                        all
+                    }
+                    wind {
+                        speed
+                        deg
+                    }
+                    visibility
+                    pop
+                    sys {
+                        pod
+                    }
+                    dt_txt
+                }
+                city {
+                    name
+                    timezone
+                    sunrise
+                    sunset                
+                }
+            }
         }
     }
 `;
@@ -30,6 +70,46 @@ export const FIND_USER = gql`
                 shelterDescription
                 transport
                 transportDescription
+            }
+            weatherData {
+                cod
+                message
+                cnt
+                list {
+                    dt
+                    main {
+                        temp
+                        feels_like
+                        temp_max
+                        pressure
+                        humidity
+                    }
+                    weather {
+                        id
+                        main
+                        description
+                        icon
+                    }
+                    clouds {
+                        all
+                    }
+                    wind {
+                        speed
+                        deg
+                    }
+                    visibility
+                    pop
+                    sys {
+                        pod
+                    }
+                    dt_txt
+                }
+                city {
+                    name
+                    timezone
+                    sunrise
+                    sunset                
+                }
             }
         }
     }

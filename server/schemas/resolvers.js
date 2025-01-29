@@ -1,4 +1,7 @@
-const { User, Options } = require('../models')
+require('dotenv').config()
+const axios = require('axios')
+
+const { User, Options } = require('../models')    
 const {signToken, AuthenticationError } = require('../utils/auth')
 
 const resolvers = {
@@ -12,7 +15,30 @@ const resolvers = {
                 const foundUser = await User.findOne({
                     _id: context.user._id,
                 }).populate('options')
-                return foundUser
+
+                if(!foundUser){
+                    throw AuthenticationError
+                }
+                
+                // Fetch weather from OpenWeather API
+                const apiKey = process.env.OPENWEATHER_API_KEY
+                const location = foundUser.location
+                let weatherData = null
+
+                if(location) {
+                    try {
+                        const response = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${location}&appid=${apiKey}`)
+                        weatherData = response.data
+
+                    } catch (error) {
+                        console.error('Unable to get the weather data ', error)
+                    }
+                }
+
+                return{
+                    ...foundUser.toObject(),
+                    weatherData
+                }
             }
 
             throw AuthenticationError
@@ -24,7 +50,25 @@ const resolvers = {
                 if(!foundUser){
                     throw new Error('no user found')
                 }
-                return foundUser
+                const apiKey = process.env.OPENWEATHER_API_KEY
+                const location = foundUser.location
+                let weatherData = null
+
+                if(location) {
+                    try {
+                        const response = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${location}&appid=${apiKey}`)
+                        weatherData = response.data
+
+                    } catch (error) {
+                        console.error('Unable to get the weather data ', error)
+                    }
+                }
+
+                return {
+                    ...foundUser.toObject(),
+                    weatherData
+
+                }
             } catch (error) {
                 console.error(error)
             }
@@ -71,11 +115,25 @@ const resolvers = {
 
             return{token, user} 
         },
+        /*         
+         * Location
+        */
+       setLocation: async(parent, {location}, context ) =>{
+            if(context.user){
+                const user = await User.findByIdAndUpdate(
+                    context.user._id,
+                    {location: location},
+                    {new: true}
+                )
+                return user
+            }
+            throw AuthenticationError
+       },
+
+
         /* 
          * Options
         */
-
-        
         // Shelter
         setShelter: async (parent, { shelter }, context) => {
             if ( context.user ){
@@ -135,9 +193,6 @@ const resolvers = {
             }
             throw AuthenticationError
         },
-
-
-
 
     }
 }

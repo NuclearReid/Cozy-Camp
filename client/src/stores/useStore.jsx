@@ -4,6 +4,7 @@ import { subscribeWithSelector, persist } from 'zustand/middleware'
 // 'create' creates the Zustand store
 // 'persist' puts the store into the local storage so it can be used when the user goes to another page
 
+// Look in 'SearchBar.jsx'
 const useStore = create(persist(subscribeWithSelector((set) => ({
     searchedUser: null, // the inital state
     setSearchedUser: (user) => {

@@ -33,6 +33,16 @@ export const LOGIN = gql`
     }
 `
 
+// Location
+export const SET_LOCATION = gql`
+    mutation setLocation($location: String) {
+        setLocation(location: $location) {
+            username
+            location
+        }
+    }
+`
+
 /* 
  * Options
  */
