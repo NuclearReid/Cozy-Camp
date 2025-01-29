@@ -16,7 +16,7 @@ export default function LocationForm({
 
 
     const [formState, setFormState] = useState({
-        location: currentLocation,
+        location: "",
     })
 
     useEffect(() =>{
