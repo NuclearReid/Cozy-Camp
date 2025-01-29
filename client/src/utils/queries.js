@@ -71,6 +71,46 @@ export const FIND_USER = gql`
                 transport
                 transportDescription
             }
+            weatherData {
+                cod
+                message
+                cnt
+                list {
+                    dt
+                    main {
+                        temp
+                        feels_like
+                        temp_max
+                        pressure
+                        humidity
+                    }
+                    weather {
+                        id
+                        main
+                        description
+                        icon
+                    }
+                    clouds {
+                        all
+                    }
+                    wind {
+                        speed
+                        deg
+                    }
+                    visibility
+                    pop
+                    sys {
+                        pod
+                    }
+                    dt_txt
+                }
+                city {
+                    name
+                    timezone
+                    sunrise
+                    sunset                
+                }
+            }
         }
     }
 `

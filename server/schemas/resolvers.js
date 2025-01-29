@@ -50,7 +50,25 @@ const resolvers = {
                 if(!foundUser){
                     throw new Error('no user found')
                 }
-                return foundUser
+                const apiKey = process.env.OPENWEATHER_API_KEY
+                const location = foundUser.location
+                let weatherData = null
+
+                if(location) {
+                    try {
+                        const response = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${location}&appid=${apiKey}`)
+                        weatherData = response.data
+
+                    } catch (error) {
+                        console.error('Unable to get the weather data ', error)
+                    }
+                }
+
+                return {
+                    ...foundUser.toObject(),
+                    weatherData
+
+                }
             } catch (error) {
                 console.error(error)
             }

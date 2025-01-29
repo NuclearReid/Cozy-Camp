@@ -5,12 +5,12 @@ import useStore from "../stores/useStore";
 
 
 // the Search Button is it's own component to make Zustand's global state work
+
 // Basically, the useStore hook wasn't working in the main body of SearchBar so I had to move it 
 const SearchButton = ({ data }) => {
     // Puts the searched user into the global State
     const setSearchedUser = useStore((state) => state.setSearchedUser)
     const handleSearchButtonClick = (event => {
-        console.log('clicked the search button')
         if(data?.user) {
             setSearchedUser(data.user)
         }
@@ -23,7 +23,7 @@ const SearchButton = ({ data }) => {
             className="btn btn-primary" 
             onClick={handleSearchButtonClick}
         >
-            <p>Look at: {data.user.username}'s Camp</p>
+            <p>Look at: {data.user.username}'s Camp </p>
         </a>
     )
 }

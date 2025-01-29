@@ -1,6 +1,7 @@
+import useStore from '../../stores/useStore';
 import { Sky } from '@react-three/drei'
 import { useQuery } from '@apollo/client'
-import { QUERY_ME } from '../../utils/queries'
+import { QUERY_ME, FIND_USER } from '../../utils/queries'
 
 
 // this converts unix time to 24 hr time. I may use this function later. not sure yet so i'm just keeping it in for now
@@ -24,26 +25,40 @@ function isDaytime(currentUnixTime, sunriseUnixTime, sunsetUnixTime) {
 
 export default function Lighting()
 {
-    // Where I'll add in my openweather API call to pick the sun position
-    const { loading, data} = useQuery(QUERY_ME)
-    const currentUnixTime = Math.floor(Date.now() / 1000)
-
+    // get the path to see if on /scene or /searchedScene
+    let currentPath = window.location.pathname
     let dayTime = null
     let sunrise = null
     let sunset = null
     let sunSkyPosition = null
+    const currentUnixTime = Math.floor(Date.now() / 1000)
 
-    if(!loading){
-       sunrise = data?.me?.weatherData?.city?.sunrise
-       sunset = data?.me?.weatherData?.city?.sunset
-       dayTime = isDaytime(currentUnixTime, sunrise, sunset)
-       if(dayTime){
-        sunSkyPosition = 20
-       } else {
-        sunSkyPosition = -20
-       }
+
+    if(currentPath === '/scene'){
+        const { loading, data} = useQuery(QUERY_ME)
+        if(!loading){
+            sunrise = data?.me?.weatherData?.city?.sunrise
+            sunset = data?.me?.weatherData?.city?.sunset
+            dayTime = isDaytime(currentUnixTime, sunrise, sunset)
+            if(dayTime){
+                sunSkyPosition = 20
+            } else {
+                sunSkyPosition = -20
+            }
+        }
+    // gets the searched user from the stores, and does the same thing as above for figuring out if it's daytime or nighttime then sets the sun position
+    } else if(currentPath === '/searchedScene'){
+        const searchedUserWeather = useStore.getState().searchedUser
+        sunrise = searchedUserWeather?.weatherData?.city?.sunrise
+        sunset = searchedUserWeather?.weatherData?.city?.sunset
+        dayTime = isDaytime(currentUnixTime, sunrise, sunset)
+        if(dayTime){
+            sunSkyPosition = 20
+        } else {
+            sunSkyPosition = -20
+        }
     }
-
+    
 
     return(
         <>

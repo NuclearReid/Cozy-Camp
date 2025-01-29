@@ -119,8 +119,6 @@ const typeDefs = gql`
             transportDescription: String
         ): User
     }
-
-
 `
 
 module.exports = typeDefs
