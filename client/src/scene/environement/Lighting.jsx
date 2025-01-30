@@ -33,10 +33,12 @@ export default function Lighting()
     let sunset = null
     let sunSkyPosition = null
     const currentUnixTime = Math.floor(Date.now() / 1000)
-
+    const { loading, data} = useQuery(QUERY_ME)
+    if(loading){
+        return <LoadingScreen/>
+    }
 
     if(currentPath === '/scene'){
-        const { loading, data} = useQuery(QUERY_ME)
         if(!loading){
             sunrise = data?.me?.weatherData?.city?.sunrise
             sunset = data?.me?.weatherData?.city?.sunset
