@@ -11,7 +11,6 @@ const FireMaterial = shaderMaterial(
     {
         uTime: 0,
         uFirePng: null,
-        
     },
     fireVertexShader,
     fireFragmentShader
