@@ -96,7 +96,6 @@ export default function FireScene()
             {/* Transport */}
             <Transport />
 
-
             {/* The floor */}
             <RigidBody
                 type='fixed'

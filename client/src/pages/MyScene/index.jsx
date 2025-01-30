@@ -1,7 +1,10 @@
 // I have this as a page to make it less cluttered to work with for checking if logged in, sending props etc
-import { Loader } from "@react-three/drei";
 import Experience from "../../scene/Experience";
 import { Canvas} from '@react-three/fiber'
+import { Suspense } from "react";
+import LoadingScreen from '../../components/LoadingScreen'
+
+
 
 
 export default function Scene() {
@@ -16,9 +19,12 @@ export default function Scene() {
                     position: [-3.9, 10.2, 11.9],
                 }}
             >
-                <Experience />
+                <Suspense fallback={<LoadingScreen/>}>
+                    <Experience />
+                </Suspense>
+                
             </Canvas>
-            <Loader />
+            {/* <Loader /> */}
         </div>
     )
 }

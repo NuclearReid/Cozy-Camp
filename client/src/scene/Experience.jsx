@@ -1,4 +1,4 @@
-import { OrbitControls, CameraControls, Text, Sparkles } from '@react-three/drei'
+import { OrbitControls, CameraControls, Text, Sparkles, Html } from '@react-three/drei'
 import { Perf } from 'r3f-perf'
 import { useFrame, useThree } from '@react-three/fiber'
 import { useRef, useState, useEffect } from 'react'
@@ -19,11 +19,12 @@ import Grass from './grass/Grass'
 
 export default function Experience()
 {
-    const [finalPosition, setFinalPosition] = useState(false)    
+    const [finalPosition, setFinalPosition] = useState(false)
+    // if(isLoading){
+    //     return <Html>Loading...</Html>
+    // }  
 
     const cameraControlsRef = useRef()
-
-
     // Loading the models: flightHelmet is a test model
     // const flightHelmet = useGLTF('./FlightHelmet/glTF/FlightHelmet.gltf')
 
@@ -105,78 +106,73 @@ export default function Experience()
 
         return(
             <>
-             {/*  The wood for the panel/Sign. It has the onClick function right now but that will be swapped to the startSign once the rope joint is working :)  */}
-                    <RigidBody
-                        ref={cozySignRef}
-                        type='fixed'
+                <RigidBody
+                    ref={cozySignRef}
+                    type='fixed'
+                >
+                    <mesh 
+                            
+                        position={[-0.6899, 10.2, 3.6]}
+                        scale={[5.8, 3.3, 0.2]}
+                        rotation-y={Math.PI * 0.75}
                     >
-                        <mesh 
-                             
-                            position={[-0.6899, 10.2, 3.6]}
-                            scale={[5.8, 3.3, 0.2]}
-                            rotation-y={Math.PI * 0.75}
-                        >
-                            <boxGeometry/>
-                            <meshToonMaterial color={'#916302'} />
-                        </mesh>
-                    </RigidBody>
+                        <boxGeometry/>
+                        <meshToonMaterial color={'#916302'} />
+                    </mesh>
+                </RigidBody>
 
-                    {/* The 'click to start' sign that will fall */}
-                    <RigidBody
-                        ref={startSignRef}
-                        density={30}
-                        onClick={handleClick}
-                        position={[-0.2452, 10.6, 3.2]}
-                        scale={[0.2, 1.5, 2.5 ]}
-                        rotation={[Math.PI * 0.1, Math.PI * 0.25, Math.PI * 0.1]}
-                        // rotation-x = {Math.PI * 0.1}                
+                {/* The 'click to start' sign that will fall */}
+                <RigidBody
+                    ref={startSignRef}
+                    density={30}
+                    onClick={handleClick}
+                    position={[-0.2452, 10.6, 3.2]}
+                    scale={[0.2, 1.5, 2.5 ]}
+                    rotation={[Math.PI * 0.1, Math.PI * 0.25, Math.PI * 0.1]}
+                    // rotation-x = {Math.PI * 0.1}                
+                >
+                    <mesh>
+                        <boxGeometry />
+                        <meshToonMaterial 
+                            color='#916302'
+                        />
+                    </mesh>
+                    <Text
+                        rotation-y={ - Math.PI * 0.5}
+                        scale={0.3}
+                        position={[-0.52,0.15,0]}
+                        anchorX='center'
+                        anchorY='middle'
+                        font='./text/FingerPaint-Regular.ttf'
+                        color='#E13C42'
+                        
                     >
-                        <mesh>
-                            <boxGeometry />
-                            <meshToonMaterial 
-                                color='#916302'
-                            />
-                        </mesh>
-                        <Text
-                            rotation-y={ - Math.PI * 0.5}
-                            scale={0.3}
-                            position={[-0.52,0.15,0]}
-                            anchorX='center'
-                            anchorY='middle'
-                            font='./text/FingerPaint-Regular.ttf'
-                            color='#E13C42'
-                            
-                        >
-                            Click
-                        </Text>
-                        <Text
-                            rotation-y={ - Math.PI * 0.5}
-                            scale={0.3}
-                            position={[-0.52,-0.10,0]}
-                            anchorX='center'
-                            anchorY='middle'
-                            font='./text/FingerPaint-Regular.ttf'
-                            color='#E13C42'
-                            
-                        >
-                            Me!
-                        </Text>
-                    </RigidBody>
-                    {/* Grass is here to give it some time to render. If it's in the return() below, only one blade of grass is rendered */}
-                    <Grass/>
+                        Click
+                    </Text>
+                    <Text
+                        rotation-y={ - Math.PI * 0.5}
+                        scale={0.3}
+                        position={[-0.52,-0.10,0]}
+                        anchorX='center'
+                        anchorY='middle'
+                        font='./text/FingerPaint-Regular.ttf'
+                        color='#E13C42'
+                        
+                    >
+                        Me!
+                    </Text>
+                </RigidBody>
+                {/* Grass is here to give it some time to render. If it's in the return() below, only one blade of grass is rendered */}
+                <Grass/>
             </>
         )
     }
 
-
-
     return (
         <>
-            
             {/* I wrapped everything in the physics tag to make sure nothing that uses physics was left out */}
             <Physics>
                 {/* <Perf position='top-left' /> */}
-
                 <Lighting />
                 
                 {/* The Text on the sign*/}
@@ -214,6 +210,5 @@ export default function Experience()
                 />
             </Physics>      
         </>
-    
-)
+    )
 }

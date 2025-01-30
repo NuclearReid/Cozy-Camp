@@ -2,6 +2,7 @@ import useStore from '../../stores/useStore';
 import { Sky } from '@react-three/drei'
 import { useQuery } from '@apollo/client'
 import { QUERY_ME, FIND_USER } from '../../utils/queries'
+import LoadingScreen from '../../components/LoadingScreen';
 
 
 // this converts unix time to 24 hr time. I may use this function later. not sure yet so i'm just keeping it in for now
@@ -32,10 +33,12 @@ export default function Lighting()
     let sunset = null
     let sunSkyPosition = null
     const currentUnixTime = Math.floor(Date.now() / 1000)
-
+    const { loading, data} = useQuery(QUERY_ME)
+    if(loading){
+        return <LoadingScreen/>
+    }
 
     if(currentPath === '/scene'){
-        const { loading, data} = useQuery(QUERY_ME)
         if(!loading){
             sunrise = data?.me?.weatherData?.city?.sunrise
             sunset = data?.me?.weatherData?.city?.sunset
@@ -59,7 +62,6 @@ export default function Lighting()
         }
     }
     
-
     return(
         <>
             <directionalLight position={ [ 1, 0.25, 3 ] } intensity={ 1.5 } />
