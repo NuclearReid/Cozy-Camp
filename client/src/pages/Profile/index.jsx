@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/client"
-import { QUERY_ME } from "../../utils/queries"
+import { QUERY_ME_NO_WEATHER } from "../../utils/queries"
 
 import ShelterForm from '../../components/forms/ShelterForm'
 import SearchBar from "../../components/SearchBar"
@@ -10,7 +10,7 @@ import LocationForm from "../../components/forms/LocationForm"
 
 export default function Profile(){
 
-    const { loading, data} = useQuery(QUERY_ME)
+    const { loading, data} = useQuery(QUERY_ME_NO_WEATHER)
 
     // User Location
     const [location, setLocation] = useState(data?.me?.location)
