@@ -6,7 +6,8 @@ import { subscribeWithSelector, persist } from 'zustand/middleware'
 
 // Look in 'SearchBar.jsx'
 const useStore = create(persist(subscribeWithSelector((set) => ({
-    searchedUser: null, // the inital state
+    // the initial state
+    searchedUser: null,
     setSearchedUser: (user) => {
         // updates the state
         set({ 

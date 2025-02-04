@@ -4,7 +4,7 @@ import Experience from "../../scene/Experience";
 import { Canvas } from "@react-three/fiber";
 
 export default function SearchedScene() {
-  const searchedUser = useStore((state) => state.searchedUser);
+  const searchedUser = useStore((state) => state.searchedUser)
 
   return (
     <>

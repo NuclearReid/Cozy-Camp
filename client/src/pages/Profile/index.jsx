@@ -1,9 +1,10 @@
 import { useQuery } from "@apollo/client"
 import { QUERY_ME_NO_WEATHER } from "../../utils/queries"
+import { useEffect, useState } from "react"
+import useStore from "../../stores/useStore"
 
 import ShelterForm from '../../components/forms/ShelterForm'
 import SearchBar from "../../components/SearchBar"
-import { useEffect, useState } from "react"
 import TransportForm from "../../components/forms/TransportForm"
 import LocationForm from "../../components/forms/LocationForm"
 
@@ -12,6 +13,18 @@ export default function Profile(){
 
     const { loading, data} = useQuery(QUERY_ME_NO_WEATHER)
 
+    // This is here to put something into the global state. If it's left empty, the code will break because other sections are reliant on there being something in the global state. It's easier to fill it here than to set checks for it in a different sections of the code
+    const setSearchedUser = useStore((state) => state.setSearchedUser)
+    const setTheGlobalState = (event => {
+        if(data?.me) {
+            setSearchedUser(data.me)
+        }
+        console.log(useStore.getState().searchedUser)
+    })
+    setTheGlobalState()
+
+
+    
     // User Location
     const [location, setLocation] = useState(data?.me?.location)
 
@@ -68,13 +81,12 @@ export default function Profile(){
             <SearchBar />
             <h1> Hey there! {data?.me?.username} </h1>
             <p>Your current location is set to: {location}</p>
+
             <LocationForm
                 onLocationUpdate={handleLocationUpdate}
                 currentLocation={location}
             />
-
             <p> Your current shelter of choice is a {shelter} </p>
-
             {/* Get the new shelter that was chosen in the form */}
             <ShelterForm 
                 onShelterUpdate={handleShelterUpdate}

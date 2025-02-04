@@ -17,6 +17,10 @@ import Lighting from './environement/Lighting'
 import CozyCampText from './startScreen/CozyCampText'
 import Grass from './grass/Grass'
 
+
+
+
+
 export default function Experience()
 {
     const [finalPosition, setFinalPosition] = useState(false)
