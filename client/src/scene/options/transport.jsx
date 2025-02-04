@@ -9,7 +9,6 @@ export default function Transport() {
     const { loading, data } = useQuery(QUERY_ME)
     const userTransport = data?.me?.options?.transport
     const userTransportDescription = data?.me?.options?.transportDescription
-
     // This is for when you look up a user
     // Gets the searched user Data from the store
     const searchedUserTransport = useStore.getState().searchedUser.options.transport
@@ -21,6 +20,9 @@ export default function Transport() {
     if( loading ) {
         return <>loading...</>
     }
+    if(!loading)console.log(data)
+
+
     
     // description is just sending either the user or searched user's shelter description
      const TransportDescriptionHtml = ({description}) => {

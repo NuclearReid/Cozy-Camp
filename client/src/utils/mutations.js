@@ -42,7 +42,6 @@ export const SET_LOCATION = gql`
         }
     }
 `
-
 /* 
  * Options
  */
