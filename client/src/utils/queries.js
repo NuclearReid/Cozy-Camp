@@ -1,5 +1,24 @@
 import { gql } from '@apollo/client';
 
+
+export const QUERY_ME_NO_WEATHER = gql`
+    query MeNoWeather {
+        me {
+            _id
+            email
+            username
+            location
+            options {
+                _id
+                shelter
+                shelterDescription
+                transport
+                transportDescription
+            }
+        }
+    }
+`;
+
 export const QUERY_ME = gql`
     query Me {
         me {

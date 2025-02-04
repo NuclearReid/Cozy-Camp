@@ -9,7 +9,20 @@ const resolvers = {
         users: async() => {
             return User.find().populate('options')
         },
-        
+        meNoWeather: async(parent, args, context) => {
+            if(context.user){
+                const foundUser = await User.findOne({
+                    _id: context.user._id,
+                }).populate('options')
+                
+                if(!foundUser) {
+                    throw AuthenticationError
+                }
+
+                return foundUser
+            }
+            throw AuthenticationError
+        },
         me: async(parent, args, context) => {
             if(context.user){
                 const foundUser = await User.findOne({
@@ -43,6 +56,7 @@ const resolvers = {
 
             throw AuthenticationError
         },
+        
 
         user: async(parent, {username}) => {
             const foundUser = await User.findOne({username}).populate('options')
