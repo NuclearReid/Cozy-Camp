@@ -78,11 +78,7 @@ export default function Profile(){
 
     return(
         <Container>
-            <Row className="mb-4">
-                <Col md={7}>
-                    <SearchBar />
-                </Col>
-            </Row>
+            
             <Row>
                 <Col md={6} className='equal-card-height'>
                     <Card className='w-100'>

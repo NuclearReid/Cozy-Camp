@@ -4,9 +4,6 @@ import { Canvas} from '@react-three/fiber'
 import { Suspense } from "react";
 import LoadingScreen from '../../components/LoadingScreen'
 
-
-
-
 export default function Scene() {
 
     return(

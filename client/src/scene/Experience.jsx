@@ -17,10 +17,6 @@ import Lighting from './environement/Lighting'
 import CozyCampText from './startScreen/CozyCampText'
 import Grass from './grass/Grass'
 
-
-
-
-
 export default function Experience()
 {
     const [finalPosition, setFinalPosition] = useState(false)
@@ -180,7 +176,10 @@ export default function Experience()
                 <Lighting />
                 
                 {/* The Text on the sign*/}
-                <CozyCampText />  
+                <CozyCampText
+                    // loggedInName={data?.me?.username}
+                    
+                />  
                 {/* Where i'm trying to get the start sign to fall but be on a rope  */}
                 <SignRopeJoint /> 
 
