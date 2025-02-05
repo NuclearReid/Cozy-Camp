@@ -1,3 +1,4 @@
+import { Container, Row, Col, Card, Button } from 'react-bootstrap'
 import { useQuery } from "@apollo/client"
 import { QUERY_ME_NO_WEATHER } from "../../utils/queries"
 import { useEffect, useState } from "react"
@@ -19,7 +20,6 @@ export default function Profile(){
         if(data?.me) {
             setSearchedUser(data.me)
         }
-        console.log(useStore.getState().searchedUser)
     })
     setTheGlobalState()
 
@@ -77,31 +77,75 @@ export default function Profile(){
 
 
     return(
-        <>
-            <SearchBar />
-            <h1> Hey there! {data?.me?.username} </h1>
-            <p>Your current location is set to: {location}</p>
-
-            <LocationForm
-                onLocationUpdate={handleLocationUpdate}
-                currentLocation={location}
-            />
-            <p> Your current shelter of choice is a {shelter} </p>
-            {/* Get the new shelter that was chosen in the form */}
-            <ShelterForm 
-                onShelterUpdate={handleShelterUpdate}
-                currentShelter={shelter} 
-                currentShelterDescription={shelterDescription}
-            />
-            <TransportForm
-                onTransportUpdate={handleTransportUpdate}
-                currentTransport={transport}
-                currentTransportDescription={transportDescription}
-            />
-
-            <a href="/scene" className="btn btn-primary mt-3">
-                Your scene
-            </a>
-        </>
+        <Container>
+            <Row className="mb-4">
+                <Col md={7}>
+                    <SearchBar />
+                </Col>
+            </Row>
+            <Row>
+                <Col md={6} className='equal-card-height'>
+                    <Card className='w-100'>
+                        <Card.Body>
+                            <Card.Title> 
+                                    Welcome Back, {data?.me?.username}
+                            </Card.Title>
+                            <Card.Text>
+                                Here's your current setup,
+                                <br />
+                                Your location is: {data?.me?.location} <br />
+                                You're sleeping in:
+                                {data?.me?.options?.shelter === 'cowboy' ? '.... Nothing' : data?.me?.options?.shelter} <br />
+                                put more info here
+                            </Card.Text>
+                        </Card.Body>
+                    </Card>
+                </Col>
+                <Col md={6} className='equal-card-height'>
+                    <Card className='w-100'>
+                        <Card.Body>
+                            <Card.Text>
+                                Your current location is set to: {location}
+                            </Card.Text>
+                            <LocationForm 
+                                onLocationUpdate={handleLocationUpdate} 
+                                currentLocation={location} 
+                            />
+                        </Card.Body>
+                    </Card>
+                </Col>
+            </Row>
+            <Row className="mt-3">
+                <Col md={6}>
+                    <Card className='mb-3'>
+                        <Card.Body>
+                            <ShelterForm
+                                onShelterUpdate={handleShelterUpdate}
+                                currentShelter={shelter}
+                                currentShelterDescription={shelterDescription}
+                            />
+                        </Card.Body>
+                    </Card>
+                </Col>
+                <Col md={6} >
+                    <Card>
+                        <Card.Body>
+                            <TransportForm
+                                onTransportUpdate={handleTransportUpdate}
+                                currentTransport={transport}
+                                currentTransportDescription={transportDescription}
+                            />
+                        </Card.Body>
+                    </Card>
+                </Col>
+            </Row>
+            <Row className="mt-3">
+                <Col>
+                    <Button href="/scene" className="btn btn-primary">
+                        Your scene
+                    </Button>
+                </Col>
+            </Row>
+        </Container>
     )
 }

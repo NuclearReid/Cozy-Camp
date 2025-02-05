@@ -36,3 +36,13 @@ html body #root .removeOverflow{
     border-radius: 30px;
     user-select: none;
 }
+
+
+/* Where i'll be working on the profile page CSS */
+
+.equal-card-height{
+    display: flex;
+    align-items: stretch;
+    flex: 1;
+}
+

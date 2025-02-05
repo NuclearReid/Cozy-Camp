@@ -77,7 +77,7 @@ export default function TransportForm( {
   return (
     <form onSubmit={handleSubmit}>
         <Row>
-            <Col className='mb-3' xs={12} md={12}>
+            <Col className='mb-1' xs={12} md={12}>
                 <label className='form-label fs-3'>
                     Type of Transport?
                 </label>
@@ -128,7 +128,7 @@ export default function TransportForm( {
         </Row>
         <button 
             type="submit" 
-            className="btn btn-primary mt-3">
+            className="btn btn-primary mt-1">
                 Submit
         </button>
     </form>
