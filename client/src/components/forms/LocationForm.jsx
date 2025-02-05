@@ -58,7 +58,6 @@ export default function LocationForm({
                     formState.location
                 )
             }
-            
         } catch (error) {
             console.log(error)
         }
@@ -78,11 +77,13 @@ export default function LocationForm({
                     value={formState.location}
                     maxLength={58}
                 />
-                <p>character count: {charCount}/58</p>
+                <p>
+                    Character count: {charCount}/58
+                </p>
             </Row>
             <button
                 type="submit"
-                className="btn btn-primary mt-3"
+                className="btn btn-primary"
             >
                 Submit
             </button>

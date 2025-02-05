@@ -1,0 +1,24 @@
+These are essentially just notes for myself with a little bit of how the code is working in the different parts
+
+
+Right now, I'm running a query inside of enviornment/lighting and I'm running a query inside of each of the options for shelter & transport.
+
+- I could probably reduce this down by making a single query inside of pages/MyScene/index.js and pages/SearchedScene/index.jsx and pass the querried props down the line to the different components. 
+
+- This way I'll only have to make that query once and share the data amongst the different components
+
+
+steps for working at reducing the query calls:
+1. Make a note of each component that makes a QUERY_ME
+2. make the single QUERY_ME inside of pages/MyScene
+3. send that data in, pass it down to each of the components that need it just as 'data'.
+4. From within the components, i'll break it down how i need it
+
+
+
+
+
+
+________________________________________________________________________
+I really need to fix the double loading, i think it has to do with how i have the grass working
+_________________________________________________________________________

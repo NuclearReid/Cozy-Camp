@@ -8,7 +8,6 @@ export default function SearchedScene() {
 
   return (
     <>
-      <h1>{searchedUser.username}'s Camp</h1>
       {searchedUser ? (
         <div className="removeOverflow"> 
           <Canvas

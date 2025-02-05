@@ -1,7 +1,9 @@
+import { Card, Container, Row, Col, Button } from 'react-bootstrap'
 import { FIND_USER } from "../utils/queries";
 import { useLazyQuery } from "@apollo/client";
 import { useState } from "react";
 import useStore from "../stores/useStore";
+
 
 
 // the Search Button is it's own component to make Zustand's global state work
@@ -14,7 +16,6 @@ const SearchButton = ({ data }) => {
         if(data?.user) {
             setSearchedUser(data.user)
         }
-        console.log(useStore.getState().searchedUser)
     })
 
     return(
@@ -23,7 +24,7 @@ const SearchButton = ({ data }) => {
             className="btn btn-primary" 
             onClick={handleSearchButtonClick}
         >
-            <p>Look at: {data.user.username}'s Camp </p>
+            Look at: {data.user.username}'s Camp
         </a>
     )
 }
@@ -65,48 +66,48 @@ export default function SearchBar() {
 
   return (
     <>
-      <form onSubmit={handleFormSubmit}>
-        <div className="input-group has-validation">
-          <span className="input-group-text">@</span>
-          <div className="form-floating">
-            <input
-              type="text"
-              className="form-control"
-              id="floatingInputGroup2"
-              placeholder="Username"
-              name="usernameSearch"
-              onChange={handleChange}
-              required
-            />
-            <label htmlFor="floatingInputGroup2">Username</label>
-          </div>
-          <div className="invalid-feedback">Please choose a username.</div>
-        </div>
-        <button type="submit" className="btn btn-primary">
-          {" "}
-          Search{" "}
-        </button>
-      </form>
-      {/* This is just where I can make sure the user info is showing up! */}
-      {/* This data is being saved in the global State with Zustand */}
+            <form onSubmit={handleFormSubmit}>
+                <div className="input-group has-validation">
+                    <span className="input-group-text">@</span>
+                    <div className="form-floating">
+                        <input
+                            type="text"
+                            className="form-control"
+                            id="floatingInputGroup2"
+                            placeholder="Username"
+                            name="usernameSearch"
+                            onChange={handleChange}
+                            required
+                        />
+                        <label htmlFor="floatingInputGroup2">Username</label>
+                    </div>
+                    <div className="invalid-feedback">Please choose a username.</div>
+                </div>
+                <button type="submit" className="btn btn-primary">Search</button>
+            </form>
 
-
-      {loading && <p>Loading...</p>}
-      {/* Lets the user know a username was not found */}
-      {data?.user?._id == null && <p>Unable to find that username</p>}
-      {/* If a user is found with that username, their info is displayed || also creates the <a> to see their scene */}
-      {data?.user?._id && (
-        <>
-          <div>
-            <h1>User Details</h1>
-            <p>Username: {data.user.username}</p>
-            <p>Shelter: {data.user.options.shelter}</p>
-            <p>Shelter Description: {data.user.options.shelterDescription}</p>
-          </div>
-          {/* Sends the searched user's data as a prop to SearchButton where it'll be put into the Zustand Global State */}
-          <SearchButton data={data}/>
+            {loading && <p>Loading...</p>}
+            {data?.user?._id == null && <p>Unable to find that username</p>}
+            {data?.user?._id && (
+                <Container>
+                    <Row>
+                        <Col md={6}>
+                            <Card >
+                                <Card.Body>
+                                    <Card.Title>User Details</Card.Title>
+                                    <Card.Text>
+                                        <strong>Username:</strong> {data.user.username} <br />
+                                        <strong>Shelter:</strong> {data.user.options.shelter} <br />
+                                        <strong>Shelter Description:</strong> {data.user.options.shelterDescription}
+                                    </Card.Text>
+                                    {/* This is sending the retrieved data to the global state */}
+                                    <SearchButton data={data} />
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                    </Row>
+                </Container>
+            )}
         </>
-      )}
-    </>
   );
 }
