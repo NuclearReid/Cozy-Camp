@@ -2,14 +2,15 @@
 
 
 
+
+
+When the user wants to view a scene, I want to have the name of that scene's owner on the starting sign. instead of 'Cozy Camp' it'll say 'Reid's Camp' for example
+
+
+
+         Done!
+ *******************************************
 Right now, I'm running a query inside of enviornment/lighting and I'm running a query inside of each of the options for shelter & transport.
-
-
-
-- I could probably reduce this down by making a single query inside of pages/MyScene/index.js and pages/SearchedScene/index.jsx and pass the querried props down the line to the different components. 
-
-- This way I'll only have to make that query once and share the data amongst the different components
-
 
 steps for working at reducing the query calls:
 1. Make a note of each component that makes a QUERY_ME 
@@ -19,12 +20,19 @@ steps for working at reducing the query calls:
 
 * Note: because the searched scene is stored in the global state, that query is only happening once.
 
+- I could probably reduce this down by making a single query inside of pages/MyScene/index.js and pages/SearchedScene/index.jsx and pass the querried props down the line to the different components. 
 
+- This way I'll only have to make that query once and share the data amongst the different components
 ________________________________________________________________________________________________
 I really need to fix the double loading, i think it has to do with how i have the grass working
+
+- This seems to be fixed for the most part when i reduced the number of queries
 _________________________________________________________________________________________________
 
 
 
 
-When the user wants to view a scene, I want to have the name of that scene's owner on the starting sign. instead of 'Cozy Camp' it'll say 'Reid's Camp' for example
+
+*******************************************
+
+

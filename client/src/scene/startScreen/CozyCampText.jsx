@@ -1,8 +1,17 @@
 import { Text3D } from "@react-three/drei"
+import useStore from "../../stores/useStore"
 
 
-export default function CozyCampText()
+export default function CozyCampText({data})
 {
+    let displayName = null
+    const username = data?.me?.username
+    const searchedUser = useStore.getState().searchedUser?.username
+    let currentPath = window.location.pathname
+    if(currentPath === '/scene') displayName = username
+    if(currentPath === '/searchedScene') displayName = searchedUser
+
+    
 
     return(
         <>
@@ -12,7 +21,7 @@ export default function CozyCampText()
                 // position-y={1.4}
                 position={[-2.19, 10.6, 2.2]}
             >
-                Cozy 
+                {displayName}
                 <meshToonMaterial color={'#E13C42'}/>
             </Text3D>
 

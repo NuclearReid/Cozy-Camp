@@ -185,8 +185,7 @@ export default function Experience({
                 
                 {/* The Text on the sign*/}
                 <CozyCampText
-                    // loggedInName={data?.me?.username}
-                    
+                    data={data}
                 />  
                 {/* Where i'm trying to get the start sign to fall but be on a rope  */}
                 <SignRopeJoint /> 
