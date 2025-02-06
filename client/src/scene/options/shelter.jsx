@@ -1,12 +1,14 @@
 import useStore from '../../stores/useStore'
 
 import { useGLTF, Html } from '@react-three/drei'
-import { useQuery } from '@apollo/client'
-import { QUERY_ME } from '../../utils/queries'
 
-export default function Shelter() {
 
-    const { loading, data } = useQuery(QUERY_ME)
+export default function Shelter({
+    loading,
+    data
+}) {
+
+    // const { loading, data } = useQuery(QUERY_ME)
     const userShelter = data?.me?.options?.shelter
     const userShelterDescription = data?.me?.options?.shelterDescription
 

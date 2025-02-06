@@ -14,10 +14,3 @@ export default function LoadingScreen() {
         <Html center>{loadingProgress} % loaded</Html>
     );
 }
-
-
-
-
-// Make it so the OpenWeather API call is only performed with loading a scene. 
-// essentially, make another query one for the scene and one for the profile
-// make it so there is loading text when the open weather api is being called

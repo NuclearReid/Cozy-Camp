@@ -1,7 +1,5 @@
 import useStore from '../../stores/useStore';
 import { Sky } from '@react-three/drei'
-import { useQuery } from '@apollo/client'
-import { QUERY_ME, FIND_USER } from '../../utils/queries'
 import LoadingScreen from '../../components/LoadingScreen';
 
 
@@ -24,7 +22,10 @@ function isDaytime(currentUnixTime, sunriseUnixTime, sunsetUnixTime) {
     return currentUnixTime >= sunriseUnixTime && currentUnixTime <= sunsetUnixTime
 }
 
-export default function Lighting()
+export default function Lighting({
+    loading,
+    data
+})
 {
     // get the path to see if on /scene or /searchedScene
     let currentPath = window.location.pathname
@@ -33,7 +34,7 @@ export default function Lighting()
     let sunset = null
     let sunSkyPosition = null
     const currentUnixTime = Math.floor(Date.now() / 1000)
-    const { loading, data} = useQuery(QUERY_ME)
+    // const { loading, data} = useQuery(QUERY_ME)
     if(loading){
         return <LoadingScreen/>
     }
