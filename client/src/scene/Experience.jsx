@@ -17,7 +17,10 @@ import Lighting from './environement/Lighting'
 import CozyCampText from './startScreen/CozyCampText'
 import Grass from './grass/Grass'
 
-export default function Experience()
+export default function Experience({
+    loading,
+    data
+    })
 {
     const [finalPosition, setFinalPosition] = useState(false)
     // if(isLoading){
@@ -172,8 +175,13 @@ export default function Experience()
         <>
             {/* I wrapped everything in the physics tag to make sure nothing that uses physics was left out */}
             <Physics>
+
+
                 {/* <Perf position='top-left' /> */}
-                <Lighting />
+                <Lighting 
+                    loading = {loading}
+                    data = {data}
+                />
                 
                 {/* The Text on the sign*/}
                 <CozyCampText
@@ -183,8 +191,15 @@ export default function Experience()
                 {/* Where i'm trying to get the start sign to fall but be on a rope  */}
                 <SignRopeJoint /> 
 
+
+
                 {/* User Options: <Shelter/>, <Transport/>, firepit, marshmellows are in here */}
-                <FireScene /> 
+                <FireScene 
+                    loading = {loading}
+                    data = {data}
+                /> 
+
+
 
                 {/* Fireflies */}
                 <Sparkles // to create the fireflies

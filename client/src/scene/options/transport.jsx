@@ -1,12 +1,13 @@
 import useStore from '../../stores/useStore'
 
 import { useGLTF, Html } from '@react-three/drei'
-import { useQuery } from '@apollo/client'
-import { QUERY_ME } from '../../utils/queries'
 
-export default function Transport() {
+export default function Transport({
+    loading,
+    data
+}) { 
 
-    const { loading, data } = useQuery(QUERY_ME)
+    // const { loading, data } = useQuery(QUERY_ME)
     const userTransport = data?.me?.options?.transport
     const userTransportDescription = data?.me?.options?.transportDescription
     // This is for when you look up a user
@@ -20,7 +21,6 @@ export default function Transport() {
     if( loading ) {
         return <>loading...</>
     }
-    if(!loading)console.log(data)
 
 
     

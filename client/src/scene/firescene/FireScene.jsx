@@ -9,7 +9,10 @@ import Grass from "../grass/Grass"
 import Shelter from '../options/shelter'
 import Transport from "../options/transport"
 
-export default function FireScene() 
+export default function FireScene({
+    loading,
+    data
+}) 
 {
     const fireLogs = useGLTF('./Models/fireLogs.glb')
     const fireRing = useGLTF('./Models/fireRing.glb')
@@ -91,10 +94,16 @@ export default function FireScene()
             
 
             {/* Shelter */}
-            <Shelter />
+            <Shelter 
+                loading = {loading}
+                data = {data}
+            />
 
             {/* Transport */}
-            <Transport />
+            <Transport 
+                loading = {loading}
+                data = {data}
+            />
 
             {/* The floor */}
             <RigidBody

@@ -1,7 +1,10 @@
-These are essentially just notes for myself with a little bit of how the code is working in the different parts
+ -- These are essentially just notes for myself with a little bit of how the code is working in the different parts --
+
 
 
 Right now, I'm running a query inside of enviornment/lighting and I'm running a query inside of each of the options for shelter & transport.
+
+
 
 - I could probably reduce this down by making a single query inside of pages/MyScene/index.js and pages/SearchedScene/index.jsx and pass the querried props down the line to the different components. 
 
@@ -9,16 +12,19 @@ Right now, I'm running a query inside of enviornment/lighting and I'm running a 
 
 
 steps for working at reducing the query calls:
-1. Make a note of each component that makes a QUERY_ME
-2. make the single QUERY_ME inside of pages/MyScene
+1. Make a note of each component that makes a QUERY_ME 
+2. make the single QUERY_ME inside of pages/MyScene 
 3. send that data in, pass it down to each of the components that need it just as 'data'.
 4. From within the components, i'll break it down how i need it
 
+* Note: because the searched scene is stored in the global state, that query is only happening once.
 
 
-
-
-
-________________________________________________________________________
+________________________________________________________________________________________________
 I really need to fix the double loading, i think it has to do with how i have the grass working
-_________________________________________________________________________
+_________________________________________________________________________________________________
+
+
+
+
+When the user wants to view a scene, I want to have the name of that scene's owner on the starting sign. instead of 'Cozy Camp' it'll say 'Reid's Camp' for example
