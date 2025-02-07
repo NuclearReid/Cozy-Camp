@@ -1,9 +1,10 @@
 import { useProgress, Html } from "@react-three/drei";
 import { useEffect, useState } from "react";
+import { Container, Row, Col, Spinner } from 'react-bootstrap';
+// import './custom.css'; // Import your custom CSS
 
 export default function LoadingScreen() {
-    const { active, progress, errors, item, loaded, total } = useProgress();
-    
+    const { progress } = useProgress();
     const [loadingProgress, setLoadingProgress] = useState(0);
 
     useEffect(() => {
@@ -11,6 +12,19 @@ export default function LoadingScreen() {
     }, [progress]);
 
     return (
-        <Html center>{loadingProgress} % loaded</Html>
+        <Html center>
+            <div className="fullscreen-bg"/>
+            <Container className="centered-content">
+                <Row>
+                    <Col>
+                        <Spinner animation="border" role="status" className="mb-3">
+                            <span className="visually-hidden">Loading...</span>
+                        </Spinner>
+                        <h3>Loading, please wait...</h3>
+                        <p>{loadingProgress} % loaded</p>
+                    </Col>
+                </Row>
+            </Container>
+        </Html>
     );
 }
