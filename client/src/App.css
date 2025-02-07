@@ -46,3 +46,23 @@ html body #root .removeOverflow{
     flex: 1;
 }
 
+/* loading screen */
+.fullscreen-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: url('./images/AiLandingImage.png') no-repeat center center fixed;
+    background-size: cover;
+}
+
+.centered-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+}

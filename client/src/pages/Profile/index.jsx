@@ -83,16 +83,18 @@ export default function Profile(){
                 <Col md={6} className='equal-card-height'>
                     <Card className='w-100'>
                         <Card.Body>
-                            <Card.Title> 
-                                    Welcome Back, {data?.me?.username}
-                            </Card.Title>
+                            <Card.Title>Welcome Back, {data?.me?.username}!</Card.Title>
                             <Card.Text>
-                                Here's your current setup,
-                                <br />
-                                Your location is: {data?.me?.location} <br />
-                                You're sleeping in:
-                                {data?.me?.options?.shelter === 'cowboy' ? '.... Nothing' : data?.me?.options?.shelter} <br />
-                                put more info here
+                                <strong>How to use this site! (it's still under development)</strong>
+                                <ul>
+                                    <li>With your selections, your scene will be a 3D render of your campsite.</li>
+                                    <li>Do you spend your time in the woods? How do you get there, what do you use for shelter? Want to show others?</li>
+                                    <li>Set your city as your location and your camp scene will adjust to your day/night cycle (it uses OpenWeatherAPI).</li>
+                                    <li>Do you sleep in a hammock, tent, or nothing?</li>
+                                    <li>Fill out the form with that info and give a description for others to see your opinion on it.</li>
+                                    <li>How do you get to your campsite? Let us know with the transportation form!</li>
+                                </ul>
+                                <p><em>There is more to come, just working out some of the kinks right now.</em></p>
                             </Card.Text>
                         </Card.Body>
                     </Card>

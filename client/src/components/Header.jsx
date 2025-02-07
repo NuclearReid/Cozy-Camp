@@ -20,13 +20,13 @@ export default function Header(){
             {/* This is just here because I want a bit of seperation between the top of the page and everything else on the login screen */}
             {!Auth.loggedIn() &&
                 <div
-                    className='mb-5'
+                    className='mb-2'
                 />
             }
 
             {/* if they're logged in, shows a logout button and an option to go home */}
             {Auth.loggedIn() && 
-               <Navbar bg="light" expand="lg">
+               <Navbar className='mb-2' bg="light" expand="lg">
                     <Container>
                         <Navbar.Brand href="/">Cozy Camp</Navbar.Brand>
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
