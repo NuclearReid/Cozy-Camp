@@ -28,7 +28,7 @@ export default function Shelter({
      const ShelterDescriptionHtml = ({description}) => {
         return(
             <Html
-            position={ [0, 1, 0]}
+            position={ [0, 3, -3]}
             wrapperClass='label' // The name of the class in the html (in css can change it with '.label > div')
             center // makes the pivot center of the html element to be the center of the element
             distanceFactor={6} // 
@@ -72,15 +72,17 @@ export default function Shelter({
                 </primitive>
             ) 
         } else if(shelterType === 'hammock'){
-            const hammock = useGLTF('./Models/shelter/AIhammock.glb')
+            const hammock = useGLTF('./Models/shelter/hammock.glb')
             return(
                 <primitive
                     object={hammock.scene}
-                    position={[-1.6, 1, -2.2]}
-                    rotation={[0, -0.5, 0 ]}
-                    scale={3.0}
+                    position={[-1, -1, -4.2]}
+                    rotation={[0, 1, 0 ]}
+                    scale={0.35}
                 >
-                    <ShelterDescriptionHtml description={description}/>
+                    <ShelterDescriptionHtml 
+                        description={description}
+                    />
                 </primitive>
             )
         } else if (shelterType === 'cowboy'){
