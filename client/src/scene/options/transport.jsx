@@ -48,7 +48,7 @@ export default function Transport({
 
         // used to check if on the user's scene or the searched user's scene
         // Then changes shelterType and description to be the users or searched user's shelter. 
-        if (currentPath === '/scene') {
+        if (currentPath === '/scene' || '/') {
             transportType = userTransport
             description = userTransportDescription
         } else if (currentPath === '/searchedScene') {

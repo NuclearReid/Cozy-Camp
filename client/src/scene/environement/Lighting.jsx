@@ -39,7 +39,7 @@ export default function Lighting({
         return <LoadingScreen/>
     }
 
-    if(currentPath === '/scene'){
+    if(currentPath === '/scene' || '/'){
         if(!loading){
             sunrise = data?.me?.weatherData?.city?.sunrise
             sunset = data?.me?.weatherData?.city?.sunset
