@@ -48,7 +48,7 @@ export default function Shelter({
 
         // used to check if on the user's scene or the searched user's scene
         // Then changes shelterType and description to be the users or searched user's shelter. 
-        if (currentPath === '/scene') {
+        if (currentPath === '/scene' || '/') {
             shelterType = userShelter
             description = userShelterDescription
         } else if (currentPath === '/searchedScene') {

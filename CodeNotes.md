@@ -17,6 +17,14 @@ These are just my ideas for what I should do and what needs to be done
 
 ---
 
+** Issues with the profile page on the loading screen ** 
+1. the data is being listed as 'undefined' right when the profile loads so it's unable to go to the scene and be updated
+2. Fix: make the scene update/re-render when the data is changed
+
+
+
+
+
 #### Customizing the Scene
 
 **Notes:**

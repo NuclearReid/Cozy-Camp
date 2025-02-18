@@ -16,12 +16,15 @@ import FireScene from './firescene/FireScene'
 import Lighting from './environement/Lighting'
 import CozyCampText from './startScreen/CozyCampText'
 import Grass from './grass/Grass'
+import LoadingScreen from '../components/LoadingScreen'
 
 export default function Experience({
     loading,
     data
     })
+
 {
+    console.log('in experience, ', data)    
     const [finalPosition, setFinalPosition] = useState(false)
     // if(isLoading){
     //     return <Html>Loading...</Html>

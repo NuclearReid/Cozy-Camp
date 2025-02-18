@@ -8,11 +8,10 @@ export default function CozyCampText({data})
     const username = data?.me?.username
     const searchedUser = useStore.getState().searchedUser?.username
     let currentPath = window.location.pathname
-    if(currentPath === '/scene') displayName = username
+    // The "|| '/' " is there so the scene works on the home page too
+    if(currentPath === '/scene' || '/') displayName = username
+
     if(currentPath === '/searchedScene') displayName = searchedUser
-
-    
-
     return(
         <>
              <Text3D 
