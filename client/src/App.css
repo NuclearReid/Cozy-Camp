@@ -66,3 +66,30 @@ html body #root .removeOverflow{
     text-align: center;
     color: white;
 }
+
+
+/* Profile page styling */
+/* Profile.css */
+.profile-container {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.canvas-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.overlay-container {
+    position: relative;
+    z-index: 1;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 20px;
+}

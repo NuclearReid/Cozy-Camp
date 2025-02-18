@@ -2,36 +2,10 @@
 These are just my ideas for what I should do and what needs to be done
 ---
 
-#### Make the scene always visible on the profile page and have it update in real time
 
-**Thoughts on two ways how to do it:**
+#### The models stop loading after a couple refetches
+- Essentially, after I change the scene options a couple times, the models stop loading?
 
-- **First way:**
-  1. Put all the user's info into the global state.
-  2. When a form is submitted, update that info in the global state and the backend.
-  3. Have the profile scene reflect what is in the global state, not what's in the database.
-     - This will be more convoluted, but I think it'll work.
-
-- **Second way:**
-  1. Figure out how to have the scene check for a database update and adjust the scene accordingly.
-
----
-
-** Issues with the profile page on the loading screen ** 
-1. the data is being listed as 'undefined' right when the profile loads so it's unable to go to the scene and be updated
-2. Fix: make the scene update/re-render when the data is changed
-
-
-
-
-
-#### Customizing the Scene
-
-**Notes:**
-- When the user wants to view a scene, I want to have the name of that scene's owner on the starting sign. Instead of 'Cozy Camp', it'll say 'Reid's Camp', for example. 
-  - This is close, but if the name is too long, it goes off the sign.
-- Give the user a blog option so they can let people know what they're doing.
----
 
 
 
@@ -52,7 +26,9 @@ These are just my ideas for what I should do and what needs to be done
 
 
 
-### Tasks I've completed!
+# Tasks I've completed!
+
+
 Right now, I'm running a query inside of enviornment/lighting and I'm running a query inside of each of the options for shelter & transport.
 
 steps for working at reducing the query calls:
@@ -86,11 +62,21 @@ I really need to fix the double loading, i think it has to do with how i have th
 - I could probably reduce this down by making a single query inside of `pages/MyScene/index.js` and `pages/SearchedScene/index.jsx`, and pass the queried props down the line to the different components.
 - This way, I'll only have to make that query once and share the data amongst the different components.
 ---
-
-
-
-
 *******************************************
 
 
 
+#### Make the scene always visible on the profile page and have it update in real time
+
+**Thoughts on two ways how to do it:**
+
+- **First way:**
+  1. Put all the user's info into the global state.
+  2. When a form is submitted, update that info in the global state and the backend.
+  3. Have the profile scene reflect what is in the global state, not what's in the database.
+     - This will be more convoluted, but I think it'll work.
+
+- **Second way:**
+  1. Figure out how to have the scene check for a database update and adjust the scene accordingly.
+
+---

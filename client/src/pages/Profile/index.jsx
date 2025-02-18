@@ -107,44 +107,6 @@ export default function Profile(){
                 </Col>
                 <Col md={6} className='equal-card-height'>
                     <Card className='w-100'>
-                        <Card.Body>
-                            <Card.Text>
-                                Your current location is set to: {location}
-                            </Card.Text>
-
-                            <LocationForm 
-                                onLocationUpdate={handleLocationUpdate} 
-                                currentLocation={location} 
-                            />
-                        </Card.Body>
-                    </Card>
-                </Col>
-            </Row>
-            <Row className="mt-3">
-                <Col md={6}>
-                    <Card className='mb-3'>
-                        <Card.Body>
-                            <ShelterForm
-                                onShelterUpdate={handleShelterUpdate}
-                                currentShelter={shelter}
-                                currentShelterDescription={shelterDescription}
-                            />
-                        </Card.Body>
-                    </Card>
-                </Col>
-                <Col md={6} >
-                    <Card>
-                        <Card.Body>
-                            <TransportForm
-                                onTransportUpdate={handleTransportUpdate}
-                                currentTransport={transport}
-                                currentTransportDescription={transportDescription}
-                            />
-                        </Card.Body>
-                    </Card>
-                </Col>
-                <Col md={6} >
-                    <Card>
                         {/* This is here to ensure I'm not sending undefined to <Experience /> */}
                         {!loading && <Canvas
                             camera={{
@@ -166,12 +128,78 @@ export default function Profile(){
                 </Col>
             </Row>
             <Row className="mt-3">
+                <Col md={4}>
+                    <Card className='mb-3'>
+                        <Card.Body>
+                            <ShelterForm
+                                onShelterUpdate={handleShelterUpdate}
+                                currentShelter={shelter}
+                                currentShelterDescription={shelterDescription}
+                            />
+                        </Card.Body>
+                    </Card>
+                </Col>
+                <Col md={4} >
+                    <Card>
+                        <Card.Body>
+                            <TransportForm
+                                onTransportUpdate={handleTransportUpdate}
+                                currentTransport={transport}
+                                currentTransportDescription={transportDescription}
+                            />
+                        </Card.Body>
+                    </Card>
+                </Col>
+                <Col md={4} className='equal-card-height'>
+                    <Card className='w-100'>
+                        <Card.Body>
+                            <Card.Text>
+                                Your current location is set to: {location}
+                            </Card.Text>
+
+                            <LocationForm 
+                                onLocationUpdate={handleLocationUpdate} 
+                                currentLocation={location} 
+                            />
+                        </Card.Body>
+                    </Card>
+                </Col>
+                
+            </Row>
+            <Row className="mt-3">
                 <Col>
                     <Button href="/scene" className="btn btn-primary">
-                        Your scene
+                        Your scene in full screen!
                     </Button>
                 </Col>
             </Row>
         </Container>
     )
 }
+
+
+/*
+This is just my canvas fragment, I have it here for reference while I move it around the page
+///////
+    <Col md={6} >
+        <Card>
+            // This is here to ensure I'm not sending undefined to <Experience />
+            {!loading && <Canvas
+                camera={{
+                    fov: 45,
+                    near: 0.1,
+                    far: 200,
+                    position: [-3.9, 10.2, 11.9],
+                }}
+            >
+                {console.log('inside the canvas', data)}
+                <Suspense fallback={<LoadingScreen />}>
+                    <Experience
+                        loading={loading}
+                        data={data}
+                    />
+                </Suspense>
+            </Canvas>}
+        </Card>
+    </Col>
+*/
