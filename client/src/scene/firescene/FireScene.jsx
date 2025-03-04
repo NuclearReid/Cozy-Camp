@@ -17,27 +17,7 @@ export default function FireScene({
     const fireLogs = useGLTF('./Models/fireLogs.glb')
     const fireRing = useGLTF('./Models/fireRing.glb')
 
-    // These are just used to position everything when needed
-    // const { position, rotation, scale } = useControls('Positioning', {
-    //     // position={[-2.5, -0.6, 3]}
-    //     position:
-    //     {
-    //         value: {x: -2.5, y: 1, z: 3},
-    //         step: 0.1
-    //     },
-    //     rotation:
-    //     {
-    //         value: 0.25,
-    //         step: 0.01
-    //     },
-    //     scale:
-    //     {
-    //         value: 0.25,
-    //         step: 0.01,
-    //     }
-    // })
 
-    
 
     return (
         <>
@@ -92,7 +72,6 @@ export default function FireScene({
                 />
             </>
             
-
             {/* Shelter */}
             <Shelter 
                 loading = {loading}
@@ -123,3 +102,27 @@ export default function FireScene({
         </>
     )
 }
+
+
+
+    // These are just used to position everything when needed
+    // const { position, rotation, scale } = useControls('Positioning', {
+    //     // position={[-2.5, -0.6, 3]}
+    //     position:
+    //     {
+    //         value: {x: -2.5, y: 1, z: 3},
+    //         step: 0.1
+    //     },
+    //     rotation:
+    //     {
+    //         value: 0.25,
+    //         step: 0.01
+    //     },
+    //     scale:
+    //     {
+    //         value: 0.25,
+    //         step: 0.01,
+    //     }
+    // })
+
+    

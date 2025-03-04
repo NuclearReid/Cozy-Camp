@@ -24,7 +24,6 @@ export default function Experience({
     })
 
 {
-    console.log('in experience, ', data)    
     const [finalPosition, setFinalPosition] = useState(false)
     // if(isLoading){
     //     return <Html>Loading...</Html>
@@ -215,7 +214,7 @@ export default function Experience({
                 {/* Make sure to keep this out of the suspence or this controls won't work till the whole scene is loaded */}
                 <CameraControls 
                     ref={cameraControlsRef}
-                    enabled={true}
+                    enabled={false}
                     mouseButtons = {{
                         left: CameraControlsReact.ACTION.ROTATE,
                         right: CameraControlsReact.ACTION.NONE,
@@ -224,7 +223,7 @@ export default function Experience({
                     }}                   
                 />
                 <OrbitControls 
-                    enabled={false}
+                    enabled={true}
                     enableDamping={false}
                     makeDefault={true}
                 />

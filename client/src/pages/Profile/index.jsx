@@ -116,7 +116,6 @@ export default function Profile(){
                                 position: [-3.9, 10.2, 11.9],
                             }}
                         >
-                            {console.log('inside the canvas', data)}
                             <Suspense fallback={<LoadingScreen />}>
                                 <Experience
                                     loading={loading}
