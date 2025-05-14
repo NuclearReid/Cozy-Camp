@@ -7,7 +7,6 @@ import { useEffect, useState, Suspense } from "react"
 import useStore from "../../stores/useStore"
 
 import ShelterForm from '../../components/forms/ShelterForm'
-import SearchBar from "../../components/SearchBar"
 import TransportForm from "../../components/forms/TransportForm"
 import LocationForm from "../../components/forms/LocationForm"
 import LoadingScreen from "../../components/LoadingScreen"
@@ -18,7 +17,6 @@ export default function Profile(){
 
     const { loading, data, refetch} = useQuery(QUERY_ME)
 
-
     // This is here to put something into the global state. If it's left empty, the code will break because other sections are reliant on there being something in the global state. It's easier to fill it here than to set checks for it in a different sections of the code
     const setSearchedUser = useStore((state) => state.setSearchedUser)
     const setTheGlobalState = (event => {
@@ -27,6 +25,7 @@ export default function Profile(){
         }
     })
     setTheGlobalState()    
+
     // User Location
     const [location, setLocation] = useState(data?.me?.location)
 
@@ -45,9 +44,7 @@ export default function Profile(){
             setShelter(data?.me?.options?.shelter)
             setShelterDescription(data?.me?.options?.shelterDescription)
             setTransport(data?.me?.options?.transport)
-            setTransportDescription(data?.me?.options?.transportDescription)
-
-            
+            setTransportDescription(data?.me?.options?.transportDescription)            
         }
     }, [data])
 
@@ -85,6 +82,7 @@ export default function Profile(){
 
 
 
+
     return(
         <Container>
             <Row>
@@ -116,12 +114,10 @@ export default function Profile(){
                                 position: [-3.9, 10.2, 11.9],
                             }}
                         >
-                            <Suspense fallback={<LoadingScreen />}>
-                                <Experience
-                                    loading={loading}
-                                    data={data}
-                                />
-                            </Suspense>
+                            <Experience
+                                loading={loading}
+                                data={data}
+                            />
                         </Canvas>}
                     </Card>
                 </Col>
