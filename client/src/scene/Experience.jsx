@@ -16,7 +16,6 @@ import FireScene from './firescene/FireScene'
 import Lighting from './environement/Lighting'
 import CozyCampText from './startScreen/CozyCampText'
 import Grass from './grass/Grass'
-import LoadingScreen from '../components/LoadingScreen'
 
 export default function Experience({
     loading,
@@ -193,14 +192,11 @@ export default function Experience({
                 <SignRopeJoint /> 
 
 
-
                 {/* User Options: <Shelter/>, <Transport/>, firepit, marshmellows are in here */}
                 <FireScene 
                     loading = {loading}
                     data = {data}
                 /> 
-
-
 
                 {/* Fireflies */}
                 <Sparkles // to create the fireflies
@@ -214,7 +210,7 @@ export default function Experience({
                 {/* Make sure to keep this out of the suspence or this controls won't work till the whole scene is loaded */}
                 <CameraControls 
                     ref={cameraControlsRef}
-                    enabled={false}
+                    enabled={true}
                     mouseButtons = {{
                         left: CameraControlsReact.ACTION.ROTATE,
                         right: CameraControlsReact.ACTION.NONE,
@@ -223,7 +219,7 @@ export default function Experience({
                     }}                   
                 />
                 <OrbitControls 
-                    enabled={true}
+                    enabled={false}
                     enableDamping={false}
                     makeDefault={true}
                 />

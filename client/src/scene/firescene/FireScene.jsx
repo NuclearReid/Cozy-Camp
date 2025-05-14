@@ -14,6 +14,7 @@ export default function FireScene({
     data
 }) 
 {
+    
     const fireLogs = useGLTF('./Models/fireLogs.glb')
     const fireRing = useGLTF('./Models/fireRing.glb')
 

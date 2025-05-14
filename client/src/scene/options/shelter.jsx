@@ -60,13 +60,13 @@ export default function Shelter({
             setShelterType(searchedUserShelter)
             setDescription(searchedUserShelterDescription)
         }
-        console.log('shelter type: ', shelterType)
+        // console.log('shelter type: ', shelterType)
         // Loads and renders the model depending on the shelterType
         // the model load is in here so that i'm not loading models that I'm not using
         if(shelterType === 'tent')
         {
             setTent(useGLTF('./Models/shelter/AIcanvasTent.glb'))
-            console.log('tent ',tent)
+            // console.log('tent ',tent)
             setHammock(null)
             setCowboy(null)
             return(
@@ -83,7 +83,7 @@ export default function Shelter({
             setHammock(useGLTF('./Models/shelter/hammock.glb'))
             setTent(null)
             setCowboy(null)
-            console.log('hammock ', hammock.scene)
+            // console.log('hammock ', hammock.scene)
             return(
                 <primitive
                     object={hammock.scene} // .scene seems to be creating an issue
@@ -98,7 +98,7 @@ export default function Shelter({
             setCowboy(useGLTF('./Models/shelter/AIcowboyCamp.glb'))
             setTent(null)
             setHammock(null)
-            console.log('cowboy ', cowboy)
+            // console.log('cowboy ', cowboy)
             return(
                 <primitive
                     object={cowboy.scene}
